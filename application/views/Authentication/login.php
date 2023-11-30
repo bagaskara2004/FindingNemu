@@ -19,20 +19,20 @@
             <form action="#" method="post" class="d-flex flex-column justify-content-between" style="height:355px;">
                 <div class="py-4">
                     <div class="mb-3">
-                        <input type="text" placeholder="Nama Pengguna" class="inputan font-3 rounded">
+                        <input type="text" placeholder="Nama Pengguna" class="inputan fs-6 rounded p-2">
                     </div>
                     <div class="mb-3">
-                        <input type="password" placeholder="Kata Sandi" class="inputan font-3 rounded">
-                        <a class="link-offset-2 link-underline link-underline-opacity-0 color-blue font-4 mx-2" href="#">Lupa Password?</a>
+                        <input type="password" placeholder="Kata Sandi" class="inputan fs-6 rounded p-2">
+                        <a class="link-offset-2 link-underline link-underline-opacity-0 color-blue fs-7 mx-2" href="#">Lupa Password?</a>
                     </div>
                 </div>
                 <div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label color-gray font-3" for="exampleCheck1">ingatkan saya</label>
+                        <label class="form-check-label color-gray fs-6" for="exampleCheck1">ingatkan saya</label>
                     </div>
-                    <button type="submit" class="button background-blue p-2 border-none w-100 rounded">MASUK</button>
-                    <a href="<?=base_url("Cauth/register")?>" class="button background-gray p-1 mt-2 rounded" >DAFTAR</a>
+                    <button type="submit" class="button background-blue p-2 border-none w-100 rounded text-light">MASUK</button>
+                    <a href="<?=base_url("Cauth/register")?>" class="button background-gray p-1 mt-2 rounded text-light" >DAFTAR</a>
                 </div>
             </form>
         </div>

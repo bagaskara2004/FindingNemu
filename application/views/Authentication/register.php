@@ -19,21 +19,21 @@
             <form action="#" method="post" class="d-flex flex-column justify-content-between" style="height:355px;">
                 <div class="py-4">
                     <div class="mb-3">
-                        <input type="text" placeholder="Nama Pengguna" class="inputan font-3 rounded">
+                        <input type="text" placeholder="Nama Pengguna" class="inputan fs-6 rounded p-2 ">
                     </div>
                     <div class="mb-3">
-                        <input type="password" placeholder="Kata Sandi" class="inputan font-3 rounded">
+                        <input type="password" placeholder="Kata Sandi" class="inputan fs-6 rounded p-2">
                     </div>
                     <div class="mb-3">
-                        <input type="email" placeholder="Email" class="inputan font-3 rounded">
+                        <input type="email" placeholder="Email" class="inputan fs-6 rounded p-2">
                     </div>
                     <div>
-                        <input type="text" placeholder="No Telepon" class="inputan font-3 rounded">
+                        <input type="text" placeholder="No Telepon" class="inputan fs-6 rounded p-2">
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="button background-blue p-2 border-none w-100 rounded">DAFTAR</button>
-                    <a href="<?=base_url("Cauth/login")?>" class="button background-gray p-1 mt-2 rounded" >MASUK</a>
+                    <button type="submit" class="button background-blue p-2 border-none w-100 rounded text-light">DAFTAR</button>
+                    <a href="<?=base_url("Cauth/login")?>" class="button background-gray p-1 mt-2 rounded text-light" >MASUK</a>
                 </div>
             </form>
         </div>
