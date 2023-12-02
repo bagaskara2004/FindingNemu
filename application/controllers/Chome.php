@@ -5,6 +5,6 @@ class Chome extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('homepage.php');
+		$this->load->view('index.php');
 	}
 }
