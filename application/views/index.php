@@ -123,7 +123,7 @@ $(document).ready(function () {
 
     function data_item() {
         $.ajax({
-            url: '<?php echo base_url(); ?>/Chome/item',
+            url: '<?php echo base_url(); ?>/Cposting/search',
             method: 'post',
             data: {
                 cari : $('#search').val(),
@@ -131,7 +131,6 @@ $(document).ready(function () {
             },
             success:function(data){
                 $('#content').html(data);
-
             }
         });
     }

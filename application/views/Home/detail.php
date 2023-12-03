@@ -7,7 +7,7 @@
 </head>
 <body>
 <?php
-    echo $id_item;
+    echo $id_posting;
 ?>
 </body>
 </html>
