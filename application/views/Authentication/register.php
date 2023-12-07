@@ -16,15 +16,15 @@
             <div class="d-flex justify-content-center py-1">
                 <img src="<?=base_url("asset/img/logo.png")?>" class="w-50">
             </div>
-            <form action="#" method="post" class="d-flex flex-column justify-content-between" style="height:355px;">
+            <form action="#" method="post" class="d-flex flex-column justify-content-between">
                 <div class="py-4">
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <input type="text" placeholder="Nama Pengguna" class="inputan fs-6 rounded p-2 ">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <input type="password" placeholder="Kata Sandi" class="inputan fs-6 rounded p-2">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <input type="email" placeholder="Email" class="inputan fs-6 rounded p-2">
                     </div>
                     <div>

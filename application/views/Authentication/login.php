@@ -18,10 +18,10 @@
             </div>
             <form action="#" method="post" class="d-flex flex-column justify-content-between" style="height:355px;">
                 <div class="py-4">
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <input type="text" placeholder="Nama Pengguna" class="inputan fs-6 rounded p-2">
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <input type="password" placeholder="Kata Sandi" class="inputan fs-6 rounded p-2">
                         <a class="link-offset-2 link-underline link-underline-opacity-0 color-blue fs-7 mx-2" href="#">Lupa Password?</a>
                     </div>
