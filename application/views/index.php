@@ -123,7 +123,7 @@ $(document).ready(function () {
 
     function data_item() {
         $.ajax({
-            url: '<?php echo base_url(); ?>/Cposting/search',
+            url: '<?= base_url() ?>/Cposting/search',
             method: 'post',
             data: {
                 cari : $('#search').val(),

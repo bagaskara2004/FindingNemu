@@ -26,8 +26,9 @@ class Mposting extends CI_Model {
             $data = $this->db->select('*')->from('posting')->where('status',$loc)->where('id_konfirmasi',3)->get();
         }
 		if ($data->num_rows() > 0 ) {
+			$output = "";
 			foreach ($data->result_array() as $datas) {
-				return '
+				$output .= '
 				<div class="card">
 					<div class="card-header text-center fw-bold">'.$datas["judul"].'</div>
 					<img src="'.$datas["foto"].'" class="card-img-top px-3 pt-3">
@@ -37,6 +38,7 @@ class Mposting extends CI_Model {
                     </form>
 				</div>';
 			}
+			return $output;
 		}else if ($key != "") {
 			return '<div class="text-center text-light fs-7 my-5">"'.$key.'"  tidak ditemukan</div>';
 		}else {
