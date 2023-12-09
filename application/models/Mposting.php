@@ -6,7 +6,7 @@ class Mposting extends CI_Model {
 	function simpanPosting()
 	{
 		$data = $_POST;
-		$this->db->insert('item', $data);
+		$this->db->insert('posting', $data);
 		// $this->session->set_flashdata('pesan', 'Data sudah disimpan...');
 		redirect('');
 	}
