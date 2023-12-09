@@ -19,10 +19,8 @@ class Cvalidasi extends CI_Controller
         $this->form_validation->set_rules('foto', 'Foto', 'callback_validate_file');
 
         if ($this->form_validation->run() == FALSE) {
-
             $this->load->view('jika_gagal');
         } else {
-
             $data = array(
                 'nama' => $this->input->post('nama'),
                 'telp' => $this->input->post('telp'),
@@ -31,31 +29,53 @@ class Cvalidasi extends CI_Controller
                 'id_postingan' => $this->session->userdata('id_postingan'),
             );
 
-            $this->Mvalidasi->save_data($data);
-            redirect('berhasil');
+          
+            $config['upload_path'] = './Gambar_validais/';
+            // $config['allowed_types'] = 'jpg|jpeg|png';
+            // $config['max_size'] = 51200; 
+
+            $this->load->library('upload', $config);
+            $this->load->initialize($config);
+
+            if ($this->upload->do_upload('foto')) {
+                $file_info = $this->upload->data();
+                $file_name = $file_info['file_name'];
+                $data['foto'] = $file_name;
+                $this->Mvalidasi->save_data($data);
+                redirect('berhasil');
+            } else {
+               
+            }
         }
     }
 
-    // Castem falidaasi file di sini
-    public function validate_file($file)
-    {
+   
+    public function validate_file($file) {
+       
         $file_extension = pathinfo($file, PATHINFO_EXTENSION);
+    
+        
         $allowed_extensions = array('jpg', 'jpeg', 'png');
-
+    
+       
         if (!in_array($file_extension, $allowed_extensions)) {
             $this->form_validation->set_message('validate_file', 'File harus berupa JPG, JPEG, atau PNG.');
             return FALSE;
         }
-
+    
+       
         $file_size_kb = filesize($file) / 1024;
-
-        $max_size_kb = 51200;
-
+    
+        $max_size_kb = 51200; 
+    
+        
         if ($file_size_kb > $max_size_kb) {
             $this->form_validation->set_message('validate_file', 'Ukuran file maksimum adalah 50 MB.');
             return FALSE;
         }
-
+    
         return TRUE;
     }
+    
 }
+?>
