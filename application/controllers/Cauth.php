@@ -11,5 +11,10 @@ class Cauth extends CI_Controller {
 	{
 		$this->load->view('Authentication/register.php');
 	}
+
+	// sementara, untuk akses admin page
+	public function admindashboard(){
+		$this->load->view('Admin/homepageAdmin.php');
+	}
 	
 }
