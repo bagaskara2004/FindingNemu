@@ -18,7 +18,7 @@
 	<!------sidebar------>
 		<div class="h-100">
 			<div class="sidebar-logo">
-				<a href="#"><img src="<?=base_url('asset/img/logo-light.png')?>" alt="findingnemu" style="width: 100px;" class="img-fluid" ></a>
+				<a href="<?=base_url('cauth/admindashboard')?>"><img src="<?=base_url('asset/img/logo-light.png')?>" alt="findingnemu" style="width: 100px;" class="img-fluid" ></a>
 			</div>
 			<ul class="siderbar-nav">
 				<li class="sidebar-header">
@@ -26,7 +26,7 @@
 				</li>
 
 				<li class="sidebar-item">
-					<a href="<?=base_url('coverview/tampiltabel')?>" class="sidebar-link">
+					<a href="<?=base_url('cauth/adminoverview')?>" class="sidebar-link">
 						<span class="bi bi-clipboard-fill"></span>&nbsp; &nbsp;
 						Overview
 					</a>
@@ -57,14 +57,6 @@
 					<a href="#" class="sidebar-link">
 						<span class="bi bi-shield-fill-check"></span>&nbsp; &nbsp;
 						Security
-					</a>
-				</li>
-
-				<!--masih bug, untuk tombol logoutnya nga mau ngikut sidebar -->
-				<li class="sidebar-item-bottom">
-					<a href="#" class="sidebar-link">
-						<i class="bi bi-box-arrow-in-right"></i>&nbsp; &nbsp;
-						Logout
 					</a>
 				</li>
 			</ul>
@@ -100,23 +92,48 @@
 			</aside>
 		</nav>
 		<!--Main Content-->
-		<main class="content px-3 py-2">
-			<div class="container-fluid">
-				<h4>Halo Admin</h4>
-
-				<?php
-				if (empty($overviewtable)) {
-					echo "";
-				}
-				else{
-					echo $overviewtable;
-				}
-				?>
+		<main class="content">
+			<div class="container min-vh-100 d-flex justify-content-center align-items-center">
+				<div class="row">
+					<div class="col-md-6">
+						<p class="fs-1 fw-bold">Halo Admin</p>
+					</div>
+					<div class="col-md-6 ms-auto">
+						<img src="<?=base_url('asset/img/admin-image.png')?>" class="img-fluid" alt="...">
+					</div>
+				</div>
 			</div>
 		</main>
+			<!-- Footer -->
+		<footer class="content-footer footer bg-footer-theme">
+			<div class="container-xxl">
+				<div
+					class="footer-container d-flex align-items-center justify-content-between py-2 flex-md-row flex-column">
+					<div>
+						<img src="<?=base_url('asset/img/logo.png')?>" alt="findingnemu" style="width: 80px;" class="img-fluid" >
+						• Copyright ©
+						<script>
+							document.write(new Date().getFullYear());
+						</script>
+						Finding Nemu PNB
+					</div>
+					<div>
+						<a href="#" class="footer-link me-4" target="_blank"
+						><i class="bi bi-facebook"></i></a
+						>
+						<a href="#" target="_blank" class="footer-link me-4"
+						><i class="bi bi-twitter"></i></a
+						>
+						<a href="#" target="_blank" class="footer-link d-none d-sm-inline-block"
+						><i class="bi bi-github"></i></a
+						>
+					</div>
+				</div>
+			</div>
+		</footer>
 	</div>
 </div>
-<!-Sidebar toggler->
+<!--Sidebar toggler-->
 <script>
 	const sidebarToggle = document.querySelector("#sidebar-toggle");
 	sidebarToggle.addEventListener("click",function(){

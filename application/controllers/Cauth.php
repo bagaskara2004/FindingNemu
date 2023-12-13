@@ -16,5 +16,8 @@ class Cauth extends CI_Controller {
 	public function admindashboard(){
 		$this->load->view('Admin/homepageAdmin.php');
 	}
-	
+
+	public function adminoverview(){
+		$this->load->view('Admin/overview.php');
+	}
 }
