@@ -37,20 +37,20 @@ class Cauth extends CI_Controller {
 						'username' => $user['username']
 					];
 					$this->session->set_userdata($data);
-					redirect('Cposting');
+					redirect(base_url('Cposting'));
 				}else{
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">kata sandi salah!</div>');
-				redirect('Cauth/login');
+					redirect(base_url('Cauth/login'));
 				}
 
 			}else{
 				$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">nama pengguna ini belum diaktifkan</div>');
-				redirect('Cauth/login');
+				redirect(base_url('Cauth/login'));
 			}
 		
 		}else{
 		$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Data Belum Di Register</div>');
-		redirect('Cauth/login');
+		redirect(base_url('Cauth/login'));
 		}
 	}
 
@@ -82,13 +82,13 @@ class Cauth extends CI_Controller {
 				'password' => $this->input->post('password'),
 				'email' => htmlentities($this->input->post('email',true)),
 				'verifikasi' => 1,
-				'foto' => 'default.jpg',
-				'tanggal' => date(),
+				'foto' => 'asset/foto_profile/default.png',
+				'tanggal' => date("Y-m-d"),
 				'telp' => $this->input->post('telp')
 			];
 			$this->db->insert('user',$data);
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat! data kamu sudah berhasil.Mohon Login</div>');
-			redirect('Cauth/login');
+			redirect(base_url('Cauth/login'));;
 		}
 	}
 	// sementara, untuk akses admin page

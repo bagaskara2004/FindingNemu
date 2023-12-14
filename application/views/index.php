@@ -6,14 +6,13 @@
         <button class="button px-3 border-none background-yellow rounded-end ms-1 text-light fs-7" id="btnSearch"><i class="bi bi-search" id="iconSearch"></i></button>
     </div>
     <div class="img-size ">
-        <img src="<?=base_url('asset/img/kota.png')?>" class="img-fluid" alt="...">    
+        <img src="<?=base_url('asset/img/kota.png')?>" class="img-fluid" alt="...">
     </div>
     <div class="d-flex box-input">
         <button type="button" class="button py-2 border-none w-50 border border-dark-subtle fs-7 " style="border-radius:20px 0 0 20px ;" id="kehilangan">Kehilangan</button>
         <button type="button" class="button py-2 border-none w-50 background-yellow text-light border border-dark-subtle fs-7 " id="temuan" style="border-radius:0 20px 20px 0;">Temuan</button>
     </div>
 </header>
-
 <div class="container-fluid background-blue">
     <div class="container background-blue2 rounded daftar-barang pb-3" >
         <div class="container fs-5 fw-bold text-center responsive-font-example text-light p-3" id="label">TEMUAN</div>
