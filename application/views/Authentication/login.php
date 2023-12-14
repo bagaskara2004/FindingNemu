@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Masuk | FindingNemu</title>
+    <title><?= $title; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="<?=base_url("asset/css/style.css")?>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,15 +16,20 @@
             <div class="d-flex justify-content-center py-1">
                 <img src="<?=base_url("asset/img/logo.png")?>" class="w-50">
             </div>
-            <form action="#" method="post" class="d-flex flex-column justify-content-between" style="height:355px;">
+            <?= $this->session->flashdata('message')?>
+            <form action="<?= base_url('Cauth/login') ?>" method="post" class="d-flex flex-column justify-content-between" style="height:355px;">
                 <div class="py-4">
-                    <div class="mb-3">
-                        <input type="text" placeholder="Nama Pengguna" class="inputan fs-6 rounded p-2">
+                    <div class="mb-2">
+                        <input type="text" placeholder="Nama Pengguna" class="inputan fs-6 rounded p-2" name="username" value="<?= set_value('username') ?>">
+                        <?= form_error('username','<small class="text-danger" pl-3>','</small>');?>
                     </div>
-                    <div class="mb-3">
-                        <input type="password" placeholder="Kata Sandi" class="inputan fs-6 rounded p-2">
+                    <div class="mb-2">
+                        <input type="password" placeholder="Kata Sandi" class="inputan fs-6 rounded p-2" name="password">
+                        <?= form_error('password','<small class="text-danger" pl-3>','</small>');?>
+                        <br>
                         <a class="link-offset-2 link-underline link-underline-opacity-0 color-blue fs-7 mx-2" href="#">Lupa Password?</a>
                     </div>
+
                 </div>
                 <div>
                     <div class="mb-3 form-check">
