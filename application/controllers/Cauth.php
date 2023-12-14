@@ -37,7 +37,7 @@ class Cauth extends CI_Controller {
 						'username' => $user['username']
 					];
 					$this->session->set_userdata($data);
-					redirect('user');
+					redirect('Cposting');
 				}else{
 					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">kata sandi salah!</div>');
 				redirect('Cauth/login');
@@ -56,12 +56,13 @@ class Cauth extends CI_Controller {
 
     public function register()
 	{
-		$this->form_validation->set_rules('username','Username','required|trim',[
-			'required' => 'Username harus diisi'
+		$this->form_validation->set_rules('username','Username','required|trim|is_unique[user.username]',[
+			'required' => 'Username harus diisi',
+			'is_unique' => 'Username sudah ada'
 		]);
 		$this->form_validation->set_rules('password','Password','required|trim|min_length[3]',[
 			'min_length' => 'Password manimal 3 kata',
-			'required' => 'Password Haru diisi'
+			'required' => 'Password Harus diisi'
 		]);
 		$this->form_validation->set_rules('email','Email','required|trim|valid_email|is_unique[user.email]',[
 			'required' => 'Email harus diisi',
@@ -89,5 +90,12 @@ class Cauth extends CI_Controller {
 			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Selamat! data kamu sudah berhasil.Mohon Login</div>');
 			redirect('Cauth/login');
 		}
+	}
+	// sementara, untuk akses admin page
+	public function admindashboard(){
+		$this->load->view('Admin/homepageAdmin.php');
+	}
+	public function adminoverview(){
+		$this->load->view('Admin/overview.php');
 	}
 }

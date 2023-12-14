@@ -29,7 +29,6 @@
                         <br>
                         <a class="link-offset-2 link-underline link-underline-opacity-0 color-blue fs-7 mx-2" href="#">Lupa Password?</a>
                     </div>
-
                 </div>
                 <div>
                     <div class="mb-3 form-check">
