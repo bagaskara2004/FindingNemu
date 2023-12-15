@@ -65,7 +65,7 @@ $(document).ready(function () {
         if (e.keyCode == 13) {
             window.scrollTo(0, 300)
         }
-    })
+    });
 
     function data_item() {
         $.ajax({

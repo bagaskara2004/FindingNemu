@@ -14,61 +14,49 @@
 </head>
 <body>
 
-<!-- user belum login -->
+<?php if($lokasi == "home") {?>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow">
+        <div class="container">
+        <img src="<?=base_url('asset/img/logo.png')?>" alt="findingnemu" style="width:90px;"class="img-fluid" >
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <hr>
+        <?php if ($this->session->userdata('username')) {?>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item button d-flex align-items-center">
+                    <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cposting/pengajuan')?>">PENGAJUAN</a>
+                </li>
+                <li class="nav-item button d-flex align-items-center">
+                    <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cauth/register')?>">PROSEDUR</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link button mx-auto" href="<?=base_url('Cauth/logout')?>"><img src="<?=base_url('asset/foto_profile/default.png')?>" alt="findingnemu" style="width:30px;"class="img-fluid" ></a>
+                </li>
+            </ul>
+        <?php }else {?>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item border-blue button px-2 mx-1 rounded">
+                    <a class="nav-link text-dark" href="<?=base_url('Cauth/login')?>">MASUK</a>
+                </li>
+                <li class="nav-item background-blue px-2 button mx-1 rounded">
+                    <a class="nav-link text-light" href="<?=base_url('Cauth/register')?>">DAFTAR</a>
+                </li>
+            </ul>
+        <?php }?>
+        <hr>
+        </div>
+        </div>
+    </nav>
+<?php }?>
 
-<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow">
-    <div class="container">
-    <img src="<?=base_url('asset/img/logo.png')?>" alt="findingnemu" style="width:90px;"class="img-fluid" >
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <hr>
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item border-blue button px-2 mx-1 rounded">
-            <a class="nav-link text-dark" href="<?=base_url('Cauth/login')?>">MASUK</a>
-        </li>
-        <li class="nav-item background-blue px-2 button mx-1 rounded">
-            <a class="nav-link text-light" href="<?=base_url('Cauth/register')?>">DAFTAR</a>
-        </li>
-    </ul>
-    <hr>
-    </div>
-    </div>
-</nav> -->
-
-<!-- user sudah login -->
-
-<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow">
-    <div class="container">
-    <img src="<?=base_url('asset/img/logo.png')?>" alt="findingnemu" style="width:90px;"class="img-fluid" >
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <hr>
-    <ul class="navbar-nav ms-auto">
-        <li class="nav-item button d-flex align-items-center">
-            <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cposting/pengajuan')?>">PENGAJUAN</a>
-        </li>
-        <li class="nav-item button d-flex align-items-center">
-            <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cauth/register')?>">PROSEDUR</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link button mx-auto" href="<?=base_url('Cauth/register')?>"><img src="<?=base_url('asset/foto_profile/default.png')?>" alt="findingnemu" style="width:30px;"class="img-fluid" ></a>
-        </li>
-    </ul>
-    <hr>
-    </div>
-    </div>
-</nav>
-
-
+<?php if ($lokasi == "detail" || $lokasi == "profile" || $lokasi == "form") {?>
 <!-- navbar untuk detail, profile, form -->
-
-<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow">
+<nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top shadow">
     <div class="container">
     <a class="navbar-brand fw-bold" href="<?=base_url('Cposting')?>"><i class="bi bi-chevron-left"></i></a>
     <img src="<?=base_url('asset/img/logo.png')?>" alt="findingnemu" style="width:90px;"class="img-fluid" >
     </div>
-</nav> -->
+</nav>
+<?php } ?>

@@ -98,4 +98,9 @@ class Cauth extends CI_Controller {
 	public function adminoverview(){
 		$this->load->view('Admin/overview.php');
 	}
+
+	public function logout() {
+		$this->session->sess_destroy();
+		redirect(base_url('Cauth/login'));
+	}
 }
