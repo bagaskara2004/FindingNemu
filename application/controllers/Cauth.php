@@ -52,7 +52,7 @@ class Cauth extends CI_Controller
 					'nama_admin' => $admin['nama_admin']
 				];
 				$this->session->set_userdata($data);
-				redirect(base_url('Coverview/tampiltabel'));
+				redirect(base_url('Admin/Cadmin'));
 			}
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data Belum Di Register</div>');
