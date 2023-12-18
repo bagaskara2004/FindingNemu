@@ -51,8 +51,42 @@ class Cposting extends CI_Controller {
 
 	public function addPostingan() {
 		$this->form_validation->set_rules('judul','Judul','required|trim|min_length[2]|max_length[20]');
-		$this->form_validation->set_rules('judul','Judul','required|trim|min_length[2]|max_length[20]');
-		
+		if ($this->form_validation->run()) {
+			$config['upload_path']          = './asset/foto_posting';
+			$config['allowed_types']        = 'jpeg|jpg|png';
+			$config['max_size']             = 10000;
+			$config['max_width']            = 10000;
+			$config['max_height']           = 10000;
+			$this->load->library('upload', $config);
+
+			if ($this->upload->do_upload('foto')){
+				$foto = $this->upload->data();
+				$foto = 'asset/foto_posting/'.$foto['file_name'];
+			}else{
+				$name = $this->upload->data()['file_name'];
+				if (empty($name)) {
+					$foto = 'asset/foto_posting/default.jpg';
+				}else{
+					$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Form gagal di kirim, Pastikan format foto dan size foto sesuai</div>');
+					redirect(base_url('Cposting/pengajuan'));
+				}
+			}
+
+			$id_user = $this->db->get_where('user',['username' => $this->session->userdata('username')])->row_array();
+			$data = array(
+				'id_user' => $id_user['id_user'],
+				'id_kategori' => $this->input->post('kategori'),
+				'id_konfirmasi' => 1,
+				'status' => $this->input->post('status'),
+				'judul' => $this->input->post('judul'),
+				'deskripsi' => $this->input->post('deskripsi'),
+				'tanggal' => date("Y-m-d"),
+				'foto' => $foto
+			);
+			$this->Mposting->simpanPosting($data);
+		}else {
+			$this->pengajuan();
+		}
 		
 	}
 	public function comment() {

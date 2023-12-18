@@ -3,12 +3,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mposting extends CI_Model {
 
-	function simpanPosting()
+	function simpanPosting($data)
 	{
-		$data = $_POST;
 		$this->db->insert('posting', $data);
-		// $this->session->set_flashdata('pesan', 'Data sudah disimpan...');
-		redirect('');
+		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Form Berhasil di kirim, Segera konfirmasi ke admin</div>');
+		redirect(base_url('Cposting/pengajuan'));
 	}
 
 	function hapusPosting($id_posting)
