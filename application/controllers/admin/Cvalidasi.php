@@ -14,14 +14,12 @@ class Cvalidasi extends CI_Controller
     public function add($id_posting)
     {
         $data['data'] = $id_posting;
-        $this->load->view('Addvalidasi', $data);
+
+        $this->load->view('Admin/navbar');
+        $this->load->view('Admin/Addvalidasi', $data);
+        $this->load->view('Admin/footer');
     }
-    // public function simpan_validasi($id_postingan)
-    // {
-    //     // $data['id_postingan'] = $id_postingan;
-    //     // $this->load->view('Validasi', $data);
-    //     echo $id_postingan;
-    // }
+
 
 
     public function edit($id_validasi)
@@ -38,18 +36,17 @@ class Cvalidasi extends CI_Controller
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('telp', 'No Telephone', 'numeric');
         $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
-        // $this->form_validation->set_rules('foto', 'Foto', 'callback_upload_check');
+        $this->form_validation->set_rules('foto', 'Foto', 'callback_upload_check');
 
         if ($this->form_validation->run() == FALSE) {
-
-            // $this->load->view('validasi');
+            //  $this->load->view('validasi');
             echo "gagal";
         } else {
-            $id_admin = 1;
+
             $id_postingan = $this->input->post('id_postingan');
             $data = array(
                 'id_posting' => $id_postingan,
-                'id_admin' => $id_admin,
+                'id_admin' => $this->session->userdata('id_admin'),
                 'nama' => $this->input->post('nama'),
                 'tanggal' => $this->input->post('tanggal'),
                 'foto' => $this->upload->data('file_name'),
@@ -59,7 +56,7 @@ class Cvalidasi extends CI_Controller
             $this->Mvalidasi->simpan_data($data);
 
 
-            redirect('Cposting/overview');
+            redirect('Admin/Coverview/overview');
         }
     }
 

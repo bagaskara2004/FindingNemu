@@ -32,7 +32,6 @@ class Coverview extends CI_Controller
 		}
 
 		$this->load->view('Admin/navbar');
-
 		$this->load->view('posting/detail', $datas);
 		$this->load->view('Admin/tombol');
 		$this->load->view('Admin/footer');
