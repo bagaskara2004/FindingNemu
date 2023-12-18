@@ -34,7 +34,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="<?= base_url('Admin/Cuser') ?>" class="sidebar-link">
                             <i class="bi bi-person-fill"></i>&nbsp; &nbsp;
                             User
                         </a>
@@ -43,7 +43,7 @@
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link">
                             <span class="bi bi-printer-fill"></span>&nbsp; &nbsp;
-                            Print
+                            Validasi
                         </a>
                     </li>
 
