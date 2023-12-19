@@ -34,7 +34,8 @@ class Cauth extends CI_Controller
 				//cek password
 				if ($password == $user['password']) {
 					$data = [
-						'username' => $user['username']
+						'username' => $user['username'],
+						'foto' => $user['foto']
 					];
 					$this->session->set_userdata($data);
 					redirect(base_url('Cposting'));

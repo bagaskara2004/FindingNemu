@@ -31,8 +31,14 @@
                 <li class="nav-item button d-flex align-items-center">
                     <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cauth/register')?>">PROSEDUR</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link button mx-auto" href="<?=base_url('Cauth/logout')?>"><img src="<?=base_url('asset/foto_profile/default.png')?>" alt="findingnemu" style="width:30px;"class="img-fluid" ></a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link button mx-auto" href="#" data-bs-toggle="dropdown">
+						<img src="<?php echo $this->session->userdata('foto'); ?>" class="img-fluid profile-image-pic rounded-circle" width="40px" alt="profile">
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						<a href="#" class="dropdown-item">Profile</a>
+						<a href="<?=base_url('Cauth/logout')?>" class="dropdown-item">Logout</a>
+					</div>
                 </li>
             </ul>
         <?php }else {?>
