@@ -39,6 +39,7 @@ class Cposting extends CI_Controller {
 		$loc = $this->input->post("lokasi");
 		$output = $this->Mposting->searching($key,$loc);
 		echo $output;
+
 	}
 
 	public function pengajuan(){
@@ -95,5 +96,11 @@ class Cposting extends CI_Controller {
 		$id_posting = $this->input->post('id_posting');
 		$output = $this->Mposting->comment($keyword,$id_user,$id_posting);
 		echo $output;
+	}
+	public function prosedur(){
+		$this->load->library('pdf');
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "Prosedur_FindingNemu.pdf";
+		$this->pdf->load_view('Posting/prosedur');
 	}
 }
