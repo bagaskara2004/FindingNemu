@@ -97,4 +97,10 @@ class Cposting extends CI_Controller {
 		$output = $this->Mposting->comment($keyword,$id_user,$id_posting);
 		echo $output;
 	}
+	public function prosedur(){
+		$this->load->library('pdf');
+		$this->pdf->setPaper('A4', 'potrait');
+		$this->pdf->filename = "Prosedur_FindingNemu.pdf";
+		$this->pdf->load_view('Posting/prosedur');
+	}
 }

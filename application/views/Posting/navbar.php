@@ -29,7 +29,7 @@
                     <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cposting/pengajuan')?>">PENGAJUAN</a>
                 </li>
                 <li class="nav-item button d-flex align-items-center">
-                    <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cauth/register')?>">PROSEDUR</a>
+                    <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cposting/prosedur')?>">PROSEDUR</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link button mx-auto" href="#" data-bs-toggle="dropdown">
