@@ -39,6 +39,7 @@ class Cposting extends CI_Controller {
 		$loc = $this->input->post("lokasi");
 		$output = $this->Mposting->searching($key,$loc);
 		echo $output;
+
 	}
 
 	public function pengajuan(){
