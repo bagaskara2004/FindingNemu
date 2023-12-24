@@ -4,6 +4,17 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Mvalidasi extends CI_Model
 {
 
+    function tampildata()
+    {
+
+        $this->db->select('validasi.*, admin.nama_admin');
+        $this->db->from('validasi');
+        $this->db->join('admin', 'validasi.id_admin = admin.id_admin', 'left');
+
+        $query = $this->db->get();
+
+        return $query->result();
+    }
     public function get_all_data($id_posting)
     {
         $this->db->select('posting.id_posting');

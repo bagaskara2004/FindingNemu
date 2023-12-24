@@ -7,9 +7,21 @@ class Cvalidasi extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Mvalidasi');
-        $this->load->library('form_validation'); // Add this line
+        $this->load->model('admin/Mvalidasi');
+        $this->load->library('form_validation'); 
         $this->load->library('upload');
+    }
+    public function index()
+    {
+
+        $this->load->view('Admin/navbar');
+        $this->load->view('Admin/Validasi');
+        $this->load->view('Admin/footer');
+    }
+    public function validasi()
+    {
+        $resault = $this->Mvalidasi->tampildata();
+        echo json_encode($resault);
     }
     public function add($id_posting)
     {

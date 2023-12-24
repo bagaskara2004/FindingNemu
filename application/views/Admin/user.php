@@ -6,10 +6,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-md-4">
-								<h4>Overview</h4>
-							</div>
-							<div class="col-md-4 ms-auto">
-								<button type="button" class="btn btn-sm btn-warning">Add</button>
+								<h4>User</h4>
 							</div>
 						</div>
 					</div>
