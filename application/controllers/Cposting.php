@@ -43,6 +43,10 @@ class Cposting extends CI_Controller {
 	}
 
 	public function pengajuan(){
+		if (! $this->session->userdata('username')) {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Tidak bisa mengakses halaman pengajuan</div>');
+			redirect(base_url('Cauth/login'));
+		}
 		$data['kategori'] = $this->db->select('*')->from('kategori')->get();
 		$data['lokasi'] = "form";
 		$this->load->view('Posting/navbar.php',$data);
@@ -98,6 +102,10 @@ class Cposting extends CI_Controller {
 		echo $output;
 	}
 	public function prosedur(){
+		if (! $this->session->userdata('username')) {
+			$this->session->set_flashdata('message','<div class="alert alert-danger" role="alert">Tidak bisa mengakses halaman prosedur</div>');
+			redirect(base_url('Cauth/login'));
+		}
 		$this->load->library('pdf');
 		$this->pdf->setPaper('A4', 'potrait');
 		$this->pdf->filename = "Prosedur_FindingNemu.pdf";

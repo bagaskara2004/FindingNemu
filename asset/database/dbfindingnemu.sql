@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2023 at 11:55 AM
+-- Generation Time: Dec 24, 2023 at 02:33 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -29,11 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admin` (
   `id_admin` int(11) NOT NULL,
-  `nama_admin` varchar(45) NOT NULL,
-  `password_admin` varchar(45) NOT NULL,
-  `email_admin` varchar(45) NOT NULL,
-  `foto_admin` varchar(45) NOT NULL
+  `nama_admin` varchar(50) NOT NULL,
+  `password_admin` varchar(50) NOT NULL,
+  `email_admin` varchar(100) NOT NULL,
+  `foto_admin` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id_admin`, `nama_admin`, `password_admin`, `email_admin`, `foto_admin`) VALUES
+(1, 'pos1', '12345', 'pos1@gmail.com', 'asset/foto_profile/default.png');
 
 -- --------------------------------------------------------
 
@@ -65,7 +72,18 @@ CREATE TABLE `kategori` (
 
 INSERT INTO `kategori` (`id_kategori`, `kategori`) VALUES
 (1, 'kunci'),
-(2, 'helm');
+(2, 'helm'),
+(3, 'handphone');
+
+--
+-- Triggers `kategori`
+--
+DELIMITER $$
+CREATE TRIGGER `kategori_BEFORE_DELETE` BEFORE DELETE ON `kategori` FOR EACH ROW BEGIN
+delete from posting where id_kategori = OLD.id_kategori;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -102,15 +120,19 @@ CREATE TABLE `posting` (
   `judul` varchar(100) NOT NULL,
   `deskripsi` varchar(100) NOT NULL,
   `tanggal` date NOT NULL,
-  `foto` varchar(50) NOT NULL
+  `foto` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
--- Dumping data for table `posting`
+-- Triggers `posting`
 --
-
-INSERT INTO `posting` (`id_posting`, `id_user`, `id_kategori`, `id_konfirmasi`, `status`, `judul`, `deskripsi`, `tanggal`, `foto`) VALUES
-(3, 1, 2, 3, 0, 'hilang dompet', 'warna coklat', '2023-12-19', 'asset/foto_item/default.jpg');
+DELIMITER $$
+CREATE TRIGGER `posting_BEFORE_DELETE` BEFORE DELETE ON `posting` FOR EACH ROW BEGIN
+delete from comment where id_posting = OLD.id_posting;
+delete from validasi where id_posting = OLD.id_posting;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -122,9 +144,9 @@ CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `verifikasi` tinyint(4) NOT NULL,
-  `foto` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `actived` tinyint(1) NOT NULL,
+  `foto` varchar(200) NOT NULL,
   `tanggal` date NOT NULL,
   `telp` char(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -133,8 +155,18 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `verifikasi`, `foto`, `tanggal`, `telp`) VALUES
-(1, 'bagaskara', '12345', 'bagaskara@gmail.com', 1, 'adasds', '2023-12-19', '089541');
+INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `actived`, `foto`, `tanggal`, `telp`) VALUES
+(1, 'bagaskara', '12345', 'bagas@gmail.com', 1, 'asset/foto_profile/default.png', '2023-12-12', '08922222');
+
+--
+-- Triggers `user`
+--
+DELIMITER $$
+CREATE TRIGGER `user_BEFORE_DELETE` BEFORE DELETE ON `user` FOR EACH ROW BEGIN
+delete from posting where id_user = OLD.id_user;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -148,7 +180,7 @@ CREATE TABLE `validasi` (
   `id_admin` int(11) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `tanggal` date NOT NULL,
-  `foto` varchar(100) NOT NULL,
+  `foto` varchar(200) NOT NULL,
   `telp` char(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
@@ -213,19 +245,19 @@ ALTER TABLE `validasi`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `konfirmasi`
@@ -237,19 +269,19 @@ ALTER TABLE `konfirmasi`
 -- AUTO_INCREMENT for table `posting`
 --
 ALTER TABLE `posting`
-  MODIFY `id_posting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_posting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `validasi`
 --
 ALTER TABLE `validasi`
-  MODIFY `id_validasi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_validasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables

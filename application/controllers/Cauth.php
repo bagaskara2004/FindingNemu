@@ -30,7 +30,7 @@ class Cauth extends CI_Controller
 		//jika usernya ada
 		if ($user) {
 			//cek user
-			if ($user['verifikasi'] == 1) {
+			if ($user['actived'] == 1) {
 				//cek password
 				if ($password == $user['password']) {
 					$data = [
@@ -88,7 +88,7 @@ class Cauth extends CI_Controller
 				'username' => htmlentities($this->input->post('username', true)),
 				'password' => $this->input->post('password'),
 				'email' => htmlentities($this->input->post('email', true)),
-				'verifikasi' => 1,
+				'actived' => 1,
 				'foto' => 'asset/foto_profile/default.png',
 				'tanggal' => date("Y-m-d"),
 				'telp' => $this->input->post('telp')
