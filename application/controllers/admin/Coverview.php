@@ -82,31 +82,6 @@ class Coverview extends CI_Controller
 		$this->load->view('Admin/tombol');
 		$this->load->view('Admin/footer');
 	}
-	public function pengajuan()
-	{
-		$data['kategori'] = $this->db->select('*')->from('kategori')->get();
-
-		$this->load->view('Admin/navbar');
-		$this->load->view('Posting/pengajuan', $data);
-		$this->load->view('Admin/footer');
-	}
-	function tampil()
-	{
-		$data['hasil'] = $this->Moverview->tampildata();
-		$this->load->view('Admin/navbar');
-		$this->load->view('Admin/overview', $data, TRUE);
-		$this->load->view('Admin/footer');
-	}
-	function simpanprodi()
-	{
-		$this->Moverview->simpandaftar();
-	}
-	function hapusdata($KodeProdi)
-	{
-		$this->Moverview->hapusdata($KodeProdi);
-	}
-	function editdata($KodeProdi)
-	{
-		$this->Moverview->editdata($KodeProdi);
-	}
+	
+	
 }

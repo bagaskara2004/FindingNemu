@@ -57,16 +57,16 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="<?= base_url('admin/Ckonfirmasi') ?>" class="sidebar-link">
                             <span class="bi bi-flag-fill"></span>&nbsp; &nbsp;
-                            Penemuan
+                            Mengajukan
                         </a>
                     </li>
 
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">
+                        <a href="<?= base_url('Admin/Ckategori') ?>" class="sidebar-link">
                             <span class="bi bi-shield-fill-check"></span>&nbsp; &nbsp;
-                            Security
+                            Kategori
                         </a>
                     </li>
                 </ul>

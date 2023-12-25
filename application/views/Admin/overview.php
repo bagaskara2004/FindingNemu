@@ -10,14 +10,13 @@
 	<div class="container min-vh-100">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-4">
+				<div class="col-md-6">
 					<h4>Overview</h4>
 				</div>
-				<div class="col-md-4 ms-auto">
+				<div class="col-md-6 text-right">
 					<button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal">
-						ADD
+						Tambah Posting
 					</button>
-
 				</div>
 			</div>
 		</div>
@@ -29,7 +28,7 @@
 					<div class="modal-dialog  modal-xl">
 						<div class="modal-content">
 							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">ADD posting</h5>
+								<h5 class="modal-title" id="exampleModalLabel">Tambah Posting</h5>
 								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
