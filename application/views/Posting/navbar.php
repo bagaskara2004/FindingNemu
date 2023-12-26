@@ -31,14 +31,10 @@
                 <li class="nav-item button d-flex align-items-center">
                     <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cposting/prosedur')?>">PROSEDUR</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link button mx-auto" href="#" data-bs-toggle="dropdown">
+                <li class="nav-item">
+                    <a class="nav-link button mx-auto" href="<?=base_url('Cuserprofile/index')?>">
 						<img src="<?php echo $this->session->userdata('foto'); ?>" class="img-fluid profile-image-pic rounded-circle" width="40px" alt="profile">
 					</a>
-					<div class="dropdown-menu dropdown-menu-end">
-						<a href="#" class="dropdown-item">Profile</a>
-						<a href="<?=base_url('Cauth/logout')?>" class="dropdown-item">Logout</a>
-					</div>
                 </li>
             </ul>
         <?php }else {?>
