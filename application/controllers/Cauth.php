@@ -36,7 +36,8 @@ class Cauth extends CI_Controller
 				if ($password == $this->encryption->decrypt($user['password'])) {
 					$data = [
 						'username' => $user['username'],
-						'foto' => $user['foto']
+						'foto' => $user['foto'],
+						'email' => $user['email']
 					];
 					$this->session->set_userdata($data);
 					redirect(base_url('Cposting'));
