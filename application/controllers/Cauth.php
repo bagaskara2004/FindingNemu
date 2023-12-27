@@ -127,7 +127,8 @@ class Cauth extends CI_Controller
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Periksa email sekarang untuk actived akunmu</div>');
 			redirect(base_url('Cauth/login'));
         } else {
-            echo "Gagal: " . $this->email->print_debugger();
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Register Akun</div>');
+			redirect(base_url('Cauth/login'));
         }
 
 	}
