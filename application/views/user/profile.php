@@ -19,6 +19,7 @@
 		border-collapse: collapse;
 		border-spacing: 0;
 		text-align: center;
+		color: #0080FF;
 	}
 </style>
 <body>
@@ -27,7 +28,7 @@
 		<div class="row mb-3">
 			<div class="d-flex align-items-center">
 				<a class="nav-link button mx-auto" href="#" data-bs-toggle="dropdown">
-					<img src="<?php echo $this->session->userdata('foto'); ?>" class="img-fluid profile-image-pic rounded-circle" width="150px" alt="profile">
+					<img src="<?= base_url($this->session->userdata('foto')) ?>" class="img-fluid profile-image-pic rounded-circle" width="150px" alt="profile">
 				</a>
 				<div class="dropdown-menu dropdown-menu-end">
 					<a href="#" class="dropdown-item">Edit Foto</a>
