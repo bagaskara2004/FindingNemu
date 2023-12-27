@@ -8,6 +8,7 @@ class Cauth extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->library('form_validation');
+		$this->load->library('encryption');
 	}
 	public function login()
 	{
@@ -32,7 +33,7 @@ class Cauth extends CI_Controller
 			//cek user
 			if ($user['actived'] == 1) {
 				//cek password
-				if ($password == $user['password']) {
+				if ($password == $this->encryption->decrypt($user['password'])) {
 					$data = [
 						'username' => $user['username'],
 						'foto' => $user['foto'],
@@ -45,7 +46,7 @@ class Cauth extends CI_Controller
 					redirect(base_url('Cauth/login'));
 				}
 			} else {
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">nama pengguna ini belum diaktifkan</div>');
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun belum di actived</div>');
 				redirect(base_url('Cauth/login'));
 			}
 		} elseif ($admin) {
@@ -57,7 +58,7 @@ class Cauth extends CI_Controller
 				redirect(base_url('Admin/Cadmin'));
 			}
 		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Data Belum Di Register</div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Nama Pengguna tidak ditemukan</div>');
 			redirect(base_url('Cauth/login'));
 		}
 	}
@@ -68,8 +69,9 @@ class Cauth extends CI_Controller
 			'required' => 'Username harus diisi',
 			'is_unique' => 'Username sudah ada'
 		]);
-		$this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[3]', [
-			'min_length' => 'Password manimal 3 kata',
+		$this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[3]|max_length[20]', [
+			'min_length' => 'Password minimal 3 kata',
+			'max_length' => 'Password maximal 20 kata',
 			'required' => 'Password Harus diisi'
 		]);
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]', [
@@ -87,19 +89,59 @@ class Cauth extends CI_Controller
 		} else {
 			$data = [
 				'username' => htmlentities($this->input->post('username', true)),
-				'password' => $this->input->post('password'),
+				'password' => $this->encryption->encrypt($this->input->post('password')),
 				'email' => htmlentities($this->input->post('email', true)),
-				'actived' => 1,
+				'actived' => 0,
 				'foto' => 'asset/foto_profile/default.png',
 				'tanggal' => date("Y-m-d"),
 				'telp' => $this->input->post('telp')
 			];
-			$this->db->insert('user', $data);
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat! data kamu sudah berhasil.Mohon Login</div>');
-			redirect(base_url('Cauth/login'));;
+			$this->sendMail($data);
 		}
 	}
-	// sementara, untuk akses admin page
+
+	public function sendMail($data) {
+		$config['useragent'] = 'Codeigniter';
+        $config['mailpath'] = "/usr/bin/sendmail";
+        $config['protocol'] = "smtp";
+        $config['smtp_host'] = "smtp.gmail.com";
+        $config['smtp_port'] = "465";
+        $config['smtp_user'] = "bagaskaraputra87@gmail.com";
+        $config['smtp_pass'] = "frnm jlse bibl kzoy";
+        $config['smtp_crypto'] = "ssl";
+        $config['charset'] = "utf-8";
+        $config['mailtype'] = "html";
+        $config['newline'] = "\r\n";
+        $config['smtp_timeout'] = "10";
+        $config['wordwrap'] = TRUE;
+
+        $this->load->library('email');
+        $this->email->initialize($config);
+        $this->email->from("findingNemu", "FindingNemu");
+        $this->email->to($data['email']);
+        $this->email->subject("Actived Akun");
+        $this->email->message("Klik link berikut untuk <a href='http://localhost/findingNemu/Cauth/actived?email=".$data["email"]."'>actived akunmu</a>");
+
+        if ($this->email->send()) {
+            $this->db->insert('user', $data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Periksa email sekarang untuk actived akunmu</div>');
+			redirect(base_url('Cauth/login'));
+        } else {
+            echo "Gagal: " . $this->email->print_debugger();
+        }
+
+	}
+
+	public function actived() {
+		$email = $this->input->get('email');
+		$data = array(
+			'actived' => 1
+		);
+		$this->db->where('email', $email);
+		$this->db->update('user', $data);
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akunmu berhasil di actived, login sekarang</div>');
+		redirect(base_url('Cauth/login'));;
+	}
 	public function admindashboard()
 	{
 		$this->load->view('Admin/homepageAdmin.php');

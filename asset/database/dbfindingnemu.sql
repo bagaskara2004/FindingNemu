@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 24, 2023 at 02:33 PM
+-- Generation Time: Dec 26, 2023 at 09:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `admin` (
   `id_admin` int(11) NOT NULL,
   `nama_admin` varchar(50) NOT NULL,
-  `password_admin` varchar(50) NOT NULL,
+  `password_admin` varchar(200) NOT NULL,
   `email_admin` varchar(100) NOT NULL,
   `foto_admin` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
@@ -143,7 +143,7 @@ DELIMITER ;
 CREATE TABLE `user` (
   `id_user` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(200) NOT NULL,
   `email` varchar(100) NOT NULL,
   `actived` tinyint(1) NOT NULL,
   `foto` varchar(200) NOT NULL,
@@ -156,7 +156,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `actived`, `foto`, `tanggal`, `telp`) VALUES
-(1, 'bagaskara', '12345', 'bagas@gmail.com', 1, 'asset/foto_profile/default.png', '2023-12-12', '08922222');
+(7, 'bagaskara', '63d54187d05ccf615b21aac7b87f3dbb73cda16f752368b953335c8c01814ece81aabdde3aeeab625d2c657f7f0d84d835d0bdf091876ef0c63ee256bffdedd99DSRobuC1th2R7pDU3GjjVmzjehH0WtWJngw+Z3Eeto=', 'bagaskaraputra87@gmail.com', 1, 'asset/foto_profile/default.png', '2023-12-26', '08954332');
 
 --
 -- Triggers `user`
@@ -269,13 +269,13 @@ ALTER TABLE `konfirmasi`
 -- AUTO_INCREMENT for table `posting`
 --
 ALTER TABLE `posting`
-  MODIFY `id_posting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_posting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `validasi`
