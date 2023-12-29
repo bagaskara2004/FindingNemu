@@ -8,8 +8,7 @@ class Cvalidasi extends CI_Controller
     {
         parent::__construct();
         $this->load->model('admin/Mvalidasi');
-        $this->load->library('form_validation'); 
-        $this->load->library('upload');
+        $this->load->library('form_validation');
     }
     public function index()
     {
@@ -32,64 +31,44 @@ class Cvalidasi extends CI_Controller
         $this->load->view('Admin/footer');
     }
 
-
-
-    public function edit($id_validasi)
-    {
-
-        $data['validasi'] = $this->Mvalidasi->get_data_by_id($id_validasi);
-
-        $this->load->view('validasi_edit', $data);
-    }
-
     public function simpan()
     {
 
-        $this->form_validation->set_rules('nama', 'Nama', 'required');
-        $this->form_validation->set_rules('telp', 'No Telephone', 'numeric');
-        $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
-        $this->form_validation->set_rules('foto', 'Foto', 'callback_upload_check');
 
-        if ($this->form_validation->run() == FALSE) {
-            //  $this->load->view('validasi');
-            echo "gagal";
-        } else {
-
-            $id_postingan = $this->input->post('id_postingan');
-            $data = array(
-                'id_posting' => $id_postingan,
-                'id_admin' => $this->session->userdata('id_admin'),
-                'nama' => $this->input->post('nama'),
-                'tanggal' => $this->input->post('tanggal'),
-                'foto' => $this->upload->data('file_name'),
-                'telp' => $this->input->post('telp')
-            );
-
-            $this->Mvalidasi->simpan_data($data);
-
-
-            redirect('Admin/Coverview/overview');
-        }
-    }
-
-    public function upload_check($str)
-    {
-        $allowed_types = array('jpg', 'jpeg', 'png', 'img');
-        $max_size = 50000;
-
-
-        $config['upload_path'] = './gambar_validasi/';
-        $config['allowed_types'] = implode('|', $allowed_types);
-        $config['max_size'] = $max_size;
-
+        $config['upload_path']          = './asset/foto_validasi';
+        $config['allowed_types']        = 'jpeg|jpg|png';
+        $config['max_size']             = 100000;
+        $config['max_width']            = 10000;
+        $config['max_height']           = 10000;
         $this->load->library('upload', $config);
 
-        if (!$this->upload->do_upload('foto')) {
-
-            $this->form_validation->set_message('upload_check', $this->upload->display_errors());
-            return FALSE;
+        if ($this->upload->do_upload('foto')) {
+            $foto = $this->upload->data();
+            $foto = 'asset/foto_validasi/' . $foto['file_name'];
         } else {
-            return TRUE;
+            $name = $this->upload->data()['file_name'];
+            if (empty($name)) {
+                $foto = 'asset/foto_posting/default.jpg';
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Form gagal di kirim, Pastikan format foto dan size foto sesuai</div>');
+                redirect(base_url('admin/Coverview/detsil'));
+            }
+        }
+
+        $id_admin = $this->session->userdata('id_admin');
+        $data = array(
+            'id_posting' => $this->input->post('id_postingan'),
+            'id_admin' => $id_admin,
+            'nama' => $this->input->post('nama'),
+            'tanggal' => $this->input->post('tanggal'),
+            'telp' => $this->input->post('telp')
+        );
+        $insertedId = $this->Mvalidasi->simpanData($data);
+
+        if ($insertedId) {
+            redirect(base_url('admin/Coverview/detail' . $insertedId));
+        } else {
+            
         }
     }
 }
