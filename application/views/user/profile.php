@@ -15,83 +15,230 @@
 	<script src="<?= base_url('asset/jquery/jquery-3.7.1.min.js')?>"></script>
 </head>
 <style>
-	.table{
+	.table-status table{
 		border-collapse: collapse;
+		width: 100%;
 		border-spacing: 0;
 		text-align: center;
-		color: #0080FF;
+		align-content: center;
+		color: white;
+		padding: 15px;
+		background-color: #2090ff;
+		border: none;
+		outline: none;
 	}
+
+	.card{
+		border: none;
+	}
+
+
+	.profile-top{
+		margin-top: 50px;
+	}
+
+	.table-status{
+		margin-top: 100px;
+	}
+
+	.input-profile{
+		margin-top: 40px;
+	}
+
+	.table-status thead{
+		background-color: #2090ff;
+	}
+
+	.profile-preview{
+		text-align: center;
+		align-content: center;
+		margin-bottom: 30px;
+	}
+
+	footer{
+		padding-top: 160px;
+	}
+
+	.alert{
+		margin-top: 50px;
+		text-align: center;
+		border: none;
+		background: white;
+	}
+
 </style>
 <body>
-<div class="container py-5 h-100">
+<div class="container mt-5">
+<div class="notification">
+	<?php
+		$pesan = $this -> session -> flashdata('pesan');
+		if ($pesan == "") {
+			echo "";
+		}
+		else {
+		?>
+			<div class="form-alert">
+				<div class="alert alert-danger alert-dismissible" id="notif-alert">
+					<?php echo $pesan; ?>
+				</div>
+			</div>
+		<?php } ?>
+</div>
 	<div class="row">
-		<div class="row mb-3">
-			<div class="d-flex align-items-center">
-				<a class="nav-link button mx-auto" href="#" data-bs-toggle="dropdown">
-					<img src="<?= base_url($this->session->userdata('foto')) ?>" class="img-fluid profile-image-pic rounded-circle" width="150px" alt="profile">
-				</a>
-				<div class="dropdown-menu dropdown-menu-end">
-					<a href="#" class="dropdown-item">Edit Foto</a>
-					<a href="<?=base_url('Cauth/logout')?>" class="dropdown-item">Logout</a>
+		<div class="row mt-3">
+			<div class="profile-top">
+				<div class="d-flex align-items-center">
+					<a class="nav-link button mx-auto" href="#" data-bs-toggle="dropdown">
+						<img src="<?= base_url($this->session->userdata('foto')) ?>" class="img-fluid profile-image-pic rounded-circle" width="150px" alt="profile">
+					</a>
+					<div class="dropdown-menu dropdown-menu-end">
+						<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#myModal">
+							Edit Profile
+						</button>
+						<a href="<?=base_url('Cauth/logout')?>" class="dropdown-item">Logout</a>
+					</div>
+					<!--Modal Profile Changes-->
+					<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="exampleModalLabel">Ganti Profile</h1>
+								</div>
+								<div class="modal-body">
+									<label for="imagePreview">Preview</label>
+									<div class="profile-preview">
+										<img src=""
+											 class="img-fluid profile-image-pic rounded-circle"
+											 id="imagePreview"
+											 width="100px"
+											 alt=""
+										>
+									</div>
+									<!--Profile Update-->
+									<?php echo form_open_multipart('Cuserprofile/uploadprofile', ['class' => 'container mt-3']); ?>
+										<input type="hidden"
+											   class="form-control"
+											   name="id_user"
+											   value="<?php echo $this->session->userdata('id_user'); ?>"
+										>
+										<label for="userImage">
+											Masukan Profile Baru Anda
+										</label>
+										<input
+											type="file"
+											class="form-control"
+											name="userImage"
+											id="userImage"
+											accept="image/jpeg, image/png"
+										/>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+											<button type="reset" class="btn btn-warning" id="cancel">Batal</button>
+											<button type="submit" class="btn btn-primary">Unggah</button>
+											<?php echo form_close(); ?>
+										</div>
+									<!--End Profile Update-->
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="row mb-3">
-			<div class="d-flex">
-				<div class="grid gap-3">
-					<div class="p-2 g-col-6">Nama</div>
-				</div>
-				<div class="input-group">
-					<input type="text" class="form-control" placeholder="<?php echo $this->session->userdata('username'); ?>">
+		<div class="input-profile">
+			<div class="row mt-3">
+				<div class="d-flex">
+					<div class="grid gap-3">
+						<div class="p-2 g-col-6">Nama</div>
+					</div>
+					<!--Username Update-->
+					<div class="input-group">
+						<?php echo form_open_multipart('Cuserprofile/updateusername', ['class' => 'input-group ']); ?>
+						<input type="hidden"
+							   class="form-control"
+							   name="id_user"
+							   value="<?php echo $this->session->userdata('id_user'); ?>"
+						>
+						<input type="text"
+							   class="form-control"
+							   name="username"
+							   required
+							   placeholder="<?php echo $this->session->userdata('username'); ?>"
+						>
 						<span class="input-group-btn">
-						<button class="btn btn-default" type="button">Edit</button>
-					</span>
+							<button class="btn btn-default" type="submit">Edit</button>
+						</span>
+						<?php echo form_close(); ?>
+					</div>
+					<!--End Username Update-->
 				</div>
 			</div>
-		</div>
-		<div class="row mb-3">
-			<div class="d-flex">
-				<div class="grid gap-3">
-					<div class="p-2 g-col-6">Email</div>
-				</div>
-				<div class="input-group">
-					<input type="email" class="form-control" placeholder="<?php echo $this->session->userdata('email'); ?>">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="button">Edit</button>
-					</span>
+			<div class="row mt-3">
+				<div class="d-flex">
+					<div class="grid gap-3">
+						<div class="p-2 g-col-6">Email</div>
+					</div>
+					<!--Email Update-->
+					<?php echo form_open_multipart('Cuserprofile/updateemail', ['class' => 'input-group ']); ?>
+					<div class="input-group">
+						<input type="hidden"
+							   class="form-control"
+							   name="id_user"
+							   value="<?php echo $this->session->userdata('id_user'); ?>"
+						>
+						<input type="email"
+							   class="form-control"
+							   name="email"
+							   required
+							   placeholder="<?php echo $this->session->userdata('email'); ?>"
+						>
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Edit</button>
+						</span>
+						<?php echo form_close(); ?>
+					</div>
+					<!--End Email Update-->
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<div class="container-fluid background-blue">
+<div class="container-fluid background-blue mt-5 ">
 	<div class="container background-blue2 rounded daftar-barang pb-3" >
-		<div class="container fs-5 fw-bold text-center responsive-font-example text-light p-3" id="label">
-			Status
-		</div>
-		<div class="card">
-			<div class="table-responsive text-nowrap">
-				<table class="table">
-					<thead>
-					<tr>
-						<th>No</th>
-						<th>Judul</th>
-						<th>Status</th>
-					</tr>
-					</thead>
-					<tbody>
-					<tr>
-						<th>test</th>
-						<th>test</th>
-						<th>test</th>
-					</tr>
-					</tbody>
-				</table>
+		<div class="table-status">
+			<div class="container fs-5 fw-bold text-center responsive-font-example text-light p-3 " id="label">
+				Status
+			</div>
+			<!--Table Content-->
+			<div class="card">
+				<div style="overflow-x: auto">
+					<table>
+						<thead>
+						<tr>
+							<th>No</th>
+							<th>Judul</th>
+							<th>Status</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<th>test</th>
+							<th>test</th>
+							<th>test</th>
+						</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
+<script>
+	document.getElementById('userImage').onchange = function (){
+		document.getElementById("imagePreview").src = URL.createObjectURL(userImage.files[0]);
+	}
+</script>
 </body>
 </html>
 <?php

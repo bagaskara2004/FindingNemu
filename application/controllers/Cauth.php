@@ -37,7 +37,8 @@ class Cauth extends CI_Controller
 					$data = [
 						'username' => $user['username'],
 						'foto' => $user['foto'],
-						'email' => $user['email']
+						'email' => $user['email'],
+						'id_user' => $user['id_user']
 					];
 					$this->session->set_userdata($data);
 					redirect(base_url('Cposting'));
