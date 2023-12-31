@@ -1,24 +1,30 @@
 <?php
+/**
+ * @property Muserprofile $muserprofile;
+ */
 	class Cuserprofile extends CI_Controller
 	{
 
 		public function __construct()
 		{
 			parent::__construct();
-			$this->load->model('Muserprofile');
+			$this->load->model('muserprofile');
 			$this->load->library('form_validation');
 			$this->load->helper('form');
 		}
 		public function index(): void
 		{
+			$id_user = $this->session->userdata('id_user');
 			$data['lokasi'] = "profile";
-			$data['title'] = "Profile | FindingNemu";
+			$title['title'] = "Profile | FindingNemu";
+			$showdata['result'] = $this->muserprofile->getDataTable($id_user);
 			$this->load->view('Posting/navbar.php', $data);
-			$this->load->view('user/profile.php');
+			$this->load->view('user/profile.php', $title);
+			$this->load->view('user/status_table.php', $showdata);
 			$this->load->view('Posting/footer.php');
 		}
 
-		function uploadprofile()
+		function uploadprofile(): void
 		{
 				$id_user = $this->input->post('id_user');
 
@@ -42,7 +48,9 @@
 						'foto' => $image
 					);
 					$this->session->set_flashdata('pesan', "Foto Profile Berhasil Di Update");
-					redirect('Cuserprofile/index', 'refresh');
+					redirect(
+						'Cuserprofile/index', 'refresh'
+					);
 
 				}
 
@@ -70,6 +78,11 @@
 			$this->session->set_flashdata('pesan', "Email Berhasil Di Update");
 			$this->Muserprofile->editemail($id_user, $data);
 			redirect('Cuserprofile/index', 'refresh');
+		}
+
+		function showdata(): void
+		{
+
 		}
 
 	}

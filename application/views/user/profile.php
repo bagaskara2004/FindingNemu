@@ -5,7 +5,7 @@
 	<meta name="viewport"
 		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>Profile | FindingNemu</title>
+	<title><?= $title; ?></title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<link rel="stylesheet" href="<?=base_url('asset/css/style.css')?>">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,14 +18,12 @@
 	.table-status table{
 		border-collapse: collapse;
 		width: 100%;
-		border-spacing: 0;
 		text-align: center;
-		align-content: center;
 		color: white;
-		padding: 15px;
 		background-color: #2090ff;
 		border: none;
 		outline: none;
+
 	}
 
 	.card{
@@ -64,6 +62,18 @@
 		text-align: center;
 		border: none;
 		background: white;
+	}
+
+	.green {
+		color: green;
+	}
+
+	.red{
+		color: red;
+	}
+
+	.yellow{
+		color: yellow;
 	}
 
 </style>
@@ -198,36 +208,6 @@
 						<?php echo form_close(); ?>
 					</div>
 					<!--End Email Update-->
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="container-fluid background-blue mt-5 ">
-	<div class="container background-blue2 rounded daftar-barang pb-3" >
-		<div class="table-status">
-			<div class="container fs-5 fw-bold text-center responsive-font-example text-light p-3 " id="label">
-				Status
-			</div>
-			<!--Table Content-->
-			<div class="card">
-				<div style="overflow-x: auto">
-					<table>
-						<thead>
-						<tr>
-							<th>No</th>
-							<th>Judul</th>
-							<th>Status</th>
-						</tr>
-						</thead>
-						<tbody>
-						<tr>
-							<th>test</th>
-							<th>test</th>
-							<th>test</th>
-						</tr>
-						</tbody>
-					</table>
 				</div>
 			</div>
 		</div>
