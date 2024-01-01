@@ -27,35 +27,30 @@
 		function uploadprofile(): void
 		{
 				$id_user = $this->input->post('id_user');
+				$old_photo = $this->input->post('old_photo');
+				$path = 'asset/foto_profile/';
 
-				$config['upload_path']          = './asset/foto_profile';
+				$config['upload_path']          = $path;
 				$config['allowed_types']        = 'jpeg|jpg|png';
 				$config['max_size']             = 10000;
 				$config['max_width']            = 10000;
 				$config['max_height']           = 10000;
 				$this->load->library('upload', $config);
 
-				if (! $this->upload->do_upload('userImage')) {
+				if (!$this->upload->do_upload('userImage')) {
 					$this->session->set_flashdata('pesan', "Foto Profile Gagal Di Update/Tidak Memasukan Foto");
-					redirect(
-						'Cuserprofile/index', 'refresh'
-					);
-					return;
 				} else {
 					$image = $this->upload->data();
-					$image = 'asset/foto_profile/'. $image['file_name'];
+					$image = $path.$image['file_name'];
 					$data = array(
 						'foto' => $image
 					);
-					$this->session->set_flashdata('pesan', "Foto Profile Berhasil Di Update");
-					redirect(
-						'Cuserprofile/index', 'refresh'
-					);
+					unlink($old_photo);
+					$this->muserprofile->editprofile($id_user, $data);
+					$this->session->set_flashdata('message', "Foto Profile Berhasil Di Update Silahkan Login Ulang");
+					$this->logout();
 
 				}
-
-
-			$this->Muserprofile->editprofile($id_user, $data);
 		}
 
 		function updateusername(): void
@@ -64,9 +59,9 @@
 			$data = array(
 				'username' => $this->input->post('username')
 			);
-			$this->session->set_flashdata('pesan', "Username Berhasil Di Update");
-			$this->Muserprofile->editusername($id_user, $data);
-			redirect('Cuserprofile/index', 'refresh');
+			$this->muserprofile->editusername($id_user, $data);
+			$this->session->set_flashdata('message', "Username Berhasil Di Update Silahkan Login Ulang Dengan Username Baru Anda");
+			$this->logout();
 		}
 
 		function updateemail(): void
@@ -75,14 +70,14 @@
 			$data = array(
 				'email' => $this->input->post('email')
 			);
-			$this->session->set_flashdata('pesan', "Email Berhasil Di Update");
-			$this->Muserprofile->editemail($id_user, $data);
-			redirect('Cuserprofile/index', 'refresh');
+			$this->muserprofile->editemail($id_user, $data);
+			$this->session->set_flashdata('message', "Email Berhasil Di Update Silahkan Login Ulang");
+			$this->logout();
 		}
 
-		function showdata(): void
+		public function logout()
 		{
-
+			$this->session->sess_destroy();
+			$this->load->view('Authentication/login');
 		}
-
 	}

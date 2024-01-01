@@ -99,7 +99,7 @@
 			<div class="profile-top">
 				<div class="d-flex align-items-center">
 					<a class="nav-link button mx-auto" href="#" data-bs-toggle="dropdown">
-						<img src="<?= base_url($this->session->userdata('foto')) ?>" class="img-fluid profile-image-pic rounded-circle" width="150px" alt="profile">
+						<img src="<?= base_url($this->session->userdata('foto')) ?>" class="img-fluid profile-image-pic rounded-circle" width="150px" alt="Profile" id="pfp">
 					</a>
 					<div class="dropdown-menu dropdown-menu-end">
 						<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#myModal">
@@ -130,6 +130,11 @@
 											   class="form-control"
 											   name="id_user"
 											   value="<?php echo $this->session->userdata('id_user'); ?>"
+										>
+										<input type="hidden"
+											   class="form-control"
+											   name="old_photo"
+											   value="<?php echo $this->session->userdata('foto'); ?>"
 										>
 										<label for="userImage">
 											Masukan Profile Baru Anda
@@ -218,6 +223,13 @@
 	document.getElementById('userImage').onchange = function (){
 		document.getElementById("imagePreview").src = URL.createObjectURL(userImage.files[0]);
 	}
+
+	// jika profile kosong digantikan dengan profile alternatif
+	const img = document.getElementById("pfp")
+	img.addEventListener("error", function (event){
+		event.target.src = "https://imagetolink.com/ib/Zn9U9bxCzF.png"
+		event.onerror = null
+	})
 </script>
 </body>
 </html>

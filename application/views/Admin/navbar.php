@@ -76,7 +76,7 @@
             <!----Navbar---->
             <nav class="navbar navbar-expand px-3 border-bottom">
                 <button class="btn" id="sidebar-toggle" type="button">
-                    <span class="navbar-toggler-icon"></span>
+					<i class="bi bi-filter-left"></i>
                 </button>
                 <!--ini sementara untuk searchnya-->
                 <form class="d-flex" role="search">
@@ -85,14 +85,10 @@
                 </form>
                 <div class="navbar-collapse navbar">
                     <ul class="navbar-nav">
-                        <li class="nav-item dropdown">
-                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-                                <img src="https://imagetolink.com/ib/0nKZYSJqVX.png" class="img-fluid profile-image-pic rounded-circle" width="40px" alt="profile">
+                        <li class="nav-item">
+                            <a href="<?=base_url('Cuserprofile/index')?>" class="nav-icon pe-md-0">
+								<img src="<?php echo $this->session->userdata('foto_admin'); ?>" class="img-fluid profile-image-pic rounded-circle" width="40px" alt="profile" onerror="this.src='https://imagetolink.com/ib/Zn9U9bxCzF.png'; this.onerror='';">
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item">Profile</a>
-                                <a href="#" class="dropdown-item">Logout</a>
-                            </div>
                         </li>
                     </ul>
                 </div>
