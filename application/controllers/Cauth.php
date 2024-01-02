@@ -66,6 +66,9 @@ class Cauth extends CI_Controller
 				];
 				$this->session->set_userdata($data);
 				redirect(base_url('Admin/Cadmin'));
+			}else{
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kata Sandi Salah</div>');
+				redirect(base_url('Cauth/login'));
 			}
 		} else {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Nama Pengguna tidak ditemukan</div>');
