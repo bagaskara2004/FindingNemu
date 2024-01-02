@@ -77,7 +77,7 @@
             <!----Navbar---->
             <nav class="navbar navbar-expand-lg navbar-light px-3 border-bottom">
                 <button class="btn" id="sidebar-toggle" type="button">
-                    <span class="navbar-toggler-icon"></span>
+					<i class="bi bi-filter-left"></i>
                 </button>
 
                 <form class="d-flex ms-auto">
@@ -85,14 +85,14 @@
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <div class="navbar-collapse navbar">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav">
                         <li class="nav-item dropdown">
                             <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
                                 <img src="https://imagetolink.com/ib/0nKZYSJqVX.png" class="img-fluid profile-image-pic rounded-circle" width="40px" alt="profile">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-
-                                <a href="<?= base_url('admin/Cadmin/logout') ?>" class="dropdown-item">Logout</a>
+                                <a href="#" class="dropdown-item">Profile</a>
+                                <a href="#" class="dropdown-item">Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -101,4 +101,3 @@
                     <img src="<?= base_url('asset/img/logo.png') ?>" alt="findingnemu" style="width: 80px;" class="img-fluid">
                 </aside>
             </nav>
-            <div id="content"></div>
