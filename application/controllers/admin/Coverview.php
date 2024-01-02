@@ -28,7 +28,6 @@ class Coverview extends CI_Controller
 	public function simpan_data()
 	{
 
-
 		$config['upload_path']          = './asset/foto_posting';
 		$config['allowed_types']        = 'jpeg|jpg|png';
 		$config['max_size']             = 100000;

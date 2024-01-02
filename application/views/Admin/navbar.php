@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -20,6 +21,11 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url('asset/jquery/jquery-3.7.1.min.js') ?>"></script>
+
 </head>
 
 <body>
@@ -28,41 +34,36 @@
             <!------sidebar------>
             <div class="h-100">
                 <div class="sidebar-logo">
-                    <a href="<?= base_url('cauth/admindashboard') ?>"><img src="<?= base_url('asset/img/logo-light.png') ?>" alt="findingnemu" style="width: 100px;" class="img-fluid"></a>
+                    <a href="<?= base_url('Admin/Cadmin') ?>"><img src="<?= base_url('asset/img/logo-light.png') ?>" alt="findingnemu" style="width: 100px;" class="img-fluid"></a>
                 </div>
                 <ul class="siderbar-nav">
                     <li class="sidebar-header">
                         <p>Admin Menu</p>
                     </li>
-
                     <li class="sidebar-item">
                         <a href="<?= base_url('Admin/Coverview') ?>" class="sidebar-link">
                             <span class="bi bi-clipboard-fill"></span>&nbsp; &nbsp;
                             Overview
                         </a>
                     </li>
-
                     <li class="sidebar-item">
                         <a href="<?= base_url('Admin/Cuser') ?>" class="sidebar-link">
                             <i class="bi bi-person-fill"></i>&nbsp; &nbsp;
                             User
                         </a>
                     </li>
-
                     <li class="sidebar-item">
                         <a href="<?= base_url('Admin/Cvalidasi') ?>" class="sidebar-link">
                             <span class="bi bi-printer-fill"></span>&nbsp; &nbsp;
                             Validasi
                         </a>
                     </li>
-
                     <li class="sidebar-item">
                         <a href="<?= base_url('admin/Ckonfirmasi') ?>" class="sidebar-link">
                             <span class="bi bi-flag-fill"></span>&nbsp; &nbsp;
                             Mengajukan
                         </a>
                     </li>
-
                     <li class="sidebar-item">
                         <a href="<?= base_url('Admin/Ckategori') ?>" class="sidebar-link">
                             <span class="bi bi-shield-fill-check"></span>&nbsp; &nbsp;
@@ -74,25 +75,29 @@
         </aside>
         <div class="main">
             <!----Navbar---->
-            <nav class="navbar navbar-expand px-3 border-bottom">
+            <nav class="navbar navbar-expand-lg navbar-light px-3 border-bottom">
                 <button class="btn" id="sidebar-toggle" type="button">
-					<i class="bi bi-filter-left"></i>
+                    <i class="bi bi-filter-left"></i>
                 </button>
-                <!--ini sementara untuk searchnya-->
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+
+                <form class="d-flex ms-auto">
+                    <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" id="search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
                 <div class="navbar-collapse navbar">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a href="<?=base_url('Cuserprofile/index')?>" class="nav-icon pe-md-0">
-								<img src="<?php echo $this->session->userdata('foto_admin'); ?>" class="img-fluid profile-image-pic rounded-circle" width="40px" alt="profile" onerror="this.src='https://imagetolink.com/ib/Zn9U9bxCzF.png'; this.onerror='';">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item dropdown">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <img src="https://imagetolink.com/ib/0nKZYSJqVX.png" class="img-fluid profile-image-pic rounded-circle" width="40px" alt="profile">
                             </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="#" class="dropdown-item">Profile</a>
+                                <a href="<?= base_url('admin/Cadmin/logout') ?>" class="dropdown-item">Logout</a>
+                            </div>
                         </li>
                     </ul>
-                </div>
-                <aside id="nav-logo">
-                    <img src="<?= base_url('asset/img/logo.png') ?>" alt="findingnemu" style="width: 80px;" class="img-fluid">
-                </aside>
+                    <aside id="nav-logo">
+                        <img src="<?= base_url('asset/img/logo.png') ?>" alt="findingnemu" style="width: 80px;" class="img-fluid">
+                    </aside>
             </nav>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
