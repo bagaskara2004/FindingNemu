@@ -37,9 +37,18 @@ class Cauth extends CI_Controller
 					$data = [
 						'username' => $user['username'],
 						'foto' => $user['foto'],
-						'email' => $user['email']
+						'email' => $user['email'],
+						'id_user' => $user['id_user']
 					];
 					$this->session->set_userdata($data);
+					if(!empty($this->input->post('save_id')))
+					{
+						setcookie("loginID", $username, time()+(10 * 365 * 24 * 60 * 60));
+						setcookie("loginPASS", $password, time()+(10 * 365 * 24 * 60 * 60));
+					}else{
+						setcookie("loginID", "");
+						setcookie("loginPASS", "");
+					}
 					redirect(base_url('Cposting'));
 				} else {
 					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">kata sandi salah!</div>');
@@ -52,6 +61,7 @@ class Cauth extends CI_Controller
 		} elseif ($admin) {
 			if ($password == $admin['password_admin']) {
 				$data = [
+					'id_admin' => $admin['id_admin'],
 					'nama_admin' => $admin['nama_admin']
 				];
 				$this->session->set_userdata($data);
@@ -100,40 +110,41 @@ class Cauth extends CI_Controller
 		}
 	}
 
-	public function sendMail($data) {
+	public function sendMail($data)
+	{
 		$config['useragent'] = 'Codeigniter';
-        $config['mailpath'] = "/usr/bin/sendmail";
-        $config['protocol'] = "smtp";
-        $config['smtp_host'] = "smtp.gmail.com";
-        $config['smtp_port'] = "465";
-        $config['smtp_user'] = "bagaskaraputra87@gmail.com";
-        $config['smtp_pass'] = "frnm jlse bibl kzoy";
-        $config['smtp_crypto'] = "ssl";
-        $config['charset'] = "utf-8";
-        $config['mailtype'] = "html";
-        $config['newline'] = "\r\n";
-        $config['smtp_timeout'] = "10";
-        $config['wordwrap'] = TRUE;
+		$config['mailpath'] = "/usr/bin/sendmail";
+		$config['protocol'] = "smtp";
+		$config['smtp_host'] = "smtp.gmail.com";
+		$config['smtp_port'] = "465";
+		$config['smtp_user'] = "bagaskaraputra87@gmail.com";
+		$config['smtp_pass'] = "frnm jlse bibl kzoy";
+		$config['smtp_crypto'] = "ssl";
+		$config['charset'] = "utf-8";
+		$config['mailtype'] = "html";
+		$config['newline'] = "\r\n";
+		$config['smtp_timeout'] = "10";
+		$config['wordwrap'] = TRUE;
 
-        $this->load->library('email');
-        $this->email->initialize($config);
-        $this->email->from("findingNemu", "FindingNemu");
-        $this->email->to($data['email']);
-        $this->email->subject("Actived Akun");
-        $this->email->message("Klik link berikut untuk <a href='http://localhost/findingNemu/Cauth/actived?email=".$data["email"]."'>actived akunmu</a>");
+		$this->load->library('email');
+		$this->email->initialize($config);
+		$this->email->from("findingNemu", "FindingNemu");
+		$this->email->to($data['email']);
+		$this->email->subject("Actived Akun");
+		$this->email->message("Klik link berikut untuk <a href='http://localhost/findingNemu/Cauth/actived?email=" . $data["email"] . "'>actived akunmu</a>");
 
-        if ($this->email->send()) {
-            $this->db->insert('user', $data);
+		if ($this->email->send()) {
+			$this->db->insert('user', $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Periksa email sekarang untuk actived akunmu</div>');
 			redirect(base_url('Cauth/login'));
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Register Akun</div>');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Register Akun</div>');
 			redirect(base_url('Cauth/login'));
-        }
-
+		}
 	}
 
-	public function actived() {
+	public function actived()
+	{
 		$email = $this->input->get('email');
 		$data = array(
 			'actived' => 1
@@ -143,6 +154,37 @@ class Cauth extends CI_Controller
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akunmu berhasil di actived, login sekarang</div>');
 		redirect(base_url('Cauth/login'));;
 	}
+
+	public function lupapassword()
+	{	
+		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email[user.email]', [
+			'required' => 'Email harus diisi',
+			'valid_email' => 'Email valid!'
+		]);
+		if($this->form_validation->run()== FALSE){
+		$data['title'] = "Lupa Password";
+		$this->load->view('Authentication/Lupa_Password.php', $data);
+		}else{
+		$email = $this->input->post('email');
+		$user  =  $this->db->get_where('user',['email' => $email, 'actived' => 1])->row_array();
+		if($user){
+			// $token = base64_encode(random_bytes(32));
+			// $user_token[
+			// 	'email' => $email,
+			// 	'token'	=> $token,
+			// 	'date_created' => time()
+			// ];
+			// $this->db->insert('user_token', $user_token);
+			// $this->sendMail($token, 'lupa');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mohon Cek Email Anda untuk reset Password</div>');
+		redirect(base_url('Cauth/lupapassword'));;
+		}else{
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">email tidak terdaftar atau diaktifkan</div>');
+		redirect(base_url('Cauth/lupapassword'));;
+		}
+		}
+	}
+	
 	public function admindashboard()
 	{
 		$this->load->view('Admin/homepageAdmin.php');

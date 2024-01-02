@@ -20,19 +20,19 @@
             <form action="<?= base_url('Cauth/login') ?>" method="post" class="d-flex flex-column justify-content-between" style="height:355px;">
                 <div class="py-4">
                     <div class="mb-3">
-                        <input type="text" placeholder="Nama Pengguna" class="inputan fs-6 rounded p-2" name="username" value="<?= set_value('username') ?>">
+                        <input type="text" placeholder="Nama Pengguna" class="inputan fs-6 rounded p-2" name="username" value="<?php if(isset($_COOKIE["loginID"])) { echo $_COOKIE["loginID"]; }else{ echo set_value('username');} ?>">
                         <?= form_error('username','<small class="text-danger" pl-3>','</small>');?>
                     </div>
                     <div class="mb-3">
-                        <input type="password" placeholder="Kata Sandi" class="inputan fs-6 rounded p-2" name="password">
+                        <input type="password" placeholder="Kata Sandi" class="inputan fs-6 rounded p-2" name="password" value="<?php if(isset($_COOKIE["loginPASS"])) { echo $_COOKIE["loginPASS"]; } ?>">
                         <?= form_error('password','<small class="text-danger" pl-3>','</small>');?>
                         <br>
-                        <a class="link-offset-2 link-underline link-underline-opacity-0 color-blue fs-7 mx-2" href="#">Lupa Password?</a>
+                        <a class="link-offset-2 link-underline link-underline-opacity-0 color-blue fs-7 mx-2" href="<?= base_url('Cauth/lupapassword') ?>">Lupa Password?</a>
                     </div>
                 </div>
                 <div>
                     <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" class="form-check-input" id="save_id" name="save_id"<?php if(isset($_COOKIE["loginPASS"])) { echo "checked"; } ?>>
                         <label class="form-check-label color-gray fs-6" for="exampleCheck1">ingatkan saya</label>
                     </div>
                     <button type="submit" class="button background-blue p-2 border-none w-100 rounded text-light">MASUK</button>

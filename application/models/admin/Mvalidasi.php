@@ -7,7 +7,9 @@ class Mvalidasi extends CI_Model
     function tampildata()
     {
 
-        $this->db->select('validasi.*, admin.nama_admin');
+        $this->db->select(
+            'validasi.*,admin.*'
+        );
         $this->db->from('validasi');
         $this->db->join('admin', 'validasi.id_admin = admin.id_admin', 'left');
 
@@ -15,46 +17,26 @@ class Mvalidasi extends CI_Model
 
         return $query->result();
     }
-    public function get_all_data($id_posting)
-    {
-        $this->db->select('posting.id_posting');
-        $this->db->from('posting');
-        $this->db->where('posting.id_posting', $id_posting);
-        $query = $this->db->get();
-
-        return $query->row_array();
-    }
-
-    public function get_all_validasi()
-    {
-
-        $this->db->select('posting.*');
-        $this->db->from('posting');
-
-        $query = $this->db->get();
-
-        return $query->result_array();
-    }
 
     public function simpan_data($data)
     {
-
         $this->db->insert('validasi', $data);
     }
+    public function update_validasi($id_validasi, $data)
+    {
+        $this->db->where('id_validasi', $id_validasi);
+        $this->db->update('validasi', $data);
 
-    public function get_data_by_id($id_validasi)
+        if ($this->db->error()) {
+            print_r($this->db->error());
+        }
+    }
+
+    public function delete_posting($id_validasi)
     {
 
         $this->db->where('id_validasi', $id_validasi);
-        $query = $this->db->get('validasi');
-
-        return $query->row_array();
+        $this->db->delete('validasi');
     }
-
-    public function update_data($id_validasi, $data)
-    {
-
-        $this->db->where('id_validasi', $id_validasi);
-        $this->db->update('nama_tabel', $data);
-    }
+    
 }
