@@ -38,5 +38,4 @@ class Mvalidasi extends CI_Model
         $this->db->where('id_validasi', $id_validasi);
         $this->db->delete('validasi');
     }
-    
 }
