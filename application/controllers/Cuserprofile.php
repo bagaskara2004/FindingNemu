@@ -12,7 +12,7 @@
 			$this->load->library('form_validation');
 			$this->load->helper('form');
 		}
-		public function index(): void
+		public function index()
 		{
 			$id_user = $this->session->userdata('id_user');
 			$data['lokasi'] = "profile";
@@ -24,7 +24,7 @@
 			$this->load->view('Posting/footer.php');
 		}
 
-		function uploadprofile(): void
+		function uploadprofile()
 		{
 				$id_user = $this->input->post('id_user');
 				$old_photo = $this->input->post('old_photo');
@@ -53,7 +53,7 @@
 				}
 		}
 
-		function updateusername(): void
+		function updateusername()
 		{
 			$id_user = $this->input->post('id_user');
 			$data = array(
@@ -64,7 +64,7 @@
 			$this->logout();
 		}
 
-		function updateemail(): void
+		function updateemail()
 		{
 			$id_user = $this->input->post('id_user');
 			$data = array(

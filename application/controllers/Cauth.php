@@ -41,6 +41,14 @@ class Cauth extends CI_Controller
 						'id_user' => $user['id_user']
 					];
 					$this->session->set_userdata($data);
+					if(!empty($this->input->post('save_id')))
+					{
+						setcookie("loginID", $username, time()+(10 * 365 * 24 * 60 * 60));
+						setcookie("loginPASS", $password, time()+(10 * 365 * 24 * 60 * 60));
+					}else{
+						setcookie("loginID", "");
+						setcookie("loginPASS", "");
+					}
 					redirect(base_url('Cposting'));
 				} else {
 					$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">kata sandi salah!</div>');
@@ -144,6 +152,37 @@ class Cauth extends CI_Controller
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akunmu berhasil di actived, login sekarang</div>');
 		redirect(base_url('Cauth/login'));;
 	}
+
+	public function lupapassword()
+	{	
+		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email[user.email]', [
+			'required' => 'Email harus diisi',
+			'valid_email' => 'Email valid!'
+		]);
+		if($this->form_validation->run()== FALSE){
+		$data['title'] = "Lupa Password";
+		$this->load->view('Authentication/Lupa_Password.php', $data);
+		}else{
+		$email = $this->input->post('email');
+		$user  =  $this->db->get_where('user',['email' => $email, 'actived' => 1])->row_array();
+		if($user){
+			// $token = base64_encode(random_bytes(32));
+			// $user_token[
+			// 	'email' => $email,
+			// 	'token'	=> $token,
+			// 	'date_created' => time()
+			// ];
+			// $this->db->insert('user_token', $user_token);
+			// $this->sendMail($token, 'lupa');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mohon Cek Email Anda untuk reset Password</div>');
+		redirect(base_url('Cauth/lupapassword'));;
+		}else{
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">email tidak terdaftar atau diaktifkan</div>');
+		redirect(base_url('Cauth/lupapassword'));;
+		}
+		}
+	}
+	
 	public function admindashboard()
 	{
 		$this->load->view('Admin/homepageAdmin.php');
