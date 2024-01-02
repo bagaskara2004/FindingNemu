@@ -192,6 +192,7 @@
 
 				html += '</table>';
 				console.log(html);
+				
 				$("#resault").html(html);
 				$('.btn-detail').click(function() {
 					var idPosting = $(this).data('id');
@@ -203,7 +204,6 @@
 	});
 
 	function deletePosting(idPosting) {
-		// Tampilkan SweetAlert2 konfirmasi pengguna
 		Swal.fire({
 			title: 'Apakah Anda yakin?',
 			text: 'Anda tidak akan dapat mengembalikan ini!',
@@ -225,7 +225,6 @@
 					success: function(response) {
 						var result = JSON.parse(response);
 						if (result.status === 'success') {
-							// Tampilkan SweetAlert2 sukses setelah penghapusan
 							Swal.fire({
 								icon: 'success',
 								title: 'Sukses',
@@ -233,13 +232,11 @@
 								confirmButtonColor: '#3085d6',
 								confirmButtonText: 'OK'
 							}).then((result) => {
-								// Jika pengguna mengklik OK, refresh halaman
 								if (result.isConfirmed || result.dismiss === Swal.DismissReason.backdrop) {
 									location.reload();
 								}
 							});
 						} else {
-							// Tampilkan SweetAlert2 gagal setelah penghapusan
 							Swal.fire({
 								icon: 'error',
 								title: 'Gagal',
@@ -250,7 +247,6 @@
 						}
 					},
 					error: function() {
-						// Tampilkan SweetAlert2 kesalahan saat menghubungi server
 						Swal.fire({
 							icon: 'error',
 							title: 'Gagal',
@@ -329,7 +325,6 @@
 			$('#status_edit').val(posting.status);
 			$('#deskripsi_edit').val(posting.deskripsi);
 
-			// Tampilkan modal edit
 			$('#editModal').modal('show');
 		} else {
 			alert('Posting not found.');

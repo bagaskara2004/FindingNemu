@@ -1,3 +1,7 @@
+<?php if ($this->session->userdata('nama_admin') == '') {
+    redirect('Cauth/login', 'refresh');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 

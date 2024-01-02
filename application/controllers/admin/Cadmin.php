@@ -3,6 +3,9 @@ class Cadmin extends CI_Controller
 {
     function index()
     {
+        if ($this->session->userdata('nama_admin') == '') {
+            redirect('Cauth/login', 'refresh');
+        }
         $this->load->view('Admin/navbar');
         $this->load->view('Admin/homepageAdmin');
         $this->load->view('Admin/footer');
@@ -18,16 +21,5 @@ class Cadmin extends CI_Controller
     {
         $this->session->sess_destroy();
         redirect('Cauth/login', 'refresh');
-    }
-    function validasi()
-    {
-        
-        if ($this->session->userdata('nama_admin') == '') {
-            $response = array('status' => 'error', 'message' => 'Silakan login terlebih dahulu.' );
-        }else{
-            $response = array('status' => 'success');
-        }
-        echo json_encode($response);
-        
     }
 }

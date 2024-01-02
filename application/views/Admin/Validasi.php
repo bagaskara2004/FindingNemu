@@ -157,21 +157,22 @@
         });
     }
 
-
     function updatevalidasi() {
         var idvalidasi = $('#id_validasi_edit').val();
 
         var formData = new FormData($('#editForm')[0]);
         formData.append('id_validasi', idvalidasi);
 
+
         $.ajax({
             type: 'POST',
-            url: '<?php echo base_url("Admin/Cvalidasi/update_data"); ?>',
+            url: 'http://localhost/findingNemu/Admin/Cvalidasi/update_data',
             data: formData,
             contentType: false,
             processData: false,
             success: function(response) {
-                var result = JSON.parse(response);
+                console.log(response);
+                resaultdata = JSON.parse(response);
                 if (result.status === 'success') {
                     Swal.fire({
                         icon: 'success',
