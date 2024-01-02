@@ -58,6 +58,7 @@
                         html += '<tr>';
                         html += '<td>' + kategoriData[i].kategori + '</td>';
                         html += '<td>' + kategoriData[i].jumlah + '</td>';
+                        html += '<td> <button type="button" class="btn btn-sm btn-danger" onclick="deleteKategori(' + kategoriData[i].id_kategori + ')">Delete</button>';
                         html += '</tr>';
                     }
 
@@ -110,4 +111,61 @@
             });
         });
     });
+
+    function deleteKategori(idkategori) {
+        Swal.fire({
+            title: 'Apakah Anda yakin?',
+            text: 'Anda tidak akan dapat mengembalikan ini!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://localhost/findingNemu/Admin/Ckategori/delete_data',
+                    data: {
+                        id_kategori: idkategori
+                    },
+                    success: function(response) {
+                        var result = JSON.parse(response);
+                        if (result.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Sukses',
+                                text: result.message,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            }).then((result) => {
+                                if (result.isConfirmed || result.dismiss === Swal.DismissReason.backdrop) {
+                                    location.reload();
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Gagal',
+                                text: 'Gagal menghapus data: ' + result.message,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal',
+                            text: 'Terjadi kesalahan saat menghubungi server',
+                            confirmButtonColor: '#3085d6',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
+        });
+    }
 </script>

@@ -18,4 +18,9 @@ class Mkategori extends CI_Model
         $data = array('kategori' => $kategori);
         $this->db->insert('kategori', $data);
     }
+    public function delete_kategori($id_kategori)
+    {
+        $this->db->where('id_kategori', $id_kategori);
+        $this->db->delete('kategori');
+    }
 }

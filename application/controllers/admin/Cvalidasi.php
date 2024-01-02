@@ -8,8 +8,8 @@ class Cvalidasi extends CI_Controller
     {
         parent::__construct();
         if ($this->session->userdata('nama_admin') == '') {
-			redirect('Cauth/login', 'refresh');
-		}
+            redirect('Cauth/login', 'refresh');
+        }
         $this->load->model('Admin/Mvalidasi');
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -57,9 +57,10 @@ class Cvalidasi extends CI_Controller
 
         echo json_encode($response);
     }
+
     public function update_data()
     {
-        $id_validasi = $this->input->post('id_validasi');
+        $id_validasi = $this->input->post('id_validasi_edit');
         $data = array(
             'id_admin' => $this->session->userdata('id_admin'),
             'nama' => $this->input->post('nama'),
@@ -87,8 +88,15 @@ class Cvalidasi extends CI_Controller
 
         $this->Mvalidasi->update_validasi($id_validasi, $data);
 
-        $result = array('status' => 'success', 'message' => 'Data berhasil di perbaharui.');
+        $result = array('status' => 'success', 'message' => 'Data berhasil diperbarui.');
 
         echo json_encode($result);
+    }
+    public function delete_data()
+    {
+        $id_validasi = $this->input->post('id_validasi');
+        $this->Mvalidasi->delete_posting($id_validasi);
+
+        echo json_encode(array('status' => 'success', 'message' => 'Data berhasil dihapus'));
     }
 }
