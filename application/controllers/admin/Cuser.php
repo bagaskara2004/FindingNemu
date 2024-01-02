@@ -12,10 +12,22 @@ class Cuser extends CI_Controller
     public function index()
     {
 
-        $data['user'] = $this->Muser->get_all_user();
+
 
         $this->load->view('Admin/navbar');
-        $this->load->view('Admin/user', $data);
+        $this->load->view('Admin/user');
         $this->load->view('Admin/footer');
+    }
+    public function user()
+    {
+        $resault = $this->Muser->tampildata();
+        echo json_encode($resault);
+    }
+    public function delete_user()
+    {
+        $id_user = $this->input->post('id_user');
+        $this->Muser->delete_user($id_user);
+
+        echo json_encode(array('status' => 'success', 'message' => 'Data berhasil dihapus'));
     }
 }

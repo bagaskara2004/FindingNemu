@@ -18,7 +18,7 @@ class Ckategori extends CI_Controller
 
     public function get_kategori()
     {
-        $kategori = $this->Mkategori->get_all_kategori();
+        $kategori = $this->Mkategori->get_kategori();
         $data = array();
 
         foreach ($kategori as $k) {
@@ -30,5 +30,13 @@ class Ckategori extends CI_Controller
         }
 
         echo json_encode($data);
+    }
+    public function tambah_kategori()
+    {
+        $kategori = $this->input->post('kategori');
+        $this->Mkategori->tambah_kategori($kategori);
+
+        $kategoriData = $this->Mkategori->get_kategori();
+        echo json_encode($kategoriData);
     }
 }

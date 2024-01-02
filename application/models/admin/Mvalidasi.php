@@ -7,7 +7,9 @@ class Mvalidasi extends CI_Model
     function tampildata()
     {
 
-        $this->db->select('validasi.id_posting');
+        $this->db->select(
+            'validasi.*,admin.*'
+        );
         $this->db->from('validasi');
         $this->db->join('admin', 'validasi.id_admin = admin.id_admin', 'left');
 
@@ -15,16 +17,26 @@ class Mvalidasi extends CI_Model
 
         return $query->result();
     }
-    public function simpanData($data)
+
+    public function simpan_data($data)
+    {
+        $this->db->insert('validasi', $data);
+    }
+    public function update_validasi($id_validasi, $data)
+    {
+        $this->db->where('id_validasi', $id_validasi);
+        $this->db->update('validasi', $data);
+
+        if ($this->db->error()) {
+            print_r($this->db->error());
+        }
+    }
+
+    public function delete_posting($id_validasi)
     {
 
-        $this->db->insert('validasi', $data);
-        return $this->db->insert_id();
+        $this->db->where('id_validasi', $id_validasi);
+        $this->db->delete('validasi');
     }
-    function simpanPosting($data)
-    {
-        $this->db->insert('validasi', $data);
-        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Form Berhasil di kirim, Segera konfirmasi ke admin</div>');
-        redirect(base_url('admin/Coverview/detail', $data));
-    }
+    
 }

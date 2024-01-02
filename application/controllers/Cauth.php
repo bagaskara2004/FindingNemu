@@ -52,6 +52,7 @@ class Cauth extends CI_Controller
 		} elseif ($admin) {
 			if ($password == $admin['password_admin']) {
 				$data = [
+					'id_admin' => $admin['id_admin'],
 					'nama_admin' => $admin['nama_admin']
 				];
 				$this->session->set_userdata($data);
@@ -100,40 +101,41 @@ class Cauth extends CI_Controller
 		}
 	}
 
-	public function sendMail($data) {
+	public function sendMail($data)
+	{
 		$config['useragent'] = 'Codeigniter';
-        $config['mailpath'] = "/usr/bin/sendmail";
-        $config['protocol'] = "smtp";
-        $config['smtp_host'] = "smtp.gmail.com";
-        $config['smtp_port'] = "465";
-        $config['smtp_user'] = "bagaskaraputra87@gmail.com";
-        $config['smtp_pass'] = "frnm jlse bibl kzoy";
-        $config['smtp_crypto'] = "ssl";
-        $config['charset'] = "utf-8";
-        $config['mailtype'] = "html";
-        $config['newline'] = "\r\n";
-        $config['smtp_timeout'] = "10";
-        $config['wordwrap'] = TRUE;
+		$config['mailpath'] = "/usr/bin/sendmail";
+		$config['protocol'] = "smtp";
+		$config['smtp_host'] = "smtp.gmail.com";
+		$config['smtp_port'] = "465";
+		$config['smtp_user'] = "bagaskaraputra87@gmail.com";
+		$config['smtp_pass'] = "frnm jlse bibl kzoy";
+		$config['smtp_crypto'] = "ssl";
+		$config['charset'] = "utf-8";
+		$config['mailtype'] = "html";
+		$config['newline'] = "\r\n";
+		$config['smtp_timeout'] = "10";
+		$config['wordwrap'] = TRUE;
 
-        $this->load->library('email');
-        $this->email->initialize($config);
-        $this->email->from("findingNemu", "FindingNemu");
-        $this->email->to($data['email']);
-        $this->email->subject("Actived Akun");
-        $this->email->message("Klik link berikut untuk <a href='http://localhost/findingNemu/Cauth/actived?email=".$data["email"]."'>actived akunmu</a>");
+		$this->load->library('email');
+		$this->email->initialize($config);
+		$this->email->from("findingNemu", "FindingNemu");
+		$this->email->to($data['email']);
+		$this->email->subject("Actived Akun");
+		$this->email->message("Klik link berikut untuk <a href='http://localhost/findingNemu/Cauth/actived?email=" . $data["email"] . "'>actived akunmu</a>");
 
-        if ($this->email->send()) {
-            $this->db->insert('user', $data);
+		if ($this->email->send()) {
+			$this->db->insert('user', $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Periksa email sekarang untuk actived akunmu</div>');
 			redirect(base_url('Cauth/login'));
-        } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Register Akun</div>');
+		} else {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Register Akun</div>');
 			redirect(base_url('Cauth/login'));
-        }
-
+		}
 	}
 
-	public function actived() {
+	public function actived()
+	{
 		$email = $this->input->get('email');
 		$data = array(
 			'actived' => 1
@@ -142,14 +144,6 @@ class Cauth extends CI_Controller
 		$this->db->update('user', $data);
 		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Akunmu berhasil di actived, login sekarang</div>');
 		redirect(base_url('Cauth/login'));;
-	}
-	public function admindashboard()
-	{
-		$this->load->view('Admin/homepageAdmin.php');
-	}
-	public function adminoverview()
-	{
-		$this->load->view('Admin/overview.php');
 	}
 
 	public function logout()

@@ -1,4 +1,4 @@
-<main class="content px-3 py-2">
+
     <div class="container min-vh-100">
         <div class="container">
             <div class="row">
@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-</main>
+
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>

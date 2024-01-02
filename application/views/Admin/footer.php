@@ -28,10 +28,65 @@
 		document.querySelector("#nav-logo").classList.toggle("collapsed");
 	});
 </script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+<script>
+	$(document).ready(function() {
+		let location = $lokasi;
+
+		let isSearching = false;
+
+		data_item();
+
+		$('#search').on('input', function() {
+			$('button i.bi').addClass('bi-x-lg');
+			if ($('#search').val() == "") {
+				$('button i.bi').removeClass('bi-x-lg');
+
+				isSearching = false;
+			} else {
+
+				isSearching = true;
+			}
+			data_item();
+		});
+
+		$('#btnSearch').on("click", function() {
+			$('#search').val("");
+			$('button i.bi').removeClass('bi-x-lg');
+
+			isSearching = false;
+			data_item();
+		});
+
+		$("#search").on('keypress', function(e) {
+			if (e.keyCode == 13) {
+				window.scrollTo(0, 300);
+			}
+		});
+
+		function data_item() {
+			$.ajax({
+				url: '<?= base_url() ?>/Cadmin/search',
+				method: 'post',
+				data: {
+					cari: $('#search').val(),
+					lokasi: location
+				},
+				success: function(data) {
+
+					if (isSearching) {
+						$('#content').html(data);
+					} else {
+
+						$('#content').html('');
+					}
+				}
+			});
+		}
+	});
+</script>
 
 
 </body>
-<div id="script"></div>
 
 </html>
