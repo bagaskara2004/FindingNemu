@@ -154,6 +154,8 @@ class Cauth extends CI_Controller
 
 	public function logout()
 	{
+		$array_items = array('username', 'email','foto','nama_admin');
+		$this->session->unset_userdata($array_items);
 		$this->session->sess_destroy();
 		redirect(base_url('Cauth/login'));
 	}
