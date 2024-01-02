@@ -224,6 +224,10 @@
 		document.getElementById("imagePreview").src = URL.createObjectURL(userImage.files[0]);
 	}
 
+	document.getElementById('cancel').onclick = function (){
+		document.getElementById("imagePreview").src = ""
+	}
+
 	// jika profile kosong digantikan dengan profile alternatif
 	const img = document.getElementById("pfp")
 	img.addEventListener("error", function (event){
@@ -233,4 +237,3 @@
 </script>
 </body>
 </html>
-<?php

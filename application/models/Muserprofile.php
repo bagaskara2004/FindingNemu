@@ -1,19 +1,7 @@
 <?php
 	class Muserprofile extends CI_Model
 	{
-		function editprofile($id_user, $data)
-		{
-			$this->db->where('id_user', $id_user);
-			$this->db->update('user', $data);
-		}
-
-		function editusername($id_user, $data)
-		{
-			$this->db->where('id_user', $id_user);
-			$this->db->update('user', $data);
-		}
-
-		function editemail($id_user, $data)
+		function executeedit($id_user, $data)
 		{
 			$this->db->where('id_user', $id_user);
 			$this->db->update('user', $data);

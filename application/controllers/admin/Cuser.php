@@ -8,6 +8,7 @@ class Cuser extends CI_Controller
     {
         parent::__construct();
         $this->load->model('Admin/Muser');
+		$this->load->helper('form');
         if ($this->session->userdata('nama_admin') == '') {
             redirect('Cauth/login', 'refresh');
         }

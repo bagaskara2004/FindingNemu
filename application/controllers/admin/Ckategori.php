@@ -11,6 +11,7 @@ class Ckategori extends CI_Controller
 			redirect('Cauth/login', 'refresh');
 		}
         $this->load->model('admin/Mkategori');
+		$this->load->helper('form');
     }
     public function index()
     {

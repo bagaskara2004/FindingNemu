@@ -12,7 +12,7 @@
 			$this->load->library('form_validation');
 			$this->load->helper('form');
 		}
-		public function index()
+		public function index(): void
 		{
 			$id_user = $this->session->userdata('id_user');
 			$data['lokasi'] = "profile";
@@ -24,7 +24,7 @@
 			$this->load->view('Posting/footer.php');
 		}
 
-		function uploadprofile()
+		function uploadprofile(): void
 		{
 				$id_user = $this->input->post('id_user');
 				$old_photo = $this->input->post('old_photo');
@@ -45,37 +45,40 @@
 					$data = array(
 						'foto' => $image
 					);
-					unlink($old_photo);
-					$this->muserprofile->editprofile($id_user, $data);
+					if (!empty($old_photo)) {
+						unlink($old_photo);
+
+					}
+					$this->muserprofile->executeedit($id_user, $data);
 					$this->session->set_flashdata('message', "Foto Profile Berhasil Di Update Silahkan Login Ulang");
 					$this->logout();
 
 				}
 		}
 
-		function updateusername()
+		function updateusername(): void
 		{
 			$id_user = $this->input->post('id_user');
 			$data = array(
 				'username' => $this->input->post('username')
 			);
-			$this->muserprofile->editusername($id_user, $data);
+			$this->muserprofile->executeedit($id_user, $data);
 			$this->session->set_flashdata('message', "Username Berhasil Di Update Silahkan Login Ulang Dengan Username Baru Anda");
 			$this->logout();
 		}
 
-		function updateemail()
+		function updateemail(): void
 		{
 			$id_user = $this->input->post('id_user');
 			$data = array(
 				'email' => $this->input->post('email')
 			);
-			$this->muserprofile->editemail($id_user, $data);
+			$this->muserprofile->executeedit($id_user, $data);
 			$this->session->set_flashdata('message', "Email Berhasil Di Update Silahkan Login Ulang");
 			$this->logout();
 		}
 
-		public function logout()
+		public function logout(): void
 		{
 			$this->session->sess_destroy();
 			$this->load->view('Authentication/login');

@@ -62,7 +62,9 @@ class Cauth extends CI_Controller
 			if ($password == $admin['password_admin']) {
 				$data = [
 					'id_admin' => $admin['id_admin'],
-					'nama_admin' => $admin['nama_admin']
+					'nama_admin' => $admin['nama_admin'],
+					'email_admin' => $admin['email_admin'],
+					'foto_admin' => $admin['foto_admin']
 				];
 				$this->session->set_userdata($data);
 				redirect(base_url('Admin/Cadmin'));
@@ -105,7 +107,7 @@ class Cauth extends CI_Controller
 				'password' => $this->encryption->encrypt($this->input->post('password')),
 				'email' => htmlentities($this->input->post('email', true)),
 				'actived' => 0,
-				'foto' => 'asset/foto_profile/default.png',
+				'foto' => '',
 				'tanggal' => date("Y-m-d"),
 				'telp' => $this->input->post('telp')
 			];

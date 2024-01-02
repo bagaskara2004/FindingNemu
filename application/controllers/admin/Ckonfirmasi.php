@@ -8,7 +8,7 @@ class Ckonfirmasi extends CI_Controller {
         if ($this->session->userdata('nama_admin') == '') {
 			redirect('Cauth/login', 'refresh');
 		}
-        
+		$this->load->helper('form');
         $this->load->model('admin/Mkonfirmasi');
     }
 
