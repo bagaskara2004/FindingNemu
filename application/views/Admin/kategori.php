@@ -36,6 +36,7 @@
                             <label for="kategori">Kategori:</label>
                             <input type="text" class="form-control" id="kategori" name="kategori" required>
                         </div>
+
                         <button type="button" class="btn btn-primary" id="tambahKategoriBtn">Tambah</button>
                     </form>
                 </div>
