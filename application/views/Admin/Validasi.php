@@ -127,10 +127,12 @@
                         id_validasi: idvalidasi
                     },
                     success: function(response) {
-                        if (response.status == 'success') {
+                        console.log(response);
+                        var hapuskategori = JSON.parse(response);
+                        if (hapuskategori.status == 'success') {
                             Swal.fire({
                                 title: 'Success!',
-                                text: response.message,
+                                text: hapuskategori.message,
                                 icon: 'success',
                                 confirmButtonText: 'OK'
                             }).then(function() {
@@ -140,7 +142,7 @@
                         } else {
                             Swal.fire({
                                 title: 'Error!',
-                                text: response.message,
+                                text: hapuskategori.message,
                                 icon: 'error',
                                 confirmButtonText: 'OK'
                             }).then(function() {
@@ -172,17 +174,17 @@
             processData: false,
             success: function(response) {
                 console.log(response);
-                resaultdata = JSON.parse(response);
-                if (result.status === 'success') {
+                var resaul = JSON.parse(response);
+                if (resaul.status === 'success') {
                     Swal.fire({
                         icon: 'success',
                         title: 'Sukses',
-                        text: result.message,
+                        text: resaul.message,
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK'
-                    }).then((result) => {
+                    }).then((resaul) => {
 
-                        if (result.isConfirmed || result.dismiss === Swal.DismissReason.backdrop) {
+                        if (resaul.isConfirmed || resaul.dismiss === Swal.DismissReason.backdrop) {
                             location.reload();
                         }
                     });
@@ -190,7 +192,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Gagal',
-                        text: 'Gagal mengupdate data: ' + result.message,
+                        text: 'Gagal mengupdate data: ' + resaul.message,
                         confirmButtonColor: '#3085d6',
                         confirmButtonText: 'OK'
                     });
@@ -200,7 +202,7 @@
                 Swal.fire({
                     icon: 'error',
                     title: 'Gagal',
-                    text: 'Gagal mengupdate data: ' + result.message,
+                    text: 'Gagal mengupdate data: ' + resaul.message,
                     confirmButtonColor: '#3085d6',
                     confirmButtonText: 'OK'
                 });

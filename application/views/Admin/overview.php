@@ -23,17 +23,14 @@
 		<div class="card">
 			<div class="card-datatable table-responsive pt-0">
 				<div id="resault"></div>
-				<!-- ... (kode sebelumnya) -->
 
 				<!-- Modal Tambah Posting -->
 				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog  modal-xl">
+					<div class="modal-dialog modal-xl">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">Tambah Posting</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
 								<?php echo form_open_multipart('Admin/Coverview/simpan_data', ['class' => 'container mt-3']); ?>
@@ -76,7 +73,7 @@
 
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 								<button type="submit" class="btn btn-primary">Simpan</button>
 								<?php echo form_close(); ?>
 							</div>
@@ -90,9 +87,7 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="editModalLabel">Edit Posting</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
 								<?php echo form_open_multipart('Admin/Coverview/update_data', ['class' => 'container mt-3', 'id' => 'editForm']); ?>
@@ -136,7 +131,7 @@
 
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 								<button type="button" class="btn btn-primary" onclick="updatePosting()">Simpan</button>
 								<?php echo form_close(); ?>
 							</div>
@@ -147,6 +142,7 @@
 		</div>
 	</div>
 </main>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
@@ -192,7 +188,7 @@
 
 				html += '</table>';
 				console.log(html);
-				
+
 				$("#resault").html(html);
 				$('.btn-detail').click(function() {
 					var idPosting = $(this).data('id');
@@ -215,7 +211,7 @@
 			cancelButtonText: 'Batal'
 		}).then((result) => {
 			if (result.isConfirmed) {
- 
+
 				$.ajax({
 					type: 'POST',
 					url: 'http://localhost/findingNemu/Admin/Coverview/delete_data',
