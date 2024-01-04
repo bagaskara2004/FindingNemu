@@ -9,7 +9,34 @@ class Cauth extends CI_Controller
 		parent::__construct();
 		$this->load->library('form_validation');
 		$this->load->library('encryption');
+		$this->load->helper('date');
+		$this->cekActived();
 	}
+
+	public function cekActived(){
+		$data = $this->db->select('*')->from('user')->where('actived',0)->get();
+		$kadaluarsa = 3;
+		foreach ($data->result_array() as $datas) {
+			$tanggal = date("d", strtotime($datas['tanggal']));
+			$bulan = date("m", strtotime($datas['tanggal']));
+			$tahun = date("Y", strtotime($datas['tanggal']));
+			$tglHapus = $tanggal + $kadaluarsa;
+			$jmlHari = days_in_month($bulan, $tahun);
+			if ($tglHapus > $jmlHari) {
+				$tglHapus = $tglHapus - $jmlHari;
+				if ($bulan == 12) {
+					$bulan = 01;
+					$tahun += 1;
+				}else {
+					$bulan +=1;
+				}
+			}
+			if ($tglHapus <= date('d') && $bulan <= date('m') && $tahun <= date('Y')) {
+				$this->db->delete('user', array('id_user' => $datas['id_user']));
+			}
+		}
+	}
+
 	public function login()
 	{
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');

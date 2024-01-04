@@ -9,6 +9,38 @@ class Cposting extends CI_Controller
 		parent::__construct();
 		$this->load->model('Mposting');
 		$this->load->library('form_validation');
+		$this->load->helper('date');
+		$this->cekKonfirmasi();
+	}
+
+	public function cekKonfirmasi(){
+		for ($i=1; $i <= 3; $i++) { 
+			$data = $this->db->select('*')->from('posting')->where('id_konfirmasi',$i)->get();
+			if ($i == 1) {
+				$kadaluarsa = 3;
+			}else {
+				$kadaluarsa = 30;
+			}
+			foreach ($data->result_array() as $datas) {
+				$tanggal = date("d", strtotime($datas['tanggal']));
+				$bulan = date("m", strtotime($datas['tanggal']));
+				$tahun = date("Y", strtotime($datas['tanggal']));
+				$tglHapus = $tanggal + $kadaluarsa;
+				$jmlHari = days_in_month($bulan, $tahun);
+				if ($tglHapus > $jmlHari) {
+					$tglHapus = $tglHapus - $jmlHari;
+					if ($bulan == 12) {
+						$bulan = 01;
+						$tahun += 1;
+					}else {
+						$bulan +=1;
+					}
+				}
+				if ($tglHapus <= date('d') && $bulan <= date('m') && $tahun <= date('Y')) {
+					$this->db->delete('posting', array('id_posting' => $datas['id_posting']));
+				}
+			}
+		}
 	}
 
 	public function index()
