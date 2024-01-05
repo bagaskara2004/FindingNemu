@@ -134,7 +134,7 @@ class Cauth extends CI_Controller
 				'password' => $this->encryption->encrypt($this->input->post('password')),
 				'email' => htmlentities($this->input->post('email', true)),
 				'actived' => 0,
-				'foto' => '',
+				'foto' => 'asset/foto_profile/no_profile.jpg',
 				'tanggal' => date("Y-m-d"),
 				'telp' => $this->input->post('telp')
 			];

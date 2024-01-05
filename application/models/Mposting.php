@@ -33,7 +33,7 @@ class Mposting extends CI_Model {
 				$user = $this->db->get_where('user',['id_user' => $datas['id_user']])->row_array();
 				$output .='
 				<div class="d-flex fs-7 text-light background-blue3 py-1 align-items-center mb-1 overflow-auto px-2 ">
-					<img src="'.base_url("asset/foto_profile/default.png").'" style="width:30px;"class="img-fluid me-2 rounded" >
+					<img src="'.base_url($user['foto']).'" style="width:30px;"class="img-fluid me-2 rounded-circle" >
 					<div class="border-start px-2"><span class="fw-bold text-center pe-2">'.$user['username'].'</span>'.$datas['komentar'].'</div>
 				</div>
 				';

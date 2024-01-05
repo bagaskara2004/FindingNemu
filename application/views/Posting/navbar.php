@@ -33,7 +33,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link button mx-auto" href="<?=base_url('Cuserprofile/index')?>">
-						<img src="<?php echo $this->session->userdata('foto'); ?>" class="img-fluid profile-image-pic rounded-circle" width="40px" alt="profile" onerror="this.src='https://imagetolink.com/ib/Zn9U9bxCzF.png'; this.onerror='';">
+						<img src="<?php echo $this->session->userdata('foto'); ?>" class="img-fluid profile-image-pic rounded-circle" width="30px" alt="profile" onerror="this.src='https://imagetolink.com/ib/Zn9U9bxCzF.png'; this.onerror='';">
 					</a>
                 </li>
             </ul>
