@@ -38,7 +38,7 @@
 				$this->load->library('upload', $config);
 
 				if (!$this->upload->do_upload('userImage')) {
-					$this->session->set_flashdata('pesan', "Foto Profile Gagal Di Update/Tidak Memasukan Foto");
+					$this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">Foto Profile Gagal Di Update/Tidak Memasukan Foto</div>');
 				} else {
 					$image = $this->upload->data();
 					$image = $path.$image['file_name'];
@@ -50,7 +50,7 @@
 
 					}
 					$this->muserprofile->executeedit($id_user, $data);
-					$this->session->set_flashdata('message', "Foto Profile Berhasil Di Update Silahkan Login Ulang");
+					$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Foto Profile Berhasil Di Update Silahkan Login Ulang</div>');
 					$this->logout();
 
 				}

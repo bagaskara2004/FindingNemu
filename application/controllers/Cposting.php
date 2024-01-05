@@ -19,7 +19,7 @@ class Cposting extends CI_Controller
 			if ($i == 1) {
 				$kadaluarsa = 3;
 			}else {
-				$kadaluarsa = 30;
+				$kadaluarsa = 90;
 			}
 			foreach ($data->result_array() as $datas) {
 				$tanggal = date("d", strtotime($datas['tanggal']));
