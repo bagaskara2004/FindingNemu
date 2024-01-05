@@ -59,23 +59,38 @@
 		function updateusername(): void
 		{
 			$id_user = $this->input->post('id_user');
+			$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]');
+			if (!$this->form_validation->run()) {
+				$this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">Username Ini Sudah Dipakai</div>');
+				redirect(base_url('Cuserprofile/index'),'refresh');
+			}
+			else{
 			$data = array(
 				'username' => $this->input->post('username')
 			);
 			$this->muserprofile->executeedit($id_user, $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Username Berhasil Di Update Silahkan Login Ulang Dengan Username Baru Anda</div>');
 			$this->logout();
+			}
 		}
 
 		function updateemail(): void
 		{
 			$id_user = $this->input->post('id_user');
+			$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email|is_unique[user.email]');
+			if (!$this->form_validation->run()) {
+				$this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">Email Ini Sudah Dipakai</div>');
+				redirect(base_url('Cuserprofile/index'),'refresh');
+			}
+			else
+			{
 			$data = array(
 				'email' => $this->input->post('email')
 			);
 			$this->muserprofile->executeedit($id_user, $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Email Berhasil Di Update Silahkan Login Ulang</div>');
 			$this->logout();
+			}
 		}
 
 		public function logout(): void
