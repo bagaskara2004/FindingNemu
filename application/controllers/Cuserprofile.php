@@ -62,7 +62,7 @@
 			$data = array(
 				'username' => $this->input->post('username')
 			);
-			$this->muserprofile->editusername($id_user, $data);
+			$this->muserprofile->executeedit($id_user, $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Username Berhasil Di Update Silahkan Login Ulang Dengan Username Baru Anda</div>');
 			$this->logout();
 		}
@@ -73,7 +73,7 @@
 			$data = array(
 				'email' => $this->input->post('email')
 			);
-			$this->muserprofile->editemail($id_user, $data);
+			$this->muserprofile->executeedit($id_user, $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Email Berhasil Di Update Silahkan Login Ulang</div>');
 			$this->logout();
 		}
