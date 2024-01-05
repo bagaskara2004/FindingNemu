@@ -117,7 +117,7 @@
 								<div class="modal-body">
 									<label for="imagePreview">Preview</label>
 									<div class="profile-preview">
-										<img src=""
+										<img src="<?= base_url($this->session->userdata('foto')) ?>"
 											 class="img-fluid profile-image-pic rounded-circle"
 											 id="imagePreview"
 											 width="100px"
@@ -225,7 +225,7 @@
 	}
 
 	document.getElementById('cancel').onclick = function (){
-		document.getElementById("imagePreview").src = ""
+		document.getElementById("imagePreview").src = "<?= base_url($this->session->userdata('foto')) ?>"
 	}
 
 	// jika profile kosong digantikan dengan profile alternatif
