@@ -19,16 +19,16 @@ class Cposting extends CI_Controller
 			if ($i == 1) {
 				$kadaluarsa = 3;
 			}else {
-				$kadaluarsa = 90;
+				$kadaluarsa = 14;
 			}
 			foreach ($data->result_array() as $datas) {
 				$tanggal = date("d", strtotime($datas['tanggal']));
 				$bulan = date("m", strtotime($datas['tanggal']));
-				$tahun = date("Y", strtotime($datas['tanggal']));
-				$tglHapus = $tanggal + $kadaluarsa;
+				$tahun = date("Y", strtotime($datas['tanggal'])); 
+				$tglHapus = $tanggal + $kadaluarsa; 
 				$jmlHari = days_in_month($bulan, $tahun);
-				if ($tglHapus > $jmlHari) {
-					$tglHapus = $tglHapus - $jmlHari;
+				if ($tglHapus > $jmlHari) { 
+					$tglHapus = $tglHapus - $jmlHari; 
 					if ($bulan == 12) {
 						$bulan = 01;
 						$tahun += 1;
@@ -36,7 +36,7 @@ class Cposting extends CI_Controller
 						$bulan +=1;
 					}
 				}
-				if ($tglHapus <= date('d') && $bulan <= date('m') && $tahun <= date('Y')) {
+				if ($tglHapus <= date('d') && $bulan <= date('m') && $tahun <= date('Y')) { 
 					$this->db->delete('posting', array('id_posting' => $datas['id_posting']));
 				}
 			}
