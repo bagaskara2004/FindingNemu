@@ -39,6 +39,12 @@ class Cauth extends CI_Controller
 
 	public function login()
 	{
+		if ($this->session->userdata('role') == 'user') {
+			redirect(base_url('Cposting'));
+		}
+		if ($this->session->userdata('role') == 'admin') {
+			redirect(base_url('admin/Cadmin'));
+		}
 		$this->form_validation->set_rules('username', 'Username', 'required|trim');
 		$this->form_validation->set_rules('password', 'Password', 'required|trim');
 		if ($this->form_validation->run() == FALSE) {
@@ -62,6 +68,7 @@ class Cauth extends CI_Controller
 				//cek password
 				if ($password == $this->encryption->decrypt($user['password'])) {
 					$data = [
+						'role' => 'user',
 						'username' => $user['username'],
 						'foto' => $user['foto'],
 						'email' => $user['email'],
@@ -88,6 +95,7 @@ class Cauth extends CI_Controller
 		} elseif ($admin) {
 			if ($password == $admin['password_admin']) {
 				$data = [
+					'role' => 'admin',
 					'id_admin' => $admin['id_admin'],
 					'nama_admin' => $admin['nama_admin'],
 					'email_admin' => $admin['email_admin'],
@@ -107,6 +115,12 @@ class Cauth extends CI_Controller
 
 	public function register()
 	{
+		if ($this->session->userdata('role') == 'user') {
+			redirect(base_url('Cposting'));
+		}
+		if ($this->session->userdata('role') == 'admin') {
+			redirect(base_url('admin/Cadmin'));
+		}
 		$this->form_validation->set_rules('username', 'Username', 'required|trim|is_unique[user.username]', [
 			'required' => 'Username harus diisi',
 			'is_unique' => 'Username sudah ada'
@@ -209,10 +223,10 @@ class Cauth extends CI_Controller
 			// $this->db->insert('user_token', $user_token);
 			// $this->sendMail($token, 'lupa');
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mohon Cek Email Anda untuk reset Password</div>');
-		redirect(base_url('Cauth/lupapassword'));;
+		redirect(base_url('Cauth/lupapassword'));
 		}else{
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">email tidak terdaftar atau diaktifkan</div>');
-		redirect(base_url('Cauth/lupapassword'));;
+		redirect(base_url('Cauth/lupapassword'));
 		}
 		}
 	}

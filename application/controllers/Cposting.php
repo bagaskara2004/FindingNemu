@@ -49,6 +49,9 @@ class Cposting extends CI_Controller
 		$this->load->view('Posting/navbar.php', $data);
 		$this->load->view('index.php');
 		$this->load->view('Posting/footer.php');
+		if ($this->session->userdata('role') == 'admin') {
+			redirect('admin/Cadmin');
+		}
 	}
 
 	public function detail()
