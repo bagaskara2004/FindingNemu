@@ -14,6 +14,10 @@
 		}
 		public function index(): void
 		{
+			if (!$this->session->userdata('username')) {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akses Ditolak, Silahkan Login Ulang</div>');
+				redirect(base_url('Cauth/login'));
+			}
 			$id_user = $this->session->userdata('id_user');
 			$data['lokasi'] = "profile";
 			$title['title'] = "Profile | FindingNemu";
