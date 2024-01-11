@@ -58,12 +58,13 @@ class Cposting extends CI_Controller
 	{
 		// $sql = "SELECT posting.judul, posting.deskripsi, posting.foto,posting.status,kategori.kategori,user.username,user.foto AS `foto_user` FROM posting INNER JOIN kategori ON posting.id_kategori = kategori.id_kategori INNER JOIN user ON posting.id_user = user.id_user WHERE posting.id_posting = ".$this->input->post("id_posting").";";
 		// $datas['data'] = $this->db->query($sql)->row_array();
-		$this->db->select('posting.judul, posting.deskripsi, posting.foto,posting.status,kategori.kategori,user.username,user.foto AS foto_user');
+		$this->db->select('posting.id_posting,posting.judul, posting.deskripsi, posting.foto,posting.status,kategori.kategori,user.username,user.foto AS foto_user');
 		$this->db->from('posting');
 		$this->db->join('kategori', 'posting.id_kategori = kategori.id_kategori', 'inner');
 		$this->db->join('user', 'posting.id_user = user.id_user', 'inner');
 		$this->db->where('posting.id_posting',$this->input->post("id_posting"));
 		$datas['data'] = $this->db->get()->row_array();
+		$datas['id_user'] = $this->session->userdata("id_user");
 		if ($datas['data']['status'] > 0) {
 			$datas['status'] = 'Temuan';
 		} else {

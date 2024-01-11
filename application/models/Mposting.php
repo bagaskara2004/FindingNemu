@@ -56,8 +56,8 @@ class Mposting extends CI_Model {
 				$output .= '
 				<div class="card">
 					<div class="card-header text-center fw-bold">'.$datas["judul"].'</div>
-					<img src="'.$datas["foto"].'" class="card-img-top px-3 pt-3">
-					<form action="Cposting/detail" method="post" class="card-body d-flex">
+					<img src="'.base_url($datas["foto"]).'" class="card-img-top px-3 pt-3">
+					<form action="'.base_url("Cposting/detail").'" method="post" class="card-body d-flex">
                         <input type="hidden" name="id_posting" value="'.$datas["id_posting"].'">
 						<button class="button text-light p-2 w-100 background-yellow fw-bold fs-6 rounded mt-auto border-none" >DETAIL</button>
                     </form>

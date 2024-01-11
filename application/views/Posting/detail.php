@@ -20,7 +20,7 @@
             <div class="p-2 text-center text-light fs-5 responsive-font-example">COMMENT</div>
             <div id="chat" class="overflow-auto" style="height:300px;"></div>
             <div class="d-flex justify-content-center w-100 mt-2">
-                <input type="text" placeholder="kirim pesan" class="search rounded-start fs-7" id="search">
+                <input type="text" placeholder="kirim pesan" class="search rounded-start fs-7" id="search" maxlength="100">
                 <button class="button px-3 border-none background-yellow rounded-end ms-1 text-light fs-7" id="btnSearch"><i class="bi bi-search" id="iconSearch"></i></button>
             </div>
         </div>
@@ -63,7 +63,7 @@
                 method: 'post',
                 data: {
                     keyword: key,
-                    id_user: <?= $user['id_user'] ?>,
+                    id_user: <?= $id_user ?>,
                     id_posting: <?= $data['id_posting'] ?>
                 },
                 success: function(data) {
