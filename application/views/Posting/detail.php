@@ -6,9 +6,9 @@
         <div class="col-12 col-sm-5 col-md-6 col-lg-8 mt-4">
             <div class="text-center fw-bold "><?= $data['judul'] ?></div>
             <hr>
-            <p class="fs-7"><span class="fw-bold">Kategori : </span><?= $kategori['kategori'] ?></p>
+            <p class="fs-7"><span class="fw-bold">Kategori : </span><?= $data['kategori'] ?></p>
             <p class="fs-7"><span class="fw-bold">Status : </span><?= $status ?></p>
-            <p class="fs-7"><span class="fw-bold">Pelapor : <img src="<?= base_url('asset/foto_profile/default.png') ?>" alt="findingnemu" style="width:20px;" class="img-fluid"> </span><?= $pelapor['username'] ?></p>
+            <p class="fs-7"><span class="fw-bold">Pelapor : <img src="<?= base_url($data['foto_user']) ?>" style="width:20px;" class="img-fluid"> </span><?= $data['username'] ?></p>
             <p class="fs-7"><span class="fw-bold">Deskripsi : </span><?= $data['deskripsi'] ?></p>
         </div>
     </div>
