@@ -10,13 +10,15 @@
 	<div class="container min-vh-100">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6">
+				<div class="col-md-10">
 					<h4>Overview</h4>
 				</div>
-				<div class="col-md-6 text-right">
-					<button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#exampleModal">
-						Tambah Posting
-					</button>
+				
+
+				<div class="col-md-2 text-right">
+				<button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					Tambah posting
+				</button>
 				</div>
 			</div>
 		</div>
@@ -24,8 +26,7 @@
 			<div class="card-datatable table-responsive pt-0">
 				<div id="resault"></div>
 
-				<!-- Modal Tambah Posting -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog modal-xl">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -73,13 +74,14 @@
 
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 								<button type="submit" class="btn btn-primary">Simpan</button>
 								<?php echo form_close(); ?>
 							</div>
 						</div>
 					</div>
 				</div>
+
 
 				<!-- Modal Update Posting -->
 				<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -142,9 +144,7 @@
 		</div>
 	</div>
 </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11">
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
 <script type="text/javascript">
 	var resaultdata;

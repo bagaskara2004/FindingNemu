@@ -1,28 +1,7 @@
-*,
-::after,
-::before {
-	box-sizing: border-box;
-}
-
 body {
-	font-family: "Poppins", sans-serif;
-	font-size: 0.875rem;
-	opacity: 1;
-	overflow: scroll;
+	overflow-x: hidden;
 	margin: 0;
 }
-
-a {
-	cursor: pointer;
-	text-decoration: none;
-	font-family: "Poppins", sans-serif;
-}
-
-li {
-	list-style: none;
-}
-
-/* admin dashboard layout */
 
 .wrapper {
 	align-items: stretch;
@@ -35,6 +14,11 @@ li {
 	min-width: 264px;
 	background: #0080ff;
 	transition: all 0.35s ease-in-out;
+	position: absolute;
+	height: 100%;
+	z-index: 1000;
+	overflow-y: auto;
+	padding-top: 56px;
 }
 
 .main {
@@ -45,10 +29,19 @@ li {
 	overflow: hidden;
 	transition: all 0.35s ease-in-out;
 	width: 100%;
-	background: #ffffff;
+	margin-left: 264px; 
 }
 
-/* sidebar elements */
+/* Navbar */
+
+.navbar {
+	position: fixed;
+	width: 100%;
+	z-index: 1000;
+	background-color: #fff; 
+}
+
+/* Sidebar elements */
 
 .sidebar-logo {
 	padding: 1.2rem;
@@ -78,17 +71,7 @@ a.sidebar-link {
 	font-size: 1.2rem;
 }
 
-.sidebar-item-bottom {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-}
-
-#sidebar.collapsed {
-	margin-left: -269px;
-}
-
-/* navbar element */
+/* Navbar elements */
 
 .avatar {
 	height: 40px;
@@ -111,8 +94,13 @@ a.sidebar-link {
 }
 
 .img-fixed-size {
-	width: 40px; 
-	height: 40px; 
-	object-fit: cover; 
-	border-radius: 50%; 
+	width: 40px;
+	height: 40px;
+	object-fit: cover;
+	border-radius: 50%;
+}
+.profile-preview {
+	text-align: center;
+	align-content: center;
+	margin-bottom: 30px;
 }

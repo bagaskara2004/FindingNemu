@@ -80,8 +80,8 @@ class Coverview extends CI_Controller
 		}
 
 		$this->load->view('Admin/navbar');
-		$this->load->view('posting/detail', $datas);
 		$this->load->view('Admin/tombol', $datas);
+		$this->load->view('posting/detail', $datas);
 		$this->load->view('Admin/footer');
 	}
 	public function update_data()

@@ -28,6 +28,7 @@
             foreach ($kategori as $k) {
                 $jumlah = $this->Mkategori->get_jumlah_kategori($k->id_kategori);
                 $data[] = array(
+                    'id_kategori' => $k->id_kategori,
                     'kategori' => $k->kategori,
                     'jumlah' => $jumlah
                 );
@@ -43,11 +44,16 @@
             $kategoriData = $this->Mkategori->get_kategori();
             echo json_encode($kategoriData);
         }
-        public function delete_data()
-        {
-            $id_kategori  = $this->input->post('id_kategori');
-            $this->Mkategori->delete_kategori($id_kategori);
-
-            echo json_encode(array('status' => 'success', 'message' => 'Data berhasil dihapus'));
+        public function hapus_kategori() {
+            $id_kategori= $this->input->post('id_kategori');
+            $result = $this->Mkategori->hapus_kategori($id_kategori);
+        
+            if ($result) {
+                echo json_encode(array('status' => 'success', 'message' => 'Kategori berhasil dihapus'));
+                
+            } else {
+                echo json_encode(array('status' => false, 'message' => 'Gagal menghapus kategori'));
+                
+            }
         }
     }

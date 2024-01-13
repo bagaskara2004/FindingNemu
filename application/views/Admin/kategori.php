@@ -1,13 +1,12 @@
-<!-- Main Content -->
 <main class="content px-3 py-2">
     <div class="container min-vh-100">
         <div class="container">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-10">
                     <h4>Kategori</h4>
                 </div>
-                <div class="col-md-6 text-right">
-                    <button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#tambahKategoriModal">
+                <div class="col-md-2 text-right">
+                    <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#tambahKategoriModal">
                         Tambah Kategori
                     </button>
                 </div>
@@ -19,16 +18,12 @@
             </div>
         </div>
     </div>
-
-    <!-- Tambah Kategori Modal -->
-    <div class="modal fade" id="tambahKategoriModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    <div class="modal" tabindex="-1" id="tambahKategoriModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="formTambahKategori">
@@ -36,7 +31,6 @@
                             <label for="kategori">Kategori:</label>
                             <input type="text" class="form-control" id="kategori" name="kategori" required>
                         </div>
-
                         <button type="button" class="btn btn-primary" id="tambahKategoriBtn">Tambah</button>
                     </form>
                 </div>
@@ -44,6 +38,7 @@
         </div>
     </div>
 </main>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function() {
         function loadKategori() {
@@ -57,9 +52,10 @@
 
                     for (var i = 0; i < kategoriData.length; i++) {
                         html += '<tr>';
+                        html += '<td>' + kategoriData[i].id_kategori + '</td>';
                         html += '<td>' + kategoriData[i].kategori + '</td>';
                         html += '<td>' + kategoriData[i].jumlah + '</td>';
-                        html += '<td> <button type="button" class="btn btn-sm btn-danger" onclick="deleteKategori(' + kategoriData[i].id_kategori + ')">Delete</button>';
+                        html += '<td> <button type="button" class="btn btn-sm btn-danger" onclick="deleteKategori(' + kategoriData[i].id_kategori + ')">Delete</button> </td>';
                         html += '</tr>';
                     }
 
@@ -69,9 +65,7 @@
             });
         }
 
-
         loadKategori();
-
 
         $("#tambahKategoriBtn").on("click", function() {
             var kategori = $("#kategori").val();
@@ -83,9 +77,7 @@
                     kategori: kategori
                 },
                 success: function(data) {
-
                     loadKategori();
-
 
                     Swal.fire({
                         title: 'Success!',
@@ -94,14 +86,10 @@
                         confirmButtonText: 'OK'
                     });
 
-
                     $("#tambahKategoriModal").modal('hide');
-
-
                     $("#formTambahKategori")[0].reset();
                 },
                 error: function() {
-
                     Swal.fire({
                         title: 'Error!',
                         text: 'Terjadi kesalahan. Silakan coba lagi.',
@@ -110,10 +98,12 @@
                     });
                 }
             });
+
         });
     });
 
-    function deleteKategori(idkategori) {
+    function deleteKategori(id_kategori) {
+
         Swal.fire({
             title: 'Apakah Anda yakin?',
             text: 'Anda tidak akan dapat mengembalikan ini!',
@@ -128,9 +118,9 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost/findingNemu/Admin/Ckategori/delete_data',
+                    url: 'http://localhost/findingNemu/Admin/Ckategori/hapus_kategori',
                     data: {
-                        id_kategori: idkategori
+                        id_kategori: id_kategori
                     },
                     success: function(response) {
                         var result = JSON.parse(response);
@@ -168,5 +158,7 @@
                 });
             }
         });
+
+
     }
 </script>
