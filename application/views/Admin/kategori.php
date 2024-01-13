@@ -52,7 +52,7 @@
 
                     for (var i = 0; i < kategoriData.length; i++) {
                         html += '<tr>';
-                        html += '<td>' + kategoriData[i].id_kategori + '</td>';
+
                         html += '<td>' + kategoriData[i].kategori + '</td>';
                         html += '<td>' + kategoriData[i].jumlah + '</td>';
                         html += '<td> <button type="button" class="btn btn-sm btn-danger" onclick="deleteKategori(' + kategoriData[i].id_kategori + ')">Delete</button> </td>';

@@ -15,6 +15,24 @@ class Moverview extends CI_Model
 
 		return $query->result();
 	}
+	public function getPostingDetail($id_posting)
+    {
+        $query = $this->db->select('posting.id_posting, 
+                                   posting.judul, 
+                                   posting.deskripsi, 
+                                   posting.foto, 
+                                   posting.status, 
+                                   kategori.kategori, 
+                                   user.foto as foto_user, 
+                                   user.username')
+                          ->from('posting')
+                          ->join('kategori', 'kategori.id_kategori = posting.id_kategori', 'left')
+                          ->join('user', 'user.id_user = posting.id_user', 'left')
+                          ->where('posting.id_posting', $id_posting)
+                          ->get();
+
+        return $query->row_array();
+    }
 	public function get_kategori()
 	{
 		$query = $this->db->get('kategori');

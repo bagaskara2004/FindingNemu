@@ -4,6 +4,8 @@
  * @property Madmin $madmin;
  * @property Mposting $mposting;
  */
+
+use Mpdf\Mpdf;
 class Cadmin extends CI_Controller
 
 {
@@ -15,23 +17,23 @@ class Cadmin extends CI_Controller
 		$this->load->helper('form');
 	}
 
-    function index()
-    {
-        if ($this->session->userdata('nama_admin') == '') {
+	function index()
+	{
+		if ($this->session->userdata('nama_admin') == '') {
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akses Ditolak, Silahkan Login Ulang</div>');
-            redirect('Cauth/login', 'refresh');
-        }
-        $this->load->view('Admin/navbar');
-        $this->load->view('Admin/homepageAdmin');
-        $this->load->view('Admin/footer');
-    }
-    public function search()
-    {
-        $key = $this->input->post("cari");
-        $loc = $this->input->post("lokasi");
-        $output = $this->mposting->searching($key, $loc);
-        echo $output;
-    }
+			redirect('Cauth/login', 'refresh');
+		}
+		$this->load->view('Admin/navbar');
+		$this->load->view('Admin/homepageAdmin');
+		$this->load->view('Admin/footer');
+	}
+	public function search()
+	{
+		$key = $this->input->post("cari");
+		$loc = $this->input->post("lokasi");
+		$output = $this->mposting->searching($key, $loc);
+		echo $output;
+	}
 
 	function uploadprofile(): void
 	{
@@ -50,18 +52,16 @@ class Cadmin extends CI_Controller
 			$this->session->set_flashdata('pesan', "Foto Profile Gagal Di Update/Tidak Memasukan Foto");
 		} else {
 			$image = $this->upload->data();
-			$image = $path.$image['file_name'];
+			$image = $path . $image['file_name'];
 			$data = array(
 				'foto_admin' => $image
 			);
 			if (!empty($old_photo)) {
 				unlink($old_photo);
-
 			}
 			$this->madmin->executeedit($id_admin, $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Foto Profile Berhasil di Update, Silahkan Login Ulang</div>');
 			$this->logout();
-
 		}
 	}
 
@@ -87,9 +87,35 @@ class Cadmin extends CI_Controller
 		$this->logout();
 	}
 
-    function logout(): void
+	function logout(): void
 	{
-        $this->session->sess_destroy();
+		$this->session->sess_destroy();
 		$this->load->view('Authentication/login');
-    }
+	}
+	public function getPostAndValidationStatistics()
+	{
+		$this->load->model('Madmin');
+		$data['data'] = $this->Madmin->getPostAndValidationStatistics();
+		$this->output->set_content_type('application/json')->set_output(json_encode($data));
+	}
+	function cetakpdf()
+	{
+		$data['total_posting'] = $this->madmin->getTotalPosting();
+        $data['kategori_stats'] = $this->madmin->getKategoriStats();
+        $data['total_validasi'] = $this->madmin->getTotalValidasi();
+        $data['total_user'] = $this->madmin->getTotalUser();
+		$data['all_postings'] = $this->madmin->getPosting();
+
+		require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
+		$pdf = new Dompdf\Dompdf();
+		$pdf->setPaper('A4', 'potrait');
+		$pdf->set_option('isRemoteEnabled', TRUE);
+		$pdf->set_option('isHtml5ParserEnabled', true);
+		$pdf->set_option('isPhpEnabled', true);
+		$pdf->set_option('isFontSubsettingEnabled', true);
+
+		$pdf->loadHtml($this->load->view('admin/cetak_pdf',$data, true));
+		$pdf->render();
+		$pdf->stream('NamaFile', ['Attachment' => false]);
+	}
 }

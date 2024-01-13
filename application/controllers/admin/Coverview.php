@@ -69,19 +69,13 @@ class Coverview extends CI_Controller
 
 	public function detail($id_posting)
 	{
-		$datas['data'] = $this->db->get_where('posting', ['id_posting' => $id_posting])->row_array();
-		$datas['pelapor'] = $this->db->get_where('user', ['id_user' => $datas['data']['id_user']])->row_array();
-		$datas['kategori'] = $this->db->get_where('kategori', ['id_kategori' => $datas['data']['id_kategori']])->row_array();
-		$datas['user'] = $this->db->get_where('user', ['username' => $this->session->userdata('username')])->row_array();
-		if ($datas['data']['status'] > 0) {
-			$datas['status'] = 'Temuan';
-		} else {
-			$datas['status'] = 'Kehilangan';
-		}
+		$data['data'] = $this->Moverview->getPostingDetail($id_posting);
+        
+        $data['status'] = ($data['data']['status'] == 1) ? 'Temuan' : 'Kehilangan';
 
 		$this->load->view('Admin/navbar');
-		$this->load->view('Admin/tombol', $datas);
-		$this->load->view('posting/detail', $datas);
+		$this->load->view('Admin/tombol', $data);
+		$this->load->view('Admin/detail', $data);
 		$this->load->view('Admin/footer');
 	}
 	public function update_data()

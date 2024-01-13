@@ -29,6 +29,9 @@
 	<!-- jQuery -->
 
 </head>
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <!-- SweetAlert2 -->
@@ -44,8 +47,8 @@
 
 <body>
 	<div class="wrapper">
-		<aside id="sidebar" >
-			
+		<aside id="sidebar">
+
 			<div class="h-100 ">
 				<div class="sidebar-logo">
 					<a href="<?= base_url('Admin/Cadmin') ?>"><img src="<?= base_url('asset/img/logo-light.png') ?>" alt="findingnemu" style="width: 100px;" class="img-fluid"></a>
@@ -84,6 +87,13 @@
 							Kategori
 						</a>
 					</li>
+					<li class="sidebar-item">
+						<button type="button" onclick="cetakpdf()" class="sidebar-link">
+							<i class="bi bi-printer-fill"></i>&nbsp; &nbsp;
+							Cetak PDF
+						</button>
+					</li>
+
 				</ul>
 			</div>
 		</aside>
@@ -199,5 +209,9 @@
 
 				document.getElementById('batal').onclick = function() {
 					document.getElementById("imagePreview").src = "<?= base_url($this->session->userdata('foto_admin')) ?>"
+				}
+
+				function cetakpdf() {
+					window.open("<?php echo base_url() ?>admin/Cadmin/cetakpdf", "_blank");
 				}
 			</script>
