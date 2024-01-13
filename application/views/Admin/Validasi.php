@@ -19,14 +19,12 @@
             <div class="card-datatable table-responsive pt-0">
                 <div id="resault"></div>
 
-                <div class="modal fade" id="validasiModaledit" tabindex="-1" aria-labelledby="validasiModallable" aria-hidden="true">
+                <div class="modal" tabindex="-1" id="validasiModaledit" aria-labelledby="validasiModallable" aria-hidden="true">
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="validasiModallable">Edit Posting</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <?php echo form_open_multipart('Admin/Cvalidasi/update_data', ['class' => 'container mt-3', 'id' => 'editForm']); ?>
@@ -52,13 +50,13 @@
 
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-primary" onclick="updatevalidasi()">Simpan</button>
-                                <?php echo form_close(); ?>
                             </div>
                         </div>
                     </div>
                 </div>
+
 </main>
 <script type="text/javascript">
     var resaultdata;
