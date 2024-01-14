@@ -47,7 +47,6 @@
         <li>mengisi form pengajuan;</li>
         <li>kemudian pergi ke admin untuk validasi;</li>
         <li>jika barangnya ditemukan maka akan di chat langsung oleh admin via wa;</li>
-        <li>jika barangnya tidak ditemukan lebih dari 3 bulan maka sistem akan menghapus Laporan pengajuannya;</li>
     </ol>
     <p>Jika ingin mengambil barang temuan :</p>
     <ol class="step">

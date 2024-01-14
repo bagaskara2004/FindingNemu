@@ -178,6 +178,8 @@ class Cauth extends CI_Controller
 		$this->email->from("findingNemu", "FindingNemu");
 		$this->email->to($data['email']);
 
+		$user = $this->db->get_where('user', ['email' => $data['email']])->row_array();
+
 		if (empty($data['kode'])) {
 			$this->email->subject("Actived Akun");
 			$this->email->message("Klik link berikut untuk <a href='http://localhost/findingNemu/Cauth/actived?email=" . $data["email"] . "'>actived akunmu</a>");
@@ -190,6 +192,9 @@ class Cauth extends CI_Controller
 				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Register Akun</div>');
 				redirect(base_url('Cauth/login'));
 			}
+		}else if (!$user) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">User tidak ditemukan</div>');
+			redirect(base_url('Cauth/lupapassword'));
 		}else {
 			$this->email->subject("Lupa Password");
 			$this->email->message("Kode :".$data['kode']);
@@ -237,13 +242,6 @@ class Cauth extends CI_Controller
 		if ($this->input->post('kode_hash')) {
 			$data['kode_hash'] = $this->input->post('kode_hash');
 			$data['email'] = $this->input->post('email');
-		}
-
-		$user = $this->db->get_where('user', ['email' => $data['email']])->row_array();
-
-		if (!$user) {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">User tidak ditemukan</div>');
-			redirect(base_url('Cauth/lupapassword'));
 		}
 
 		if ($this->form_validation->run() == false) {
