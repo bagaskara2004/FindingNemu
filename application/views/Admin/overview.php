@@ -13,12 +13,12 @@
 				<div class="col-md-10">
 					<h4>Overview</h4>
 				</div>
-				
+
 
 				<div class="col-md-2 text-right">
-				<button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
-					Tambah posting
-				</button>
+					<button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+						Tambah posting
+					</button>
 				</div>
 			</div>
 		</div>
@@ -38,11 +38,6 @@
 								<div class="mb-3">
 									<label for="judul" class="form-label">Judul</label>
 									<input type="text" class="form-control" name="judul" required>
-								</div>
-
-								<div class="mb-3">
-									<label for="tanggal" class="form-label">Tanggal</label>
-									<input type="date" class="form-control" name="tanggal" required>
 								</div>
 
 								<div class="mb-3">
@@ -74,7 +69,7 @@
 
 							</div>
 							<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 								<button type="submit" class="btn btn-primary">Simpan</button>
 								<?php echo form_close(); ?>
 							</div>
@@ -97,11 +92,6 @@
 								<div class="mb-3">
 									<label for="judul" class="form-label">Judul</label>
 									<input type="text" class="form-control" name="judul" id="judul_edit" required>
-								</div>
-
-								<div class="mb-3">
-									<label for="tanggal" class="form-label">Tanggal</label>
-									<input type="date" class="form-control" name="tanggal" id="tanggal_edit" required>
 								</div>
 
 								<div class="mb-3">

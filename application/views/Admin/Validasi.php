@@ -35,10 +35,6 @@
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="tanggal" class="form-label">Tanggal</label>
-                                    <input type="date" class="form-control" name="tanggal" id="tanggal_edit" required>
-                                </div>
-                                <div class="mb-3">
                                     <label for="telp" class="form-label">No Telephone</label>
                                     <input type="number" class="form-control" name="telp" id="telp_edit" required>
                                 </div>
@@ -90,7 +86,7 @@
                     html += '<td>' + resaultdata[i].telp + '</td>';
                     html += '<td>' + resaultdata[i].nama_admin + '</td>';
                     html += '<td>' + resaultdata[i].id_posting + '</td>';
-                    html += '<td> <button type="button" class="btn btn-sm btn-danger" onclick="deletePosting(' + resaultdata[i].id_validasi + ')">Delete</button> <button type="button" class="btn btn-sm btn-primary" onclick="openEditModal(' + resaultdata[i].id_validasi + ')">Update</button>';
+                    html += '<td> <button type="button" class="btn btn-sm btn-danger" onclick="deletePosting(' + resaultdata[i].id_validasi + ')">Delete</button> <button type="button" class="btn btn-sm btn-primary" onclick="openEditModal(' + resaultdata[i].id_validasi + ')">Update</button> <button type="button" class="btn btn-sm btn-warning btn-detail" data-id="' + resaultdata[i].id_validasi + '">Detail</button>';
                     html += '</tr>';
 
                 }
@@ -98,6 +94,11 @@
                 html += '</table>';
                 console.log(html);
                 $("#resault").html(html);
+                $('.btn-detail').click(function() {
+					var idvalidasi = $(this).data('id');
+					window.location.href = '<?php echo base_url('admin/Cvalidasi/getValidasi/'); ?>' + idvalidasi;
+				});
+               
             }
         });
 

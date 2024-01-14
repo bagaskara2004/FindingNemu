@@ -83,7 +83,6 @@ class Coverview extends CI_Controller
 		$id_posting = $this->input->post('id_posting');
 		$data = array(
 			'judul' => $this->input->post('judul'),
-			'tanggal' => $this->input->post('tanggal'),
 			'id_kategori' => $this->input->post('kategori'),
 			'status' => $this->input->post('status'),
 			'deskripsi' => $this->input->post('deskripsi')

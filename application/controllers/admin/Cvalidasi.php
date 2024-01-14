@@ -64,7 +64,6 @@ class Cvalidasi extends CI_Controller
         $data = array(
             'id_admin' => $this->session->userdata('id_admin'),
             'nama' => $this->input->post('nama'),
-            'tanggal' => $this->input->post('tanggal'),
             'telp' => $this->input->post('telp')
         );
 
@@ -98,5 +97,12 @@ class Cvalidasi extends CI_Controller
         $this->Mvalidasi->delete_posting($id_validasi);
 
         echo json_encode(array('status' => 'success', 'message' => 'Data berhasil dihapus'));
+    }
+    public function getValidasi($id_validasi)
+    {
+        $data['data'] = $this->Mvalidasi->getDetail($id_validasi);
+        $this->load->view('Admin/navbar');
+        $this->load->view('admin/detailValidasi', $data);
+        $this->load->view('Admin/footer');
     }
 }

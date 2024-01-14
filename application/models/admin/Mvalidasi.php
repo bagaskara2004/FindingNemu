@@ -34,4 +34,14 @@ class Mvalidasi extends CI_Model
         $this->db->where('id_validasi', $id_validasi);
         $this->db->delete('validasi');
     }
+    public function getDetail($id_validasi)
+    {
+        $this->db->select('validasi.*, admin.nama_admin, admin.foto_admin, posting.judul');
+        $this->db->from('validasi');
+        $this->db->join('admin', 'validasi.id_admin = admin.id_admin', 'left');
+        $this->db->join('posting', 'validasi.id_posting = posting.id_posting', 'left');
+        $this->db->where('validasi.id_validasi', $id_validasi);
+        $query = $this->db->get();
+        return $query->row_array();
+    }
 }

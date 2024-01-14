@@ -104,10 +104,10 @@
 					<i class="bi bi-filter-left"></i>
 				</button>
 
-				<form class="d-flex ms-auto">
+				<!-- <form class="d-flex ms-auto">
 					<input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" id="search">
 					<button class="btn btn-outline-success" type="submit">Search</button>
-				</form>
+				</form> -->
 				<div class="collapse navbar-collapse">
 					<ul class="navbar-nav ms-auto">
 						<li class="nav-item dropdown">
