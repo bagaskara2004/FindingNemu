@@ -10,37 +10,33 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Admin Dashboard</title>
 
-	<!-- Bootstrap CSS v5.3.2 -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pzjw8Q+tcM5/s1U3qL9xua6rKU/knbQ9KGfXE4sFZlRXx8KGR7cPdA4oJ5l9srX6" crossorigin="anonymous"></script>
 
-	<!-- Custom CSS -->
+
 	<link rel="stylesheet" href="<?= base_url('asset/css/adminstyle.css') ?>">
 	<link rel="stylesheet" href="<?= base_url('asset/css/style.css') ?>">
 
-	<!-- Google Fonts -->
+
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
 
-	<!-- Bootstrap Icons -->
+
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
 
-	<!-- jQuery -->
+
 
 </head>
-<!-- Chart.js -->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
-<!-- SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 
-<!-- Bootstrap JS Bundle v5.3.2 -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Your additional scripts -->
 <script src="<?= base_url('asset/jquery/jquery-3.7.1.min.js') ?>"></script>
 
 
@@ -105,9 +101,9 @@
 		</aside>
 		<div class="main">
 			<!----Navbar---->
-			<nav class="navbar navbar-expand-lg navbar-light px-3 border-bottom ">
+			<nav class="navbar navbar-expand-lg navbar-light px-6 border-bottom ">
 				<button class="btn" id="sidebar-toggle" type="button">
-					<i class="bi bi-filter-left"></i>
+					<i class="bi bi-list"></i>
 				</button>
 
 				<!-- <form class="d-flex ms-auto">
