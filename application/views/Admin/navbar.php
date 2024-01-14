@@ -70,6 +70,12 @@
 						</a>
 					</li>
 					<li class="sidebar-item">
+						<a href="<?= base_url('Admin/Cadmin/admin') ?>" class="sidebar-link">
+							<i class="bi bi-person-workspace"></i>&nbsp; &nbsp;
+							Admin
+						</a>
+					</li>
+					<li class="sidebar-item">
 						<a href="<?= base_url('Admin/Cvalidasi') ?>" class="sidebar-link">
 							<span class="bi bi-bookmark-check-fill"></span>&nbsp; &nbsp;
 							Validasi

@@ -1,25 +1,25 @@
 <?php
 class Madmin extends CI_Model
 {
-	function executeedit($id_admin, $data): void
-	{
-		$this->db->where('id_admin', $id_admin);
-		$this->db->update('admin', $data);
-	}
-	public function getPostAndValidationStatistics()
+    function executeedit($id_admin, $data): void
+    {
+        $this->db->where('id_admin', $id_admin);
+        $this->db->update('admin', $data);
+    }
+    public function getPostAndValidationStatistics()
     {
         $query = $this->db->select('kategori.kategori as category_name, 
                                    COUNT(posting.id_posting) as post_count, 
                                    COUNT(validasi.id_validasi) as validation_count')
-                          ->from('posting')
-                          ->join('kategori', 'kategori.id_kategori = posting.id_kategori', 'left')
-                          ->join('validasi', 'validasi.id_posting = posting.id_posting', 'left')
-                          ->group_by('kategori.kategori')
-                          ->get();
+            ->from('posting')
+            ->join('kategori', 'kategori.id_kategori = posting.id_kategori', 'left')
+            ->join('validasi', 'validasi.id_posting = posting.id_posting', 'left')
+            ->group_by('kategori.kategori')
+            ->get();
 
         return $query->result_array();
     }
-	public function getTotalValidasi()
+    public function getTotalValidasi()
     {
         return $this->db->count_all_results('validasi');
     }
@@ -37,10 +37,10 @@ class Madmin extends CI_Model
     public function getKategoriStats()
     {
         $query = $this->db->select('kategori.kategori as kategori, COUNT(posting.id_posting) as post_count')
-                          ->from('posting')
-                          ->join('kategori', 'kategori.id_kategori = posting.id_kategori', 'left')
-                          ->group_by('kategori.kategori')
-                          ->get();
+            ->from('posting')
+            ->join('kategori', 'kategori.id_kategori = posting.id_kategori', 'left')
+            ->group_by('kategori.kategori')
+            ->get();
         return $query->result_array();
     }
 
@@ -54,4 +54,27 @@ class Madmin extends CI_Model
 
         return $query->result_array();
     }
+    public function getAllAdmins()
+    {
+        $query = $this->db->get('admin');
+        return $query->result_array();
+    }
+
+    public function deleteAdmin($id_admin)
+    {
+
+        $this->db->where('id_admin', $id_admin);
+        $this->db->delete('admin');
+
+        $result['status'] = 'success';
+        $result['message'] = 'Data berhasil dihapus';
+
+        return $result;
+    }
+    public function simpanAdmin($data)
+    {
+      
+        $this->db->insert('admin', $data);
+    }
+    
 }
