@@ -176,17 +176,36 @@ class Cauth extends CI_Controller
 		$this->email->initialize($config);
 		$this->email->from("findingNemu", "FindingNemu");
 		$this->email->to($data['email']);
-		$this->email->subject("Actived Akun");
-		$this->email->message("Klik link berikut untuk <a href='http://localhost/findingNemu/Cauth/actived?email=" . $data["email"] . "'>actived akunmu</a>");
 
-		if ($this->email->send()) {
-			$this->db->insert('user', $data);
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Periksa email sekarang untuk actived akunmu</div>');
-			redirect(base_url('Cauth/login'));
-		} else {
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Register Akun</div>');
-			redirect(base_url('Cauth/login'));
+		if (empty($data['kode'])) {
+			$this->email->subject("Actived Akun");
+			$this->email->message("Klik link berikut untuk <a href='http://localhost/findingNemu/Cauth/actived?email=" . $data["email"] . "'>actived akunmu</a>");
+
+			if ($this->email->send()) {
+				$this->db->insert('user', $data);
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Periksa email sekarang untuk actived akunmu</div>');
+				redirect(base_url('Cauth/login'));
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Register Akun</div>');
+				redirect(base_url('Cauth/login'));
+			}
+		}else {
+			$this->email->subject("Lupa Password");
+			$this->email->message("Kode :".$data['kode']);
+
+			if ($this->email->send()) {
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Kode telah dikirim ke email</div>');
+				$kode =[
+					'kode'=>$this->encryption->encrypt($data['kode']),
+					'email' => $data['email']
+				];
+				redirect(base_url('Cauth/changePassword'). '?' . http_build_query($kode));
+			} else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal kirim kode, coba lagi</div>');
+				redirect(base_url('Cauth/lupapassword'));
+			}
 		}
+		
 	}
 
 	public function actived()
@@ -201,34 +220,77 @@ class Cauth extends CI_Controller
 		redirect(base_url('Cauth/login'));;
 	}
 
+	public function changePassword() {
+
+		$this->form_validation->set_rules('password', 'Password', 'required|trim|min_length[3]|max_length[20]', [
+			'min_length' => 'Password minimal 3 kata',
+			'max_length' => 'Password maximal 20 kata',
+			'required' => 'Password Harus diisi'
+		]);
+		$this->form_validation->set_rules('kode', 'Kode', 'required|trim', [
+			'required' => 'kode harus diisi'
+		]);
+
+		$data['kode_hash'] = $this->input->get('kode', TRUE);
+		$data['email'] = $this->input->get('email', TRUE);
+		if ($this->input->post('kode_hash')) {
+			$data['kode_hash'] = $this->input->post('kode_hash');
+			$data['email'] = $this->input->post('email');
+		}
+
+		$user = $this->db->get_where('user', ['email' => $data['email']])->row_array();
+
+		if (!$user) {
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">User tidak ditemukan</div>');
+			redirect(base_url('Cauth/lupapassword'));
+		}
+
+		if ($this->form_validation->run() == false) {
+			$this->load->view('Authentication/change_Password',$data);
+		}else {
+			$kode_hash = $this->encryption->decrypt($data['kode_hash']);
+			$kode = $this->input->post('kode');
+			if ($kode_hash == $kode) {
+				$datas = array(
+					'password'=> $this->encryption->encrypt($this->input->post('password'))
+				);
+				$this->db->where('email', $data['email']);
+				$this->db->update('user', $datas);
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">password berhasil diubah</div>');
+				redirect(base_url('Cauth/login'));
+			}else {
+				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Kode Tidak Cocok, coba lagi</div>');
+				redirect(base_url('Cauth/lupapassword'));
+			}
+		}
+	}
+
 	public function lupapassword()
 	{	
+
 		$this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email[user.email]', [
 			'required' => 'Email harus diisi',
 			'valid_email' => 'Email valid!'
 		]);
+		
 		if($this->form_validation->run()== FALSE){
-		$data['title'] = "Lupa Password";
-		$this->load->view('Authentication/Lupa_Password.php', $data);
+			$data['title'] = "Lupa Password";
+			$this->load->view('Authentication/Lupa_Password.php', $data);
 		}else{
-		$email = $this->input->post('email');
-		$user  =  $this->db->get_where('user',['email' => $email, 'actived' => 1])->row_array();
-		if($user){
-			// $token = base64_encode(random_bytes(32));
-			// $user_token[
-			// 	'email' => $email,
-			// 	'token'	=> $token,
-			// 	'date_created' => time()
-			// ];
-			// $this->db->insert('user_token', $user_token);
-			// $this->sendMail($token, 'lupa');
-			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mohon Cek Email Anda untuk reset Password</div>');
-		redirect(base_url('Cauth/lupapassword'));
-		}else{
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">email tidak terdaftar atau diaktifkan</div>');
-		redirect(base_url('Cauth/lupapassword'));
+			$data = [
+				'kode'=> $this->generate_kode(),
+				'email'=> $this->input->post('email')
+			];
+			$this->sendMail($data);
 		}
+	}
+	
+	public function generate_kode() {
+		$kode ="";
+		for ($i=1; $i <= 5; $i++) { 
+			$kode .= rand(0, 9);
 		}
+		return $kode;
 	}
 	
 	public function admindashboard()

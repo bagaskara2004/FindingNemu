@@ -14,31 +14,25 @@ class Cposting extends CI_Controller
 	}
 
 	public function cekKonfirmasi(){
-		for ($i=1; $i <= 3; $i++) { 
-			$data = $this->db->select('*')->from('posting')->where('id_konfirmasi',$i)->get();
-			if ($i == 1) {
-				$kadaluarsa = 3;
-			}else {
-				$kadaluarsa = 14;
+		$data = $this->db->select('*')->from('posting')->where('id_konfirmasi',1)->get();
+		$kadaluarsa = 3;
+		foreach ($data->result_array() as $datas) {
+			$tanggal = date("d", strtotime($datas['tanggal']));
+			$bulan = date("m", strtotime($datas['tanggal']));
+			$tahun = date("Y", strtotime($datas['tanggal'])); 
+			$tglHapus = $tanggal + $kadaluarsa; 
+			$jmlHari = days_in_month($bulan, $tahun);
+			if ($tglHapus > $jmlHari) { 
+				$tglHapus = $tglHapus - $jmlHari; 
+				if ($bulan == 12) {
+					$bulan = 01;
+					$tahun += 1;
+				}else {
+					$bulan +=1;
+				}
 			}
-			foreach ($data->result_array() as $datas) {
-				$tanggal = date("d", strtotime($datas['tanggal']));
-				$bulan = date("m", strtotime($datas['tanggal']));
-				$tahun = date("Y", strtotime($datas['tanggal'])); 
-				$tglHapus = $tanggal + $kadaluarsa; 
-				$jmlHari = days_in_month($bulan, $tahun);
-				if ($tglHapus > $jmlHari) { 
-					$tglHapus = $tglHapus - $jmlHari; 
-					if ($bulan == 12) {
-						$bulan = 01;
-						$tahun += 1;
-					}else {
-						$bulan +=1;
-					}
-				}
-				if ($tglHapus <= date('d') && $bulan <= date('m') && $tahun <= date('Y')) { 
-					$this->db->delete('posting', array('id_posting' => $datas['id_posting']));
-				}
+			if ($tglHapus <= date('d') && $bulan <= date('m') && $tahun <= date('Y')) { 
+				$this->db->delete('posting', array('id_posting' => $datas['id_posting']));
 			}
 		}
 	}

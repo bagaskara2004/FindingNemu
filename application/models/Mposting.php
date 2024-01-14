@@ -53,9 +53,16 @@ class Mposting extends CI_Model {
 		if ($data->num_rows() > 0 ) {
 			$output = "";
 			foreach ($data->result_array() as $datas) {
+				$validasi = $this->db->select('*')->from('validasi')->where('id_posting',$datas["id_posting"])->get();
+				$background = "";
+				$text = "";
+				if ($validasi->num_rows() > 0) {
+					$background = "bg-success";
+					$text = "text-light";
+				}
 				$output .= '
-				<div class="card">
-					<div class="card-header text-center fw-bold">'.$datas["judul"].'</div>
+				<div class="card '.$background.'">
+					<div class="card-header text-center fw-bold '.$text.'">'.$datas["judul"].'</div>
 					<img src="'.base_url($datas["foto"]).'" class="card-img-top px-3 pt-3">
 					<form action="'.base_url("Cposting/detail").'" method="post" class="card-body d-flex">
                         <input type="hidden" name="id_posting" value="'.$datas["id_posting"].'">
