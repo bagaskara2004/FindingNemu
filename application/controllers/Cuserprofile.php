@@ -97,6 +97,24 @@
 			}
 		}
 
+		function updatetelp(): void
+		{
+			$id_user = $this->input->post('id_user');
+			$this->form_validation->set_rules('telp', 'Telp', 'required|trim|is_unique[user.telp]');
+			if (!$this->form_validation->run()) {
+				$this->session->set_flashdata('pesan','<div class="alert alert-danger" role="alert">No Telp Ini Sudah Dipakai</div>');
+				redirect(base_url('Cuserprofile/index'),'refresh');
+			}
+			else{
+				$data = array(
+					'telp' => $this->input->post('telp')
+				);
+				$this->muserprofile->executeedit($id_user, $data);
+				$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">No Telp Berhasil Di Update Silahkan Login Ulang Dengan Username Baru Anda</div>');
+				$this->logout();
+			}
+		}
+
 		public function logout(): void
 		{
 			$this->session->sess_destroy();

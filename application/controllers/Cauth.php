@@ -72,7 +72,8 @@ class Cauth extends CI_Controller
 						'username' => $user['username'],
 						'foto' => $user['foto'],
 						'email' => $user['email'],
-						'id_user' => $user['id_user']
+						'id_user' => $user['id_user'],
+						'telp' => $user['telp']
 					];
 					$this->session->set_userdata($data);
 					if(!empty($this->input->post('save_id')))

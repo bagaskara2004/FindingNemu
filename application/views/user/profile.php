@@ -215,6 +215,33 @@
 					<!--End Email Update-->
 				</div>
 			</div>
+			<div class="row mt-3">
+				<div class="d-flex">
+					<div class="grid gap-3">
+						<div class="p-2 g-col-6">Telp</div>
+					</div>
+					<!--No Telp Update-->
+					<?php echo form_open_multipart('Cuserprofile/updatetelp', ['class' => 'input-group ']); ?>
+					<div class="input-group">
+						<input type="hidden"
+							   class="form-control"
+							   name="id_user"
+							   value="<?php echo $this->session->userdata('id_user'); ?>"
+						>
+						<input type="number"
+							   class="form-control"
+							   name="telp"
+							   required
+							   placeholder="<?php echo $this->session->userdata('telp'); ?>"
+						>
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Edit</button>
+						</span>
+						<?php echo form_close(); ?>
+					</div>
+					<!--End No Telp Update-->
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
