@@ -12,9 +12,8 @@
 	},
 	"require": {
 		"php": ">=8.0",
-		"dompdf/dompdf": "*",
-      "ext-openssl": "*"
-    },
+		"dompdf/dompdf": "*"
+	},
 	"suggest": {
 		"paragonie/random_compat": "Provides better randomness in PHP 5.x"
 	},

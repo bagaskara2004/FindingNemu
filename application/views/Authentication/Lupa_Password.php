@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div>
-                    <button type="submit" class="button background-blue p-2 border-none w-100 rounded text-light">Reset Password</button>
+                    <button type="submit" class="button background-blue p-2 border-none w-100 rounded text-light">RESER PASSWORD</button>
                     <a href="<?=base_url("Cauth/login")?>" class="button background-gray p-1 mt-2 rounded text-light" >Kembali ke Login</a>
                 </div>
             </form>

@@ -152,12 +152,11 @@ class Cauth extends CI_Controller
 				'tanggal' => date("Y-m-d"),
 				'telp' => $this->input->post('telp')
 			];
-			$this->db->insert('user', $data);
-			$this->sendMail($data, 'regis');
+			$this->sendMail($data);
 		}
 	}
 
-	public function sendMail($data, $type)
+	public function sendMail($data)
 	{
 		$config['useragent'] = 'Codeigniter';
 		$config['mailpath'] = "/usr/bin/sendmail";
@@ -177,19 +176,11 @@ class Cauth extends CI_Controller
 		$this->email->initialize($config);
 		$this->email->from("findingNemu", "FindingNemu");
 		$this->email->to($data['email']);
-
-		if ($type == 'register') {
 		$this->email->subject("Actived Akun");
-		$this->email->message("Klik link berikut untuk 
-		<a href='http://localhost/findingNemu/Cauth/actived?email=" . $data["email"] . "'>actived akunmu</a>");
-		}
-		else if ($type == 'forgot') {
-			$this->email->subject("Reset Password");
-			$this->email->message("Berikut Kode OTP Anda 
-			<a href='http://localhost/findingNemu/Cauth/resetpw?email=" . $data["otp"] . "'>Reset Password</a>");
-		}
+		$this->email->message("Klik link berikut untuk <a href='http://localhost/findingNemu/Cauth/actived?email=" . $data["email"] . "'>actived akunmu</a>");
 
 		if ($this->email->send()) {
+			$this->db->insert('user', $data);
 			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Periksa email sekarang untuk actived akunmu</div>');
 			redirect(base_url('Cauth/login'));
 		} else {
@@ -216,28 +207,27 @@ class Cauth extends CI_Controller
 			'required' => 'Email harus diisi',
 			'valid_email' => 'Email valid!'
 		]);
-		if(!$this->form_validation->run()){
-			$data['title'] = "Lupa Password";
-			$this->load->view('Authentication/Lupa_Password.php', $data);
+		if($this->form_validation->run()== FALSE){
+		$data['title'] = "Lupa Password";
+		$this->load->view('Authentication/Lupa_Password.php', $data);
 		}else{
-			$email = $this->input->post('email');
-			$user  =  $this->db->get_where('user',['email' => $email, 'actived' => 1])->row_array();
-			if($user){
-				 $this->load->helper('string');
-				 $token = strtoupper(bin2hex(openssl_random_pseudo_bytes(3)));
-				 $data = [
-					'email' => $email,
-					'otp'	=> $token,
-					'tanggal' => time()
-				 ];
-				 $this->db->insert('user_token', $data);
-				 $this->sendMail($data, 'forgot');
-				 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mohon Cek Email Anda untuk reset Password</div>');
-			}else
-			{
-				$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">email tidak terdaftar atau diaktifkan</div>');
-			}
-			redirect(base_url('Cauth/lupapassword'));
+		$email = $this->input->post('email');
+		$user  =  $this->db->get_where('user',['email' => $email, 'actived' => 1])->row_array();
+		if($user){
+			// $token = base64_encode(random_bytes(32));
+			// $user_token[
+			// 	'email' => $email,
+			// 	'token'	=> $token,
+			// 	'date_created' => time()
+			// ];
+			// $this->db->insert('user_token', $user_token);
+			// $this->sendMail($token, 'lupa');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Mohon Cek Email Anda untuk reset Password</div>');
+		redirect(base_url('Cauth/lupapassword'));
+		}else{
+			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">email tidak terdaftar atau diaktifkan</div>');
+		redirect(base_url('Cauth/lupapassword'));
+		}
 		}
 	}
 	
@@ -249,14 +239,6 @@ class Cauth extends CI_Controller
 	{
 		$this->load->view('Admin/overview.php');
 	}
-
-	// sementara untuk akses form reset pw
-	public function resetpw()
-	{
-			$this->load->view('Authentication/password_reset.php');
-
-	}
-
 
 	public function logout()
 	{
