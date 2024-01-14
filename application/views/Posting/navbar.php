@@ -29,7 +29,7 @@
                     <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cposting/pengajuan')?>">PENGAJUAN</a>
                 </li>
                 <li class="nav-item button d-flex align-items-center">
-                    <a class="nav-link fs-7 mx-auto" href="<?=base_url('Cposting/prosedur')?>">PROSEDUR</a>
+                    <a class="nav-link fs-7 mx-auto" onclick="window.open('<?=base_url()?>Cposting/prosedur', '_blank')" href="">PROSEDUR</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link button mx-auto" href="<?=base_url('Cuserprofile/index')?>">

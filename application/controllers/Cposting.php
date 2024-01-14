@@ -151,9 +151,16 @@ class Cposting extends CI_Controller
 			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Tidak bisa mengakses halaman prosedur</div>');
 			redirect(base_url('Cauth/login'));
 		}
-		$this->load->library('pdf');
-		$this->pdf->setPaper('A4', 'potrait');
-		$this->pdf->filename = "Prosedur_FindingNemu.pdf";
-		$this->pdf->load_view('Posting/prosedur');
+		require_once(APPPATH . 'libraries/dompdf/autoload.inc.php');
+		$pdf = new Dompdf\Dompdf();
+		$pdf->setPaper('A4', 'potrait');
+		$pdf->set_option('isRemoteEnabled', TRUE);
+		$pdf->set_option('isHtml5ParserEnabled', true);
+		$pdf->set_option('isPhpEnabled', true);
+		$pdf->set_option('isFontSubsettingEnabled', true);
+
+		$pdf->loadHtml($this->load->view('posting/prosedur','', true));
+		$pdf->render();
+		$pdf->stream('prosedurFindingNemu', ['Attachment' => false]);
 	}
 }
