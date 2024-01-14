@@ -56,7 +56,7 @@ class Cadmin extends CI_Controller
 			$data = array(
 				'foto_admin' => $image
 			);
-			if (!empty($old_photo)) {
+			if (file_exists($old_photo)) {
 				unlink($old_photo);
 			}
 			$this->madmin->executeedit($id_admin, $data);

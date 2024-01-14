@@ -49,7 +49,7 @@
 					$data = array(
 						'foto' => $image
 					);
-					if (!empty($old_photo)) {
+					if (file_exists($old_photo)) {
 						unlink($old_photo);
 
 					}

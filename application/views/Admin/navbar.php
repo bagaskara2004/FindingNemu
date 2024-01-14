@@ -88,10 +88,10 @@
 						</a>
 					</li>
 					<li class="sidebar-item">
-						<button type="button" onclick="cetakpdf()" class="sidebar-link">
-							<i class="bi bi-printer-fill"></i>&nbsp; &nbsp;
+						<a type="button" onclick="cetakpdf()" class="sidebar-link">
+							<span class="bi bi-printer-fill"></span>&nbsp; &nbsp;
 							Cetak PDF
-						</button>
+						</a>
 					</li>
 
 				</ul>
