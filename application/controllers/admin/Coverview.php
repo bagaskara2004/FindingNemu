@@ -53,7 +53,7 @@ class Coverview extends CI_Controller
 
 		$id_user = $this->db->get_where('admin', ['nama_admin' => $this->session->userdata('nama_admin')])->row_array();
 		$data = array(
-			'id_user' => $id_user['id_admin'],
+			'id_user' => 1,
 			'id_kategori' => $this->input->post('kategori'),
 			'id_konfirmasi' => 3,
 			'status' => $this->input->post('status'),
