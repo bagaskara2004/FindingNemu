@@ -21,7 +21,7 @@
     </style>
 </head>
 <body>
-    <table style="width:100%;border-collapse: collapse;margin-top: 20px;border-bottom:2px solid black;">
+    <table style="width:100%;border-collapse: collapse;margin-top: 20px;">
         <tr>
             <td width="20%" align="right"  style="text-align: left;">
                 <img src="<?= base_url() ?>asset/img/logo.png" width="90px" />
@@ -35,6 +35,9 @@
             </td>
         </tr>
     </table>
+
+    <hr style="border: 1px solid #ddd;margin-top:20px;">
+
     <h2 class="header">PROSEDUR</h2>
     <p>Jika menemukan barang :</p>
     <ol class="step">
@@ -61,5 +64,18 @@
         <li>jika barang sudah dikembalikan, maka anda harus memvalidasi bahwa anda pemilik barang tersebut;</li>
         <li>lengkapi validasi dengan foto, ktp, dan no telp;</li>
     </ol>
+    <table style="width:100%;" border="1">
+        <tr>
+            <th colspan="2">KETERANGAN</th>
+        </tr>
+        <tr>
+            <th>Barang Hilang</th>
+            <th>Barang Temuan</th>
+        </tr>
+        <tr>
+            <td>jika postingan barang hilang berwarna hijau, berarti barang sudah ditemukan</td>
+            <td>jika postingan barang temuan berwarna hijau, berarti barang sudah diambil</td>
+        </tr>
+    </table>
 </body>
 </html>
