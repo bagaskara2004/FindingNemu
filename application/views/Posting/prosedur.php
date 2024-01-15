@@ -41,28 +41,28 @@
     <h2 class="header">PROSEDUR</h2>
     <p>Jika menemukan barang :</p>
     <ol class="step">
-        <li>mengisi form pengajuan;</li>
-        <li>kemudian pergi ke admin untuk validasi dan;</li>
-        <li>harus memberikan barang tersebut ke admin;</li>
+        <li>Mengisi form pengajuan</li>
+        <li>Kemudian pergi ke admin untuk validasi dan</li>
+        <li>Harus memberikan barang tersebut ke admin</li>
     </ol>
     <p>Jika kehilangan barang :</p>
     <ol class="step">
-        <li>mengisi form pengajuan;</li>
-        <li>kemudian pergi ke admin untuk validasi;</li>
-        <li>jika barangnya ditemukan maka akan di chat langsung oleh admin via wa;</li>
+        <li>Mengisi form pengajuan</li>
+        <li>Kemudian pergi ke admin untuk validasi</li>
+        <li>Jika barangnya ditemukan maka akan di chat langsung oleh admin via wa</li>
     </ol>
     <p>Jika ingin mengambil barang temuan :</p>
     <ol class="step">
-        <li>datang ke admin untuk mengajukan pengambilan barang;</li>
-        <li>kemudian memvalidasi bahwa anda pemilik barang tersebut;</li>
-        <li>lengkapi validasi dengan foto, ktp, dan no telp;</li>
+        <li>Datang ke admin untuk mengajukan pengambilan barang</li>
+        <li>Kemudian memvalidasi bahwa anda pemilik barang tersebut</li>
+        <li>Lengkapi validasi dengan foto, ktp, dan no telp</li>
     </ol>
     <p>Jika ingin mengambil barang temuan, tetapi status sudah diambil :</p>
     <ol class="step">
-        <li>datang ke admin untuk melaporkan pengambilan barang;</li>
-        <li>kemudian admin akan menghubungi/melacak orang yang telah mengambil barang tersebut;</li>
-        <li>jika barang sudah dikembalikan, maka anda harus memvalidasi bahwa anda pemilik barang tersebut;</li>
-        <li>lengkapi validasi dengan foto, ktp, dan no telp;</li>
+        <li>Datang ke admin untuk melaporkan pengambilan barang</li>
+        <li>Kemudian admin akan menghubungi/melacak orang yang telah mengambil barang tersebut</li>
+        <li>Jika barang sudah dikembalikan, maka anda harus memvalidasi bahwa anda pemilik barang tersebut</li>
+        <li>Lengkapi validasi dengan foto, ktp, dan no telp</li>
     </ol>
     <table style="width:100%;" border="1">
         <tr>
@@ -73,8 +73,8 @@
             <th>Barang Temuan</th>
         </tr>
         <tr>
-            <td>jika postingan barang hilang berwarna hijau, berarti barang sudah ditemukan</td>
-            <td>jika postingan barang temuan berwarna hijau, berarti barang sudah diambil</td>
+            <td>Jika postingan barang hilang berwarna hijau, berarti barang sudah ditemukan</td>
+            <td>Jika postingan barang temuan berwarna hijau, berarti barang sudah diambil</td>
         </tr>
     </table>
 </body>
