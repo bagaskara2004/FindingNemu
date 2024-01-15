@@ -38,7 +38,7 @@
                     html += '<td>' + status + '</td>';
                     html += '<td>';
                     html += '<button type="button" class="btn btn-success btn-sm" onclick="approvePosting(' + postingData[i].id_posting + ')">Terima</button>';
-                    html += '<button type="button" class="btn btn-danger btn-sm ml-1" onclick="rejectPosting(' + postingData[i].id_posting + ')">Tolak</button>';
+                    html += ' <button type="button" class="btn btn-danger btn-sm ml-1" onclick="rejectPosting(' + postingData[i].id_posting + ')">Tolak</button>';
                     html += '</td>';
                     html += '</tr>';
                 }

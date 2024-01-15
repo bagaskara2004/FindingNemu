@@ -39,13 +39,6 @@ class Cadmin extends CI_Controller
 		$this->load->view('Admin/admin');
 		$this->load->view('Admin/footer');
 	}
-	public function search()
-	{
-		$key = $this->input->post("cari");
-		$loc = $this->input->post("lokasi");
-		$output = $this->mposting->searching($key, $loc);
-		echo $output;
-	}
 
 	function uploadprofile(): void
 	{
@@ -174,4 +167,11 @@ class Cadmin extends CI_Controller
 		$this->madmin->simpanAdmin($data);
 		echo json_encode(array('status' => 'success', 'message' => 'Admin berhasil ditambahkan.'));
 	}
+	public function getUserStatistics() {
+        $userData = $this->madmin->getUserStatistics();
+
+       
+        header('Content-Type: application/json');
+        echo json_encode(['userData' => $userData]);
+    }
 }

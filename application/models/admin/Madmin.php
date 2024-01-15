@@ -46,9 +46,12 @@ class Madmin extends CI_Model
 
     public function getPosting()
     {
+        $thisMonth = date('Y-m');
+
         $this->db->select('posting.*, kategori.kategori');
         $this->db->from('posting');
         $this->db->join('kategori', 'posting.id_kategori = kategori.id_kategori', 'left');
+        $this->db->like('tanggal', $thisMonth, 'after');
 
         $query = $this->db->get();
 
@@ -73,8 +76,22 @@ class Madmin extends CI_Model
     }
     public function simpanAdmin($data)
     {
-      
+
         $this->db->insert('admin', $data);
     }
-    
+    public function getUserStatistics()
+    {
+        $totalUsers = $this->db->count_all('user');
+
+        $activedUsers = $this->db->where('actived', 1)->count_all_results('user');
+        $nonActivedUsers = $this->db->where('actived', 0)->count_all_results('user');
+
+        $data = array(
+            'totalUsers' => $totalUsers,
+            'activedUsers' => $activedUsers,
+            'nonActivedUsers' => $nonActivedUsers
+        );
+
+        return $data;
+    }
 }
