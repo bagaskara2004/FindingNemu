@@ -27,10 +27,19 @@
         padding: 20px;
     }
 </style>
+<div class="container">
+
+<h3>Selamat datang admin <?php echo $this->session->userdata('nama_admin'); ?></h3>
+
+</div>
 
 <div class="container min-vh-100">
+<div class="row">
+    <h4>Statistik</h4>
+</div>
     <div class="row">
         <div class="col-md-6">
+            
             <canvas id="postChart" width="400" height="200"></canvas>
         </div>
         <div class="col-md-6">
