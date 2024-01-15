@@ -29,12 +29,12 @@ class Cvalidasi extends CI_Controller
 
     public function simpan()
     {
-        $id_admin = $this->session->userdata('id_admin');
+
         $data = array(
             'id_posting' => $this->input->post('id_posting'),
             'id_admin' => $this->session->userdata('id_admin'),
             'nama' => $this->input->post('nama'),
-            'tanggal' => $this->input->post('tanggal'),
+            'tanggal' => date("Y-m-d"),
             'telp' => $this->input->post('telp')
         );
 

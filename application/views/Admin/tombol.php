@@ -36,7 +36,7 @@
                     <label>No Telephone</label>
                     <input type="number" class="form-control" name="telp">
                 </div>
-        
+
                 <div class="mb-3">
                     <label for="foto" class="form-label">Foto</label>
                     <input type="file" class="form-control" name="foto" accept="image/*" required>
