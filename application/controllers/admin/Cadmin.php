@@ -72,7 +72,7 @@ class Cadmin extends CI_Controller
 				unlink($old_photo);
 			}
 			$this->madmin->executeedit($id_admin, $data);
-			$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Foto Profile Berhasil di Update, Silahkan Login Ulang</div>');
+			$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Foto Profile Berhasil di Update, Silahkan Login Ulang</div>');
 			$this->logout();
 		}
 	}
@@ -84,7 +84,7 @@ class Cadmin extends CI_Controller
 			'nama_admin' => $this->input->post('username')
 		);
 		$this->madmin->executeedit($id_admin, $data);
-		$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Username Berhasil di Update, Silahkan Login Ulang</div>');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Username Berhasil di Update, Silahkan Login Ulang</div>');
 		$this->logout();
 	}
 
@@ -95,7 +95,7 @@ class Cadmin extends CI_Controller
 			'email_admin' => $this->input->post('email')
 		);
 		$this->madmin->executeedit($id_admin, $data);
-		$this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Email Berhasil di Update, Silahkan Login Ulang</div>');
+		$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Email Berhasil di Update, Silahkan Login Ulang</div>');
 		$this->logout();
 	}
 
