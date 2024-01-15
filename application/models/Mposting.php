@@ -22,7 +22,7 @@ class Mposting extends CI_Model {
 			$input = array(
 				'id_user' => $id_user,
 				'id_posting' => $id_posting,
-				'komentar' => $keyword
+				'komentar' => htmlspecialchars($keyword)
 			);
 			$this->db->insert('comment',$input);
 		}
@@ -72,7 +72,7 @@ class Mposting extends CI_Model {
 			}
 			return $output;
 		}else if ($key != "") {
-			return '<div class="text-center text-light fs-7 my-5">"'.$key.'"  tidak ditemukan</div>';
+			return '<div class="text-center text-light fs-7 my-5">"'.htmlspecialchars($key).'"  tidak ditemukan</div>';
 		}else {
 			return '<div class="text-center text-light fs-7 my-5">Tidak ada postingan</div>';
 		}

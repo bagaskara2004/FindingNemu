@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 26, 2023 at 09:45 AM
+-- Generation Time: Jan 15, 2024 at 08:17 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.1.25
 
@@ -40,7 +40,9 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_admin`, `nama_admin`, `password_admin`, `email_admin`, `foto_admin`) VALUES
-(1, 'pos1', '12345', 'pos1@gmail.com', 'asset/foto_profile/default.png');
+(1, 'pos1', '12345', 'pos1@gmail.com', 'asset/foto_admin/default.jpg'),
+(2, 'pos2', '12345', 'pos2@gmail.com', 'asset/foto_admin/default.jpg'),
+(3, 'pos3', '12345', 'pos3@gmail.com', 'asset/foto_admin/default.jpg');
 
 -- --------------------------------------------------------
 
@@ -71,9 +73,13 @@ CREATE TABLE `kategori` (
 --
 
 INSERT INTO `kategori` (`id_kategori`, `kategori`) VALUES
-(1, 'kunci'),
-(2, 'helm'),
-(3, 'handphone');
+(1, 'Lainnya'),
+(2, 'Helm'),
+(5, 'Kunci'),
+(6, 'Laptop'),
+(8, 'Tas'),
+(9, 'Handphone'),
+(10, 'Dompet');
 
 --
 -- Triggers `kategori`
@@ -124,6 +130,14 @@ CREATE TABLE `posting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
+-- Dumping data for table `posting`
+--
+
+INSERT INTO `posting` (`id_posting`, `id_user`, `id_kategori`, `id_konfirmasi`, `status`, `judul`, `deskripsi`, `tanggal`, `foto`) VALUES
+(31, 1, 10, 3, 1, 'dompet kulit', 'didalam ada ktp mohamad daus', '2024-01-15', 'asset/foto_posting/dompet.jpg'),
+(32, 1, 5, 3, 1, 'kunci beat', 'ditemukan di dekat kpn', '2024-01-15', 'asset/foto_posting/kunci.jpeg');
+
+--
 -- Triggers `posting`
 --
 DELIMITER $$
@@ -156,13 +170,14 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `email`, `actived`, `foto`, `tanggal`, `telp`) VALUES
-(7, 'bagaskara', '63d54187d05ccf615b21aac7b87f3dbb73cda16f752368b953335c8c01814ece81aabdde3aeeab625d2c657f7f0d84d835d0bdf091876ef0c63ee256bffdedd99DSRobuC1th2R7pDU3GjjVmzjehH0WtWJngw+Z3Eeto=', 'bagaskaraputra87@gmail.com', 1, 'asset/foto_profile/default.png', '2023-12-26', '08954332');
+(1, 'ADMIN', 'daa9df60aa0bf08407074ae5b6c82af2faadf1bb7a6f88c3783a0a7bcbde026591bc29c9252706e16ef7ead6078ff1d18941fca4d2e4e55034d92bb29d68be1dySLhrH+c68r1BZF64QhgbTZttmJRzeXGSKRNlo+3F8w=', 'admin@gmail.com', 1, 'asset/foto_profile/no_profile.jpg', '2024-01-15', '089677');
 
 --
 -- Triggers `user`
 --
 DELIMITER $$
 CREATE TRIGGER `user_BEFORE_DELETE` BEFORE DELETE ON `user` FOR EACH ROW BEGIN
+delete from comment where id_user = OLD.id_user;
 delete from posting where id_user = OLD.id_user;
 END
 $$
@@ -245,19 +260,19 @@ ALTER TABLE `validasi`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_comment` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `kategori`
 --
 ALTER TABLE `kategori`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `konfirmasi`
@@ -269,19 +284,19 @@ ALTER TABLE `konfirmasi`
 -- AUTO_INCREMENT for table `posting`
 --
 ALTER TABLE `posting`
-  MODIFY `id_posting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_posting` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `validasi`
 --
 ALTER TABLE `validasi`
-  MODIFY `id_validasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_validasi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables

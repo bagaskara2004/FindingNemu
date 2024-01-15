@@ -1,4 +1,4 @@
-<div class="container mb-5 mt-5">
+<div class="container"style="margin-top:100px;margin-bottom:100px;">
     <div class="row">
         <div class="col-12 col-sm-7 col-md-6 col-lg-4 mt-4">
             <img src="<?= base_url() ?><?= $data['foto'] ?>" class="card-img-top shadow rounded" alt="...">

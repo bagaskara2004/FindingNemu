@@ -95,7 +95,7 @@ class Cadmin extends CI_Controller
 	function logout(): void
 	{
 		$this->session->sess_destroy();
-		$this->load->view('Authentication/login');
+		redirect(base_url('Cauth/login'));
 	}
 	public function getPostAndValidationStatistics()
 	{
