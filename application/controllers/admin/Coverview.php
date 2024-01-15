@@ -51,7 +51,7 @@ class Coverview extends CI_Controller
 			}
 		}
 
-		$id_user = $this->db->get_where('admin', ['nama_admin' => $this->session->userdata('nama_admin')])->row_array();
+
 		$data = array(
 			'id_user' => 1,
 			'id_kategori' => $this->input->post('kategori'),
@@ -70,8 +70,8 @@ class Coverview extends CI_Controller
 	public function detail($id_posting)
 	{
 		$data['data'] = $this->Moverview->getPostingDetail($id_posting);
-        
-        $data['status'] = ($data['data']['status'] == 1) ? 'Temuan' : 'Kehilangan';
+
+		$data['status'] = ($data['data']['status'] == 1) ? 'Temuan' : 'Kehilangan';
 
 		$this->load->view('Admin/navbar');
 		$this->load->view('Admin/tombol', $data);
