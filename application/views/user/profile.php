@@ -162,9 +162,9 @@
 		</div>
 		<div class="input-profile">
 			<div class="row mt-3">
-				<div class="d-flex">
-					<div class="grid gap-3">
-						<div class="p-2 g-col-6">Nama</div>
+				<div class="position-relative">
+					<div class="col-sm-2 col-form-label">
+						Nama :
 					</div>
 					<!--Username Update-->
 					<div class="input-group">
@@ -189,9 +189,9 @@
 				</div>
 			</div>
 			<div class="row mt-3">
-				<div class="d-flex">
-					<div class="grid gap-3">
-						<div class="p-2 g-col-6">Email</div>
+				<div class="position-relative">
+					<div class="col-sm-1 col-form-label">
+						Email :
 					</div>
 					<!--Email Update-->
 					<?php echo form_open_multipart('Cuserprofile/updateemail', ['class' => 'input-group ']); ?>
@@ -216,13 +216,13 @@
 				</div>
 			</div>
 			<div class="row mt-3">
-				<div class="d-flex">
-					<div class="grid gap-3">
-						<div class="p-2 g-col-6">Telp</div>
+				<div class="position-relative">
+					<div class="col-sm-1 col-form-label">
+						Telp :
 					</div>
 					<!--No Telp Update-->
 					<?php echo form_open_multipart('Cuserprofile/updatetelp', ['class' => 'input-group ']); ?>
-					<div class="input-group">
+					<div class="input-group col-sm-10">
 						<input type="hidden"
 							   class="form-control"
 							   name="id_user"
