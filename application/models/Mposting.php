@@ -6,7 +6,11 @@ class Mposting extends CI_Model {
 	function simpanPosting($data)
 	{
 		$this->db->insert('posting', $data);
-		$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Form Berhasil di kirim, Segera konfirmasi ke admin</div>');
+		if ($data['status'] == 1) {
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Form Berhasil di kirim, Segera bawa barangnya ke admin untuk di konfirmasi</div>');
+		} else {
+			$this->session->set_flashdata('message','<div class="alert alert-success" role="alert">Form Berhasil di kirim, Tunggu Konfirmasi dari admin</div>');
+		}
 		redirect(base_url('Cposting/pengajuan'));
 	}
 
