@@ -44,4 +44,15 @@ class Mvalidasi extends CI_Model
         $query = $this->db->get();
         return $query->row_array();
     }
+    public function checkIdPosting($id_posting)
+    {
+        $this->db->select('COUNT(id_validasi) as count');
+        $this->db->from('validasi');
+        $this->db->where('id_posting', $id_posting);
+
+        $query = $this->db->get();
+        $result = $query->row()->count;
+
+        return $result;
+    }
 }

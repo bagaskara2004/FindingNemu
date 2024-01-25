@@ -23,7 +23,7 @@
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="validasiModallable">Edit Posting</h5>
+                                <h5 class="modal-title" id="validasiModallable">Edit validasi</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -95,10 +95,10 @@
                 console.log(html);
                 $("#resault").html(html);
                 $('.btn-detail').click(function() {
-					var idvalidasi = $(this).data('id');
-					window.location.href = '<?php echo base_url('admin/Cvalidasi/getValidasi/'); ?>' + idvalidasi;
-				});
-               
+                    var idvalidasi = $(this).data('id');
+                    window.location.href = '<?php echo base_url('admin/Cvalidasi/getValidasi/'); ?>' + idvalidasi;
+                });
+
             }
         });
 

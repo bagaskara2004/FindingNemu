@@ -30,33 +30,57 @@ class Cvalidasi extends CI_Controller
     public function simpan()
     {
 
-        $data = array(
-            'id_posting' => $this->input->post('id_posting'),
-            'id_admin' => $this->session->userdata('id_admin'),
-            'nama' => $this->input->post('nama'),
-            'tanggal' => date("Y-m-d"),
-            'telp' => $this->input->post('telp')
-        );
+        $id_posting = $this->input->post('id_posting');
 
-        $config['upload_path'] = './asset/foto_validasi';
-        $config['allowed_types'] = 'jpeg|jpg|png';
-        $config['max_size'] = 100000;
-        $config['max_width'] = 10000;
-        $config['max_height'] = 10000;
-        $this->load->library('upload', $config);
 
-        if ($this->upload->do_upload('foto')) {
+        if (!$this->isIdPosting($id_posting)) {
 
-            $data['foto'] = 'asset/foto_validasi/' . $this->upload->data('file_name');
-            $this->Mvalidasi->simpan_data($data);
-            $response = array('status' => 'success', 'message' => 'Data berhasil disimpan.');
+
+            $data = array(
+                'id_posting' => $id_posting,
+                'id_admin' => $this->session->userdata('id_admin'),
+                'nama' => $this->input->post('nama'),
+                'tanggal' => date("Y-m-d"),
+                'telp' => $this->input->post('telp')
+            );
+
+            $config['upload_path'] = './asset/foto_validasi';
+            $config['allowed_types'] = 'jpeg|jpg|png';
+            $config['max_size'] = 100000;
+            $config['max_width'] = 10000;
+            $config['max_height'] = 10000;
+            $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload('foto')) {
+
+                $data['foto'] = 'asset/foto_validasi/' . $this->upload->data('file_name');
+
+
+                $this->Mvalidasi->simpan_data($data);
+
+                $response = array('status' => 'success', 'message' => 'Data berhasil disimpan.');
+            } else {
+
+                $response = array('status' => 'error', 'message' => $this->upload->display_errors());
+            }
         } else {
 
-            $response = array('status' => 'error', 'message' => $this->upload->display_errors());
+            $response = array('status' => 'error', 'message' => 'ID posting sudah ada di tabel validasi.');
         }
+
 
         echo json_encode($response);
     }
+
+
+    private function isIdPosting($id_posting)
+    {
+        $result = $this->Mvalidasi->checkIdPosting($id_posting);
+
+
+        return ($result > 0);
+    }
+
 
     public function update_data()
     {
