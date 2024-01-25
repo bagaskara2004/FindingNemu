@@ -24,7 +24,8 @@ class Moverview extends CI_Model
                                    posting.status, 
                                    kategori.kategori, 
                                    user.foto as foto_user, 
-                                   user.username')
+                                   user.username,
+								   user.telp')
                           ->from('posting')
                           ->join('kategori', 'kategori.id_kategori = posting.id_kategori', 'left')
                           ->join('user', 'user.id_user = posting.id_user', 'left')

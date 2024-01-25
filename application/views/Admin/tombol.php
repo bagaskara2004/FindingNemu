@@ -1,13 +1,18 @@
+<?php
+$nomorTelepon = isset($data['telp']) ? $data['telp'] : '';
+?>
 <div class="container">
-
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md-8">
             <h4>Detail</h4>
         </div>
 
+        <div class="col-md-4 text-right">
 
-        <div class="col-md-2 text-right">
-            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#validasiModal">
+            <a href="#" class="btn btn-sm btn-success" id="whatsappButton">
+                WhatsApp
+            </a>
+            <button type="button" class="btn btn-sm btn-warning " data-bs-toggle="modal" data-bs-target="#validasiModal">
                 Validasi
             </button>
         </div>
@@ -91,6 +96,23 @@
                     $("#btnSimpan").prop("disabled", false);
                 }
             });
+        });
+        $("#whatsappButton").on("click", function() {
+            var nomorTelepon = "<?= $nomorTelepon ?>";
+
+            if (nomorTelepon) {
+                window.open("https://api.whatsapp.com/send?phone=" + nomorTelepon, '_blank');
+            } else {
+
+                Swal.fire({
+                    title: 'Error!',
+                    text: 'Nomor telepon tidak tersedia.',
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                }).then(function() {
+                    location.reload();
+                });
+            }
         });
     });
 </script>
