@@ -59,7 +59,7 @@
     function loadAdmin() {
         $.ajax({
             type: 'GET',
-            url: "<?php echo base_url('Admin/Cadmin/viewAdmin'); ?>",
+            url: "<?php echo base_url('admin/Cadmin/viewAdmin'); ?>",
             success: function(data) {
                 var adminData = JSON.parse(data);
                 var html = '<table class="table table-bordered table-striped">';

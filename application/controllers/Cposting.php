@@ -153,7 +153,7 @@ class Cposting extends CI_Controller
 		$pdf->set_option('isPhpEnabled', true);
 		$pdf->set_option('isFontSubsettingEnabled', true);
 
-		$pdf->loadHtml($this->load->view('posting/prosedur','', true));
+		$pdf->loadHtml($this->load->view('Posting/prosedur','', true));
 		$pdf->render();
 		$pdf->stream('prosedurFindingNemu', ['Attachment' => false]);
 	}

@@ -53,7 +53,7 @@
     $(document).ready(function() {
 
         $.ajax({
-            url: 'http://localhost/findingNemu/Admin/Cadmin/getPostAndValidationStatistics',
+            url: 'http://localhost/findingNemu/admin/Cadmin/getPostAndValidationStatistics',
             method: 'GET',
             success: function(response) {
 
@@ -107,7 +107,7 @@
         });
 
         $.ajax({
-            url: 'http://localhost/findingNemu/Admin/Cadmin/getUserStatistics',
+            url: 'http://localhost/findingNemu/admin/Cadmin/getUserStatistics',
             method: 'GET',
             success: function(response) {
                 var userStats = response.userData;

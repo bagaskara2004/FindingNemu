@@ -7,8 +7,8 @@
         public function __construct()
         {
             parent::__construct();
-            if ($this->session->userdata('nama_admin') == '') {
-                redirect('Cauth/login', 'refresh');
+            if (!$this->session->userdata('nama_admin')) {
+                redirect(base_url('Cauth/login'));
             }
             $this->load->model('admin/Mkategori');
             $this->load->helper('form');

@@ -27,7 +27,7 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <?php echo form_open_multipart('Admin/Cvalidasi/update_data', ['class' => 'container mt-3', 'id' => 'editForm']); ?>
+                                <?php echo form_open_multipart('admin/Cvalidasi/update_data', ['class' => 'container mt-3', 'id' => 'editForm']); ?>
                                 <input type="hidden" name="id_validasi_edit" id="id_validasi_edit" value="">
                                 <div class="mb-3">
                                     <label for="nama" class="form-label">Nama</label>
@@ -61,7 +61,7 @@
 
         $.ajax({
             type: 'GET',
-            url: "http://localhost/findingNemu/Admin/Cvalidasi/validasi",
+            url: "http://localhost/findingNemu/admin/Cvalidasi/validasi",
             success: function(data) {
                 console.log(data);
                 resaultdata = JSON.parse(data);
@@ -167,7 +167,7 @@
 
         $.ajax({
             type: 'POST',
-            url: 'http://localhost/findingNemu/Admin/Cvalidasi/update_data',
+            url: 'http://localhost/findingNemu/admin/Cvalidasi/update_data',
             data: formData,
             contentType: false,
             processData: false,

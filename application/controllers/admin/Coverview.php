@@ -10,7 +10,7 @@ class Coverview extends CI_Controller
 		if ($this->session->userdata('nama_admin') == '') {
 			redirect('Cauth/login', 'refresh');
 		}
-		$this->load->model('Admin/Moverview');
+		$this->load->model('admin/Moverview');
 		$this->load->library('form_validation');
 		$this->load->helper('form');
 	}

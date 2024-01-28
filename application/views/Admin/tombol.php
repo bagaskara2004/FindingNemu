@@ -29,7 +29,7 @@ $nomorTelepon = isset($data['telp']) ? $data['telp'] : '';
             <div class="modal-body">
                 <div id="popup" class="alert" style="display: none; position: fixed; top: 10px; right: 10px; z-index: 9999;"></div>
 
-                <?php echo form_open_multipart('Admin/Cvalidasi/simpan', ['class' => 'container mt-3', 'id' => 'formValidasi']); ?>
+                <?php echo form_open_multipart('admin/Cvalidasi/simpan', ['class' => 'container mt-3', 'id' => 'formValidasi']); ?>
 
                 <input type="hidden" name="id_posting" value="<?php echo $data['id_posting']; ?>">
 
@@ -64,7 +64,7 @@ $nomorTelepon = isset($data['telp']) ? $data['telp'] : '';
             var formData = new FormData($('#formValidasi')[0]);
             $.ajax({
                 type: 'POST',
-                url: "<?php echo base_url('Admin/Cvalidasi/simpan'); ?>",
+                url: "<?php echo base_url('admin/Cvalidasi/simpan'); ?>",
                 data: formData,
                 dataType: 'json',
                 contentType: false,

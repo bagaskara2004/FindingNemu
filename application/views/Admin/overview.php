@@ -34,7 +34,7 @@
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
-								<?php echo form_open_multipart('Admin/Coverview/simpan_data', ['class' => 'container mt-3']); ?>
+								<?php echo form_open_multipart('admin/Coverview/simpan_data', ['class' => 'container mt-3']); ?>
 								<div class="mb-3">
 									<label for="judul" class="form-label">Judul</label>
 									<input type="text" class="form-control" name="judul" required>
@@ -87,7 +87,7 @@
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
-								<?php echo form_open_multipart('Admin/Coverview/update_data', ['class' => 'container mt-3', 'id' => 'editForm']); ?>
+								<?php echo form_open_multipart('admin/Coverview/update_data', ['class' => 'container mt-3', 'id' => 'editForm']); ?>
 								<input type="hidden" name="id_posting_edit" id="id_posting_edit" value="">
 								<div class="mb-3">
 									<label for="judul" class="form-label">Judul</label>
@@ -143,7 +143,7 @@
 
 		$.ajax({
 			type: 'GET',
-			url: "http://localhost/findingNemu/Admin/Coverview/overview",
+			url: "http://localhost/findingNemu/admin/Coverview/overview",
 			success: function(data) {
 				console.log(data);
 				resaultdata = JSON.parse(data);
@@ -204,7 +204,7 @@
 
 				$.ajax({
 					type: 'POST',
-					url: 'http://localhost/findingNemu/Admin/Coverview/delete_data',
+					url: 'http://localhost/findingNemu/admin/Coverview/delete_data',
 					data: {
 						id_posting: idPosting
 					},
@@ -256,7 +256,7 @@
 
 		$.ajax({
 			type: 'POST',
-			url: 'http://localhost/findingNemu/Admin/Coverview/update_data',
+			url: 'http://localhost/findingNemu/admin/Coverview/update_data',
 			data: formData,
 			contentType: false,
 			processData: false,

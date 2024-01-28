@@ -47,32 +47,32 @@
 
 			<div class="h-100 ">
 				<div class="sidebar-logo">
-					<a href="<?= base_url('Admin/Cadmin') ?>"><img src="<?= base_url('asset/img/logo-light.png') ?>" alt="findingnemu" style="width: 100px;" class="img-fluid"></a>
+					<a href="<?= base_url('admin/Cadmin') ?>"><img src="<?= base_url('asset/img/logo-light.png') ?>" alt="findingnemu" style="width: 100px;" class="img-fluid"></a>
 				</div>
 				<ul class="siderbar-nav">
 					<li class="sidebar-header">
 						<p>Admin Menu</p>
 					</li>
 					<li class="sidebar-item">
-						<a href="<?= base_url('Admin/Coverview') ?>" class="sidebar-link">
+						<a href="<?= base_url('admin/Coverview') ?>" class="sidebar-link">
 							<span class="bi bi-clipboard-fill"></span>&nbsp; &nbsp;
 							Overview
 						</a>
 					</li>
 					<li class="sidebar-item">
-						<a href="<?= base_url('Admin/Cuser') ?>" class="sidebar-link">
+						<a href="<?= base_url('admin/Cuser') ?>" class="sidebar-link">
 							<i class="bi bi-person-fill"></i>&nbsp; &nbsp;
 							User
 						</a>
 					</li>
 					<li class="sidebar-item">
-						<a href="<?= base_url('Admin/Cadmin/admin') ?>" class="sidebar-link">
+						<a href="<?= base_url('admin/Cadmin/admin') ?>" class="sidebar-link">
 							<i class="bi bi-person-workspace"></i>&nbsp; &nbsp;
 							Admin
 						</a>
 					</li>
 					<li class="sidebar-item">
-						<a href="<?= base_url('Admin/Cvalidasi') ?>" class="sidebar-link">
+						<a href="<?= base_url('admin/Cvalidasi') ?>" class="sidebar-link">
 							<span class="bi bi-bookmark-check-fill"></span>&nbsp; &nbsp;
 							Validasi
 						</a>
@@ -84,7 +84,7 @@
 						</a>
 					</li>
 					<li class="sidebar-item">
-						<a href="<?= base_url('Admin/Ckategori') ?>" class="sidebar-link">
+						<a href="<?= base_url('admin/Ckategori') ?>" class="sidebar-link">
 							<span class="bi bi-tags-fill"></span>&nbsp; &nbsp;
 							Kategori
 						</a>
@@ -120,7 +120,7 @@
 								<button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#myModal">
 									Edit Profile
 								</button>
-								<li><a href="<?= base_url('Admin/Cadmin/logout') ?>" class="dropdown-item">Logout</a></li>
+								<li><a href="<?= base_url('admin/Cadmin/logout') ?>" class="dropdown-item">Logout</a></li>
 							</ul>
 						</li>
 					</ul>
@@ -143,7 +143,7 @@
 								<img src="<?= base_url($this->session->userdata('foto_admin')) ?>" class="img-fluid profile-image-pic rounded-circle" id="imagePreview" width="100px" alt="" onerror="this.src='https://imagetolink.com/ib/Zn9U9bxCzF.png'; this.onerror='';">
 							</div>
 							<div class="profile-upload">
-								<?php echo form_open_multipart('Admin/Cadmin/uploadprofile', ['class' => 'container mt-3']); ?>
+								<?php echo form_open_multipart('admin/Cadmin/uploadprofile', ['class' => 'container mt-3']); ?>
 								<input type="hidden" class="form-control" name="id_admin" value="<?php echo $this->session->userdata('id_admin'); ?>">
 								<input type="hidden" class="form-control" name="old_photo" value="<?php echo $this->session->userdata('foto_admin'); ?>">
 								<label for="userImage">
@@ -165,7 +165,7 @@
 									</div>
 									<!--Username Update-->
 									<div class="input-group">
-										<?php echo form_open_multipart('Admin/Cadmin/updateusername', ['class' => 'input-group ']); ?>
+										<?php echo form_open_multipart('admin/Cadmin/updateusername', ['class' => 'input-group ']); ?>
 										<input type="hidden" class="form-control" name="id_admin" value="<?php echo $this->session->userdata('id_admin'); ?>">
 										<input type="text" class="form-control" name="username" required placeholder="<?php echo $this->session->userdata('nama_admin'); ?>">
 										<span class="input-group-btn">
@@ -183,7 +183,7 @@
 										Email
 									</div>
 									<!--Email Update-->
-									<?php echo form_open_multipart('Admin/Cadmin/updateemail', ['class' => 'input-group ']); ?>
+									<?php echo form_open_multipart('admin/Cadmin/updateemail', ['class' => 'input-group ']); ?>
 									<div class="input-group">
 										<input type="hidden" class="form-control" name="id_admin" value="<?php echo $this->session->userdata('id_admin'); ?>">
 										<input type="email" class="form-control" name="email" required placeholder="<?php echo $this->session->userdata('email_admin'); ?>">

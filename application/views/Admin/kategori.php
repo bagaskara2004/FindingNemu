@@ -118,7 +118,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost/findingNemu/Admin/Ckategori/hapus_kategori',
+                    url: 'http://localhost/findingNemu/admin/Ckategori/hapus_kategori',
                     data: {
                         id_kategori: id_kategori
                     },

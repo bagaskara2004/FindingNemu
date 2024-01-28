@@ -26,7 +26,7 @@
 
         $.ajax({
             type: 'GET',
-            url: "http://localhost/findingNemu/Admin/Cuser/user",
+            url: "http://localhost/findingNemu/admin/Cuser/user",
             success: function(data) {
                 console.log(data);
                 resaultdata = JSON.parse(data);
@@ -80,7 +80,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: 'http://localhost/findingNemu/Admin/Cuser/delete_user',
+                    url: 'http://localhost/findingNemu/admin/Cuser/delete_user',
                     data: {
                         id_user: iduser
                     },

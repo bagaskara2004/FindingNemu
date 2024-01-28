@@ -49,10 +49,6 @@
 					$data = array(
 						'foto' => $image
 					);
-					if (file_exists($old_photo)) {
-						unlink($old_photo);
-
-					}
 					$this->muserprofile->executeedit($id_user, $data);
 					$this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Foto Profile Berhasil Di Update Silahkan Login Ulang</div>');
 					$this->logout();
